@@ -36,6 +36,10 @@ europe_map = folium.Map(location=map_center, zoom_start=4)
 # Prepare data for heatmap (latitude, longitude, NO₂ level)
 heat_data = list(zip(df["Latitude"], df["Longitude"], df["Air Pollution Level"]))
 
+
+
+print(heat_data)
+
 # Add heatmap to the map
 HeatMap(heat_data, radius=10, blur=15, max_zoom=10).add_to(europe_map)
 
