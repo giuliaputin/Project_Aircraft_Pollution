@@ -3,9 +3,10 @@ import matplotlib.pyplot as plt
 import cartopy.crs as ccrs
 import cartopy.feature as cfeature
 import xarray as xr
+import os
 
 # Open DataSet and print an overview of it
-ds = xr.open_dataset('raw_data/emissions/AvemFluxes.nc4')
+ds = xr.open_dataset(os.path.join('raw_data', 'emissions', 'AvEmFluxes.nc4'))
 print(ds)
 
 # Select a DataArray
