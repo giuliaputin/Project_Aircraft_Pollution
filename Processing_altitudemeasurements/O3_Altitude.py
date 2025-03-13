@@ -5,7 +5,7 @@ from folium.plugins import HeatMap
 import os
 
 # Define the file path
-file_path = ("C:/Users/joaob/OneDrive/Documents/GitHub/Project_Aircraft_Pollution/Measurements_Data/O3.csv")  # Adjust based on your folder structure
+file_path = "Measurements_Data/O3.csv"   # Adjust based on your folder structure
 
 # Check if the file exists before reading
 if not os.path.exists(file_path):
@@ -55,7 +55,8 @@ for k in final:
     HeatMap(heat_data, radius=10, blur=15, max_zoom=10).add_to(europe_map)
 
     # Save and display map
-    map_path = "C:/Users/joaob/OneDrive/Documents/GitHub/Project_Aircraft_Pollution/Processing_altitude/O3_Europe_Map" + "_" + str(count) + ".html"
+    map_path = "Processing_altitudemeasurements/Map_Representation/O3_Altitude_Map" + "_" + str(count) + ".html"
+    
     try:
         europe_map.save(map_path)
     except:
