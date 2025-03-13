@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2dbf4d21-bb76-44e3-9863-609744a1c082" name="Changes" comment="hey" />
+    <list default="true" id="2dbf4d21-bb76-44e3-9863-609744a1c082" name="Changes" comment="hey">
+      <change afterPath="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements/New_Plotting.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements/O3.JUL.ON.nc4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements/O3_plotting_JUL_ON.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements/sampleplot.py" beforeDir="false" afterPath="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements/sampleplot.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -40,25 +46,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.Given_Plotting.executor&quot;: &quot;Run&quot;,
-    &quot;Python.New_Plotting.executor&quot;: &quot;Run&quot;,
-    &quot;Python.check.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Model-Jan/Jul&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.fileTypes&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.Given_Plotting.executor": "Run",
+    "Python.New_Plotting.executor": "Run",
+    "Python.O3_plotting_JUL_ON.executor": "Run",
+    "Python.check.executor": "Run",
+    "Python.sampleplot.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "Model-Jan/Jul",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.fileTypes",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\unigi\OneDrive\Documentos\GitHub\Project_Aircraft_Pollution\Plotting_Model\JUN_Model_Measurements" />
       <recent name="C:\Users\unigi\OneDrive\Documentos\GitHub\Project_Aircraft_Pollution\Plotting_Model" />
       <recent name="C:\Users\unigi\OneDrive\Documentos\GitHub\Project_Aircraft_Pollution\Plotting_Model\Model_Measurements" />
     </key>
@@ -80,7 +89,7 @@
       <option name="presentableId" value="Default" />
       <updated>1741853034744</updated>
       <workItem from="1741853036437" duration="8000" />
-      <workItem from="1741853056264" duration="2706000" />
+      <workItem from="1741853056264" duration="4276000" />
     </task>
     <task id="LOCAL-00001" summary="folder created">
       <option name="closed" value="true" />
@@ -106,11 +115,46 @@
       <option name="project" value="LOCAL" />
       <updated>1741855662167</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="hi">
+      <option name="closed" value="true" />
+      <created>1741855815362</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1741855815362</updated>
+    </task>
+    <task id="LOCAL-00005" summary="hi">
+      <option name="closed" value="true" />
+      <created>1741855907569</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1741855907569</updated>
+    </task>
+    <task id="LOCAL-00006" summary="hi">
+      <option name="closed" value="true" />
+      <created>1741856111663</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1741856111663</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="folder created" />
@@ -119,8 +163,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="hey" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Project_Aircraft_Pollution$New_Plotting.coverage" NAME="New_Plotting Coverage Results" MODIFIED="1741855579926" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/Annual_Model_Measurements" />
+    <SUITE FILE_PATH="coverage/Project_Aircraft_Pollution$O3_plotting_JUL_ON.coverage" NAME="O3_plotting_JUL_ON Coverage Results" MODIFIED="1741857248626" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements" />
+    <SUITE FILE_PATH="coverage/Project_Aircraft_Pollution$New_Plotting.coverage" NAME="New_Plotting Coverage Results" MODIFIED="1741857326102" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements" />
     <SUITE FILE_PATH="coverage/Project_Aircraft_Pollution$check.coverage" NAME="check Coverage Results" MODIFIED="1741854743412" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/Model_Measurements" />
     <SUITE FILE_PATH="coverage/Project_Aircraft_Pollution$Given_Plotting.coverage" NAME="Given_Plotting Coverage Results" MODIFIED="1741855505476" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/Model_Measurements" />
+    <SUITE FILE_PATH="coverage/Project_Aircraft_Pollution$sampleplot.coverage" NAME="sampleplot Coverage Results" MODIFIED="1741856645349" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements" />
   </component>
 </project>
