@@ -30,29 +30,32 @@ for j in range(19):
                 temp = [df["Longitude"][i], df["Latitude"][i], df["Air Pollution Level"][i]]
                 layer.append(temp)
                 temp = []
-        elif 0.1<j<10.5:
+        if 0.1<j or j<10.5:
             if df["Altitude"][i] > float(50 * (j-1)) and df["Altitude"][i] <= float(50 * (j)):
                 temp = [df["Longitude"][i], df["Latitude"][i], df["Air Pollution Level"][i]]
                 layer.append(temp)
                 temp = []
-        elif 10.5<j<15.5:
+        if 10.5<j or j<15.5:
             if df["Altitude"][i] > float(500 + 100 * (j-11)) and df["Altitude"][i] <= float(500 + 100 * (j - 10)):
                 temp = [df["Longitude"][i], df["Latitude"][i], df["Air Pollution Level"][i]]
                 layer.append(temp)
                 temp = []
-        elif 15.5<j<17.5:
+        if 15.5<j or j<17.5:
             if df["Altitude"][i] > float(1000 + 500 * (j-16)) and df["Altitude"][i] <= float(1000 + 500 * (j - 15)):
                 temp = [df["Longitude"][i], df["Latitude"][i], df["Air Pollution Level"][i]]
                 layer.append(temp)
                 temp = []
-        elif 17.5<j:
-            if df["Altitude"][i] > float(2000):
+        if j==18:
+            if df["Altitude"][i] > 2000:
                 temp = [df["Longitude"][i], df["Latitude"][i], df["Air Pollution Level"][i]]
                 layer.append(temp)
                 temp = []
     final.append(layer)
     layer = []
 
+for i in range(len(df["Altitude"])):
+    if df["Altitude"][i]>2000:
+        print(df["Altitude"][i])
 
 lon = []
 lat = []
