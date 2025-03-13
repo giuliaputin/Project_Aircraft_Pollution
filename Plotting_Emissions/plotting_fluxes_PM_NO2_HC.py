@@ -2,11 +2,15 @@
 import matplotlib.pyplot as plt
 import cartopy.crs as ccrs
 import cartopy.feature as cfeature
+import folium
+from folium.plugins import HeatMap
+import pandas as pd
+import numpy as np
 import xarray as xr
 import os
 
 # Open DataSet and print an overview of it
-ds = xr.open_dataset(os.path.join('raw_data', 'emissions', 'AvEmFluxes.nc4'))
+ds = xr.open_dataset('raw_data/emissions/AvEmFluxes.nc4')
 print(ds)
 
 # Select a DataArray
@@ -50,3 +54,85 @@ daSurf_scaled.plot(transform=ccrs.PlateCarree(), vmin=vmin, vmax=vmax)
 # Update title to include flight level
 plt.title(f'{var} (scaled to pg/m²/s) - Flight Level {flight_level}')
 plt.show()
+
+
+# Extract lat, lon, and emission values
+lats = ds['lat'].values
+lons = ds['lon'].values
+values = daSurf_scaled.values
+
+# Ensure the data is flattened for folium plotting
+lat_grid, lon_grid = np.meshgrid(lats, lons, indexing='ij')
+lat_flat = lat_grid.flatten()
+lon_flat = lon_grid.flatten()
+values_flat = values.flatten()
+
+# Remove NaN values for proper plotting
+valid_idx = ~np.isnan(values_flat)
+data = pd.DataFrame({
+    'lat': lat_flat[valid_idx],
+    'lon': lon_flat[valid_idx],
+    'value': values_flat[valid_idx]
+})
+
+# Initialize a folium map
+m = folium.Map(location=[0, 0], zoom_start=2, tiles='cartodbpositron')
+
+# Add a heatmap
+HeatMap(data[['lat', 'lon', 'value']].values, min_opacity=0.2, radius=10, blur=15).add_to(m)
+
+
+# Add airport locations to the map
+airportscsv = "Airportdata/EU_airports.csv"
+
+# Check if the file exists before reading
+if not os.path.exists(airportscsv):
+    raise FileNotFoundError(f"File not found: {airportscsv}. Check your folder structure!")
+
+# Load the CSV file
+airports = pd.read_csv(airportscsv)
+
+# Check if required columns exist
+required_columns = {"latitude_deg", "longitude_deg", "name", "type"}
+if not required_columns.issubset(airports.columns):
+    raise ValueError(f"CSV file is missing one or more required columns: {required_columns}")
+
+#Grab specific columns from the airports dataframe
+airports = airports[["latitude_deg", "longitude_deg", "name", "type"]]
+
+# Add airport markers to the map
+for row in airports.itertuples(index=False):
+    lat = row.latitude_deg
+    lon = row.longitude_deg
+    name = row.name
+    type = row.type
+    
+    '''	# Uncomment this block to add airport markers to the map
+    if type == "large_airport":
+        folium.Marker(
+            location=[lat, lon],
+            popup=name,
+            icon=folium.Icon(color="blue", icon="plane", prefix="fa")
+        ).add_to(m) 
+
+    elif type == "medium_airport":
+        folium.Marker(
+            location=[lat, lon],
+            popup=name,
+            icon=folium.Icon(color="green", icon="plane", prefix="fa")
+        ).add_to(m)
+
+    elif type == "small_airport":
+        folium.Marker(
+            location=[lat, lon],
+            popup=name,
+            icon=folium.Icon(color="red", icon="plane", prefix="fa")
+        ).add_to(m)  '
+        '''
+
+
+# Save map to file
+m.save('Plotting_Emissions/Map_Representation/plotting_fluxes_PM_NO2_HC.html')
+
+# Display map (if running in Jupyter Notebook, use `m` to show inline)
+print("Map has been saved as 'plotting_fluxes_PM_NO2_HC.html'. Open this file in a browser to view it.")
