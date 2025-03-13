@@ -13,13 +13,14 @@
 #    - updated 07/03/2024
 
 # Import modules
-import matplotlib.pyplot as plt
-import cartopy.crs as ccrs
-import cartopy.feature as cfeature
-import xarray as xr
+import matplotlib.pyplot as plt  # For plotting
+import cartopy.crs as ccrs  # For map projections
+import cartopy.feature as cfeature  # For adding map features (coastlines, borders, etc.)
+import xarray as xr  # For handling netCDF data
+
 
 # Open DataSet and print an overview of it
-ds = xr.open_dataset('U:/AviationAQ/BSc/2024/data/model/Aerosol.JAN.OFF.nc4')
+ds = xr.open_dataset("PM25.annual.ON.nc4", engine="netcdf4")  # or use "h5netcdf"
 print(ds)
 
 # Select a DataArray
@@ -27,7 +28,18 @@ var = 'PM25'
 da = ds[var]
 
 # Select data from ground level at a specific time
-daSurf = da.isel(lev=0).sel(time='2019-01-15')
+# Select a region using 'lat' and the nearest 'lon' using the method='nearest'
+        # Check the underlying numpy array
+
+daSurf = da  # Keep the full latitude and longitude dimension
+ # Nearest longitude
+ # No 'lev' dimension to select
+
+print(daSurf)                # Check the contents of the DataArray
+print(daSurf.dtype)          # Check the data type of the DataArray
+print(daSurf.values)         # Check the underlying numpy array
+
+
 
 # Print the mean value of this selection
 print(f'\nMean of {var} is = {float(daSurf.mean().values):.1f} {da.attrs["units"]}')
