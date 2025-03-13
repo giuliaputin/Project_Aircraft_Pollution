@@ -1,0 +1,51 @@
+# Import modules
+import matplotlib.pyplot as plt
+import cartopy.crs as ccrs
+import cartopy.feature as cfeature
+import xarray as xr
+
+# Open DataSet and print an overview of it
+ds = xr.open_dataset('raw_data/emissions/AvEmMasses.nc4')
+print(ds)
+
+# Select a DataArray
+var = 'nvPM'
+da = ds[var]  # No need for isel(lev=0) since there's no lev dimension
+
+# Print dataset info
+print("\nDataset Structure:\n", ds)
+print("\nSelected Variable:", var)
+print("\nAttributes:\n", da.attrs)
+
+print("\nDataArray Summary:\n", da)
+print("\nData Values:\n", da.values)
+
+print("\nMin:", da.min().values, "Max:", da.max().values)
+print("\nMean (Direct):", da.mean().values)
+print("\nSum of All Values:", da.sum().values)
+
+# Check NaN count
+print("\nNumber of NaNs:", da.isnull().sum().values)
+
+# Print the mean value of this selection
+mean_value = float(da.mean().values)
+print(f'\nMean of {var} is = {mean_value:.3f} {da.attrs.get("units", "")}')
+
+# **Fix the Plotting**
+fig = plt.figure(figsize=[12, 6])
+ax = plt.axes(projection=ccrs.EqualEarth(central_longitude=10))
+ax.add_feature(cfeature.BORDERS.with_scale('50m'), linewidth=0.5, edgecolor='darkgrey')
+ax.coastlines(resolution='50m', linewidth=0.5, color='white')
+
+# Adjust vmin and vmax to properly scale the data
+vmin = float(da.min().values)
+vmax = float(da.max().values)
+
+# Ensure vmax is not too small
+if vmax < vmin + 1e-3:
+    vmax = vmin + 1e-3
+
+# Plot the data
+da.plot(transform=ccrs.PlateCarree(), vmin=vmin, vmax=vmax)
+plt.title(f'{var} (in {da.attrs.get("units", "")})')
+plt.show()

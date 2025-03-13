@@ -9,19 +9,29 @@ ds = xr.open_dataset('raw_data/emissions/AvemFluxes.nc4')
 print(ds)
 
 # Select a DataArray
-var = 'FUELBURN'
+var = 'HC'
 da = ds[var]
 
 # Select data from ground level at a specific time
 daSurf = da.isel(lev=0) #.sel(time='2019-01-15')
 
-print(daSurf)
-print("Min:", daSurf.min().values, "Max:", daSurf.max().values)
-print("Mean:", daSurf.mean().values)
-
-
 # Print the mean value of this selection
 print(f'\nMean of {var} is = {float(daSurf.mean().values):.1f} {da.attrs["units"]}')
+
+print("Dataset Structure:\n", ds)
+print("\nSelected Variable:", var)
+print("\nAttributes:\n", da.attrs)
+
+print("\nDataArray Summary:\n", daSurf)
+print("\nData Values:\n", daSurf.values)
+
+print("\nMin:", daSurf.min().values, "Max:", daSurf.max().values)
+print("\nMean (Direct):", daSurf.mean().values)
+print("\nSum of All Values:", daSurf.sum().values)
+
+# Check NaN count
+print("\nNumber of NaNs:", daSurf.isnull().sum().values)
+
 
 # Plot figure using matplotlib and cartopy. The use of some cosmetic options is illustrated here
 fig = plt.figure(figsize=[12, 6])
