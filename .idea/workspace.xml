@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2dbf4d21-bb76-44e3-9863-609744a1c082" name="Changes" comment="hi">
-      <change afterPath="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements/O3_plotting_JUL_diff.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Project_Aircraft_Pollution.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Project_Aircraft_Pollution.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="2dbf4d21-bb76-44e3-9863-609744a1c082" name="Changes" comment="hi" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -45,29 +40,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.Alt_Plotting_OFF.executor": "Run",
-    "Python.Alternative_Plotting.executor": "Run",
-    "Python.Given_Plotting.executor": "Run",
-    "Python.New_Plotting.executor": "Run",
-    "Python.O3_plotting_JUL_OFF.executor": "Run",
-    "Python.O3_plotting_JUL_ON.executor": "Run",
-    "Python.O3_plotting_JUL_diff.executor": "Run",
-    "Python.check.executor": "Run",
-    "Python.sampleplot.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "Model-Jan/Jul",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.fileTypes",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.Alt_Plotting_OFF.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Alternative_Plotting.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Given_Plotting.executor&quot;: &quot;Run&quot;,
+    &quot;Python.New_Plotting.executor&quot;: &quot;Run&quot;,
+    &quot;Python.O3_plotting_JUL_OFF.executor&quot;: &quot;Run&quot;,
+    &quot;Python.O3_plotting_JUL_ON.executor&quot;: &quot;Run&quot;,
+    &quot;Python.O3_plotting_JUL_diff.executor&quot;: &quot;Run&quot;,
+    &quot;Python.check.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sampleplot.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Model-Jan/Jul&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.fileTypes&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\unigi\OneDrive\Documentos\GitHub\Project_Aircraft_Pollution\Plotting_Model\JUN_Model_Measurements" />
