@@ -9,11 +9,11 @@ ds = xr.open_dataset('raw_data/emissions/AvemFluxes.nc4')
 print(ds)
 
 # Select a DataArray
-var = 'CO'  
+var = 'nvPM'  
 da = ds[var]
 
 # Select data from ground level
-daSurf = da.isel(lev=20)  # Level 0 selection
+daSurf = da.isel(lev=30)  # Level 0 selection
 
 # Print dataset info
 print(daSurf)
