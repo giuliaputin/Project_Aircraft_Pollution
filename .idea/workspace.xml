@@ -42,8 +42,11 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python.Alt_Plotting_OFF.executor": "Run",
+    "Python.Alternative_Plotting.executor": "Run",
     "Python.Given_Plotting.executor": "Run",
     "Python.New_Plotting.executor": "Run",
+    "Python.O3_plotting_JUL_OFF.executor": "Run",
     "Python.O3_plotting_JUL_ON.executor": "Run",
     "Python.check.executor": "Run",
     "Python.sampleplot.executor": "Run",
@@ -83,7 +86,7 @@
       <option name="presentableId" value="Default" />
       <updated>1741853034744</updated>
       <workItem from="1741853036437" duration="8000" />
-      <workItem from="1741853056264" duration="4629000" />
+      <workItem from="1741853056264" duration="4992000" />
     </task>
     <task id="LOCAL-00001" summary="folder created">
       <option name="closed" value="true" />
@@ -157,7 +160,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741857626200</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="hi">
+      <option name="closed" value="true" />
+      <created>1741858015896</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1741858015896</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -181,9 +192,12 @@
     <option name="LAST_COMMIT_MESSAGE" value="hi" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Project_Aircraft_Pollution$O3_plotting_JUL_ON.coverage" NAME="O3_plotting_JUL_ON Coverage Results" MODIFIED="1741857248626" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements" />
+    <SUITE FILE_PATH="coverage/Project_Aircraft_Pollution$O3_plotting_JUL_ON.coverage" NAME="O3_plotting_JUL_ON Coverage Results" MODIFIED="1741857957378" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements" />
     <SUITE FILE_PATH="coverage/Project_Aircraft_Pollution$New_Plotting.coverage" NAME="New_Plotting Coverage Results" MODIFIED="1741857488627" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements" />
+    <SUITE FILE_PATH="coverage/Project_Aircraft_Pollution$O3_plotting_JUL_OFF.coverage" NAME="O3_plotting_JUL_OFF Coverage Results" MODIFIED="1741857951645" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements" />
     <SUITE FILE_PATH="coverage/Project_Aircraft_Pollution$check.coverage" NAME="check Coverage Results" MODIFIED="1741854743412" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/Model_Measurements" />
+    <SUITE FILE_PATH="coverage/Project_Aircraft_Pollution$Alternative_Plotting.coverage" NAME="Alternative_Plotting Coverage Results" MODIFIED="1741857897180" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements" />
+    <SUITE FILE_PATH="coverage/Project_Aircraft_Pollution$Alt_Plotting_OFF.coverage" NAME="Alt_Plotting_OFF Coverage Results" MODIFIED="1741857931855" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements" />
     <SUITE FILE_PATH="coverage/Project_Aircraft_Pollution$Given_Plotting.coverage" NAME="Given_Plotting Coverage Results" MODIFIED="1741855505476" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/Model_Measurements" />
     <SUITE FILE_PATH="coverage/Project_Aircraft_Pollution$sampleplot.coverage" NAME="sampleplot Coverage Results" MODIFIED="1741857614456" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements" />
   </component>
