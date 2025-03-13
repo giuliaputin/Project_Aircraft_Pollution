@@ -10,11 +10,12 @@ ds = xr.open_dataset(os.path.join('raw_data', 'emissions', 'AvEmFluxes.nc4'))
 print(ds)
 
 # Select a DataArray
-var = 'nvPM'  
+var = 'FUELBURN'  
 da = ds[var]
 
 # Select data from ground level
-daSurf = da.isel(lev=30)  # Level 0 selection
+flight_level = 31  # Level index
+daSurf = da.isel(lev=flight_level)  # Level selection
 
 # Print dataset info
 print(daSurf)
@@ -46,5 +47,6 @@ ax.coastlines(resolution='50m', linewidth=0.5, color='white')
 # Use scaled data to ensure visibility
 daSurf_scaled.plot(transform=ccrs.PlateCarree(), vmin=vmin, vmax=vmax)
 
-plt.title(f'{var} (scaled to pg/m²/s)')
+# Update title to include flight level
+plt.title(f'{var} (scaled to pg/m²/s) - Flight Level {flight_level}')
 plt.show()

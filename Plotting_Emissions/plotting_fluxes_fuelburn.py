@@ -14,7 +14,8 @@ var = 'FUELBURN'
 da = ds[var]
 
 # Select data from ground level at a specific time
-daSurf = da.isel(lev=31)  # Remove time selection if 'time' is not in the dataset
+flight_level = 31  # Level index
+daSurf = da.isel(lev=flight_level)  # Remove time selection if 'time' is not in the dataset
 
 # Print dataset info
 print(daSurf)
@@ -22,7 +23,7 @@ print("Min:", daSurf.min().values, "Max:", daSurf.max().values)
 print("Mean:", daSurf.mean().values)
 
 # **Apply scaling factor if necessary**
-# Convert from kg/m2/s to nanograms/m2/s for better readability
+# Convert from kg/m²/s to nanograms/m²/s for better readability
 scale_factor = 1e9  # Convert kg to nanograms (ng)
 daSurf_scaled = daSurf * scale_factor
 
@@ -47,5 +48,7 @@ ax.coastlines(resolution='50m', linewidth=0.5, color='white')
 # Use scaled data to ensure visibility
 daSurf_scaled.plot(transform=ccrs.PlateCarree(), vmin=vmin, vmax=vmax)
 
-plt.title(f'{var} (scaled to ng/m²/s)')
+# Update title to include flight level
+plt.title(f'{var} (scaled to ng/m²/s) - Flight Level {flight_level}')
 plt.show()
+
