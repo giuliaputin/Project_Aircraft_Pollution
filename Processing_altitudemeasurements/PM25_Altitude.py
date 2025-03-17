@@ -110,7 +110,7 @@ heat_data = list(zip(lat_in, long_in, pm_in))
 HeatMap(heat_data, radius=10, blur=15, max_zoom=10).add_to(europe_map)
 
 # Define the map file path
-map_path = "Processing_altitude/Map_Representation/PM25_Altitude_Map.html"
+map_path = "Processing_altitudemeasurements/Map_Representation/PM25_Altitude_Map.html"
 
 # Overwrite the existing file with the updated map
 europe_map.save(map_path)
