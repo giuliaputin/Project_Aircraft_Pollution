@@ -16,11 +16,11 @@ def differencer(type, month, var, frame, level, average=False):
     daoff = dsoff[var]
     daon = dson[var]
     if average:
-        daSurfoff = daoff.isel(time=frame).mean(dim = "lev")
-        daSurfon = daon.isel(time=frame).mean(dim = "lev")
+        daSurfoff = daoff.mean(dim = "lev").isel(time=frame)
+        daSurfon = daon.mean(dim = "lev").isel(time=frame)
     else:
-        daSurfoff = daoff.isel(time=frame).isel(lev=level)
-        daSurfon = daon.isel(time=frame).isel(lev=level)
+        daSurfoff = daoff.isel(lev=level).isel(time=frame)
+        daSurfon = daon.isel(lev=level).isel(time=frame)
     daDiff = daSurfon - daSurfoff
 
     return daDiff
