@@ -91,7 +91,7 @@ if range==6:
     pm_in = pm25_6
 # Scatter plot of PM2.5 levels inputted range 
 plt.figure(figsize=(10, 6))
-plt.scatter(long_in, pm_in, alpha=0.5, c=pm_in, cmap="Reds")
+plt.scatter(long_in, lat_in, alpha=0.85, c=pm_in, cmap="Reds")
 plt.colorbar(label="PM2.5 Concentration (µg/m³)")
 plt.xlabel("Longitude")
 plt.ylabel("PM2.5 Concentration (µg/m³)")
