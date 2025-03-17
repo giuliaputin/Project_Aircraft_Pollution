@@ -27,7 +27,7 @@ level = 0
 # Average with respect to height is taken
 average = True
 
-subtract = True
+subtract = False
 
 # --------------------------------------------------------------------------------------------------------------------
 # Starting of the preprocessing, no need to modify anything after this
@@ -63,10 +63,7 @@ def update(frame):
     ax.coastlines(resolution='50m', linewidth=0.5, color='white')
     
     # Plot the data for the current time step
-    if subtract:
-        im = daSurf.plot(ax=ax, transform=ccrs.PlateCarree(), add_colorbar=False)
-    else:
-        im = daSurf.plot(ax=ax, transform=ccrs.PlateCarree(), vmin=0, vmax=50, add_colorbar=False)
+    im = daSurf.plot(ax=ax, transform=ccrs.PlateCarree(), add_colorbar=False)
 
     date_str = np.datetime_as_string(da.time[frame].values, unit='D') 
 
