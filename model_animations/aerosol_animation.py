@@ -18,7 +18,7 @@ aviation = 'ON'
 
 # Select variable you want to animate
 # Choose between: ['PM25', 'AerMassNIT', 'AerMassNH4', 'AerMassPOA', 'AerMassBC']
-var = 'PM25'
+var = 'AerMassNIT'
 
 # Select the level you want to animate [0, 72]
 level = 0
@@ -72,6 +72,21 @@ def update(frame):
         ax.set_title(f"{var} at time {date_str}, averaged over height", fontsize=14)
 
     else:
+        # Select the data for the current time step
+        daSurf = da.isel(lev = level).isel(time=frame)
+        
+        # Clear the previous plot
+        ax.clear()
+        
+        # Redraw the coastlines and borders for every frame
+        ax.add_feature(cfeature.BORDERS.with_scale('50m'), linewidth=0.5, edgecolor='darkgrey')
+        ax.coastlines(resolution='50m', linewidth=0.5, color='white')
+        
+        # Plot the data for the current time step
+        im = daSurf.plot(ax=ax, transform=ccrs.PlateCarree(), vmin=daSurf.min().values, vmax=daSurf.max().values, add_colorbar=False)
+        
+        
+        date_str = np.datetime_as_string(da.time[frame].values, unit='D') 
         # Add a title with the current time
         ax.set_title(f"{var} at time {date_str}, level = {np.round(daSurf.lev.values, 3)}", fontsize=14)
         
