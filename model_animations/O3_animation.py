@@ -80,4 +80,11 @@ ani = FuncAnimation(fig, update, frames=len(da.time), interval=500, blit=False)
 # Display the animation
 plt.show()
 
-ani.save(os.path.join('model_animations', 'animations', f'{month}_{aviation}_{var}.mp4'), writer='ffmpeg', fps=10)
+
+# Saving of the files
+if average:
+    ani.save(os.path.join(os.path.dirname(__file__),"..",'model_animations', 'animations', f'{month}_{aviation}_{var}_avg.mp4'), writer='ffmpeg', fps=4)
+else:
+    ani.save(os.path.join(os.path.dirname(__file__),"..", 'model_animations', 'animations', f'{month}_{aviation}_{var}_lev{level}.mp4'), writer='ffmpeg', fps=4)
+
+
