@@ -24,7 +24,7 @@ level = 0
 
 # If average is set to True then the level variable above is overridden
 # Average with respect to height is taken
-average = False
+average = True
 
 
 # --------------------------------------------------------------------------------------------------------------------
