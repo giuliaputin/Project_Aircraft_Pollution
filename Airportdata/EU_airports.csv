@@ -5871,7 +5871,7 @@ small_airport,Vallentuna flygfält,59.5417862,18.0386607,,SE,,
 small_airport,Majfält-Ovansjö,62.235628,17.384825,108,SE,,
 small_airport,Ålåsen,63.8656982,14.608111,,SE,,
 small_airport,Orrlanda Flygfält,63.0928328,14.4414464,,SE,,
-medium_airport,Scandinavian Mountains Airport,61.158393,12.842503,1608,SE,ESKS,SCR
+large_airport,Scandinavian Mountains Airport,61.158393,12.842503,1608,SE,ESKS,SCR
 small_airport,Frostlanda flygfält,64.4820531,14.1044967,,SE,,
 small_airport,Frölunda Airfield,59.45837,17.71065,,SE,,
 small_airport,Bänkås Hoppfält,62.389086,17.452807,,SE,,
@@ -5905,7 +5905,6 @@ small_airport,Lindholmen flygfält,59.58588,18.161001,,SE,,
 small_airport,Kronobergshed Airfield,56.974778,14.566527,,SE,,
 small_airport,Ödestugu Glider Field,57.60187,14.28645,,SE,,
 small_airport,Kvarnhem Flygfält,55.80065,13.6221,,SE,,
-large_airport,Scandinavian Mountains Airport,-1,-1,1649,SE,ESKS,SCR
 small_airport,Dobova Airfield,45.88769913,15.65009975,,SI,,
 small_airport,Mostje Lendava Airfield,46.59980011,16.43190002,,SI,,
 small_airport,Krapje Veržej Airfield,46.57268524,16.19097328,,SI,,
