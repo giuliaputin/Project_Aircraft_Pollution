@@ -84,7 +84,7 @@ HeatMap(data[['lat', 'lon', 'normalized_value']].values, min_opacity=0.2, radius
 
 
 # Add airport locations to the map
-airportscsv = "Airportdata/EU_airports.csv"
+airportscsv = os.path.join(os.path.dirname(__file__),"..","Airportdata","EU_airports.csv")
 
 # Check if the file exists before reading
 if not os.path.exists(airportscsv):
