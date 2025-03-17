@@ -10,7 +10,7 @@ import numpy as np
 import os
 
 # Open DataSet and print an overview of it
-ds = xr.open_dataset(os.path.join('raw_data', 'emissions', 'AvEmFluxes.nc4'))
+ds = xr.open_dataset(os.path.join(os.path.dirname(__file__),"..",'raw_data', 'emissions', 'AvEmFluxes.nc4'))
 print(ds)
 
 # Select a DataArray
@@ -133,7 +133,7 @@ for row in airports.itertuples(index=False):
 
 
 # Save map to file
-m.save('Plotting_Emissions/Map_Representation/plotting_masses.html')
+m.save(os.path.join(os.path.dirname(__file__),"..",'Plotting_Emissions',"Map_Representation",'plotting_masses.html'))
 
 # Display map (if running in Jupyter Notebook, use `m` to show inline)
 print("Map has been saved as 'plotting_masses.html'. Open this file in a browser to view it.")
