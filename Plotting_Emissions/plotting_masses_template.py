@@ -74,11 +74,13 @@ data = pd.DataFrame({
     'value': values_flat[valid_idx]
 })
 
+data['normalized_value'] = (data['value'] - vmin) / (vmax - vmin)
+
 # Initialize a folium map
 m = folium.Map(location=[0, 0], zoom_start=2, tiles='cartodbpositron')
 
 # Add a heatmap
-HeatMap(data[['lat', 'lon', 'value']].values, min_opacity=0.2, radius=10, blur=15).add_to(m)
+HeatMap(data[['lat', 'lon', 'normalized_value']].values, min_opacity=0.2, radius=10, blur=15).add_to(m)
 
 
 # Add airport locations to the map

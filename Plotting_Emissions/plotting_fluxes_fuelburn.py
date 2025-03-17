@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import cartopy.crs as ccrs
 import cartopy.feature as cfeature
 import folium
-from folium.plugins import HeatMap  
+from folium.plugins import HeatMap
 import pandas as pd
 import numpy as np
 import xarray as xr
@@ -77,12 +77,13 @@ data = pd.DataFrame({
     'lon': lon_flat[valid_idx],
     'value': values_flat[valid_idx]
 })
+data['normalized_value'] = (data['value'] - vmin) / (vmax - vmin)
 
 # Initialize a folium map
 m = folium.Map(location=[0, 0], zoom_start=2, tiles='cartodbpositron')
 
 # Add a heatmap
-HeatMap(data[['lat', 'lon', 'value']].values, min_opacity=0.2, radius=10, blur=15).add_to(m)
+HeatMap(data[['lat', 'lon', 'normalized_value']].values, min_opacity=0.2, radius=10, blur=15).add_to(m)
 
 
 # Add airport locations to the map
@@ -110,14 +111,14 @@ for row in airports.itertuples(index=False):
     name = row.name
     type = row.type
     
-    '''	# Uncomment this block to add airport markers to the map
+    '''# Uncomment this block to add airport markers to the map
     if type == "large_airport":
         folium.Marker(
             location=[lat, lon],
             popup=name,
             icon=folium.Icon(color="blue", icon="plane", prefix="fa")
         ).add_to(m) 
-
+    
     elif type == "medium_airport":
         folium.Marker(
             location=[lat, lon],
