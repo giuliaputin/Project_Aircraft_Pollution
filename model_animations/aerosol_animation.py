@@ -17,7 +17,7 @@ aviation = 'ON'
 # Choose between: ['PM25', 'AerMassNIT', 'AerMassNH4', 'AerMassPOA', 'AerMassBC']
 var = 'PM25'
 
-level = 0
+level = 71
 # --------------------------------------------------------------------------------------------------------------------
 # Starting of the preprocessing, no need to modify anything after this
 # Open DataSet and print an overview of it
@@ -31,10 +31,12 @@ ax = plt.axes(projection=ccrs.EqualEarth(central_longitude=10))
 ax.add_feature(cfeature.BORDERS.with_scale('50m'), linewidth=0.5, edgecolor='darkgrey')
 ax.coastlines(resolution='50m', linewidth=0.5, color='white')
 
+
 # Function to update the plot for each time step
 def update(frame):
+
     # Select the data for the current time step
-    daSurf = da.isel(time=frame).isel(lev=level)
+    daSurf = da.isel(lev=level).isel(time=frame)
     
     # Clear the previous plot
     ax.clear()
@@ -47,7 +49,7 @@ def update(frame):
     im = daSurf.plot(ax=ax, transform=ccrs.PlateCarree(), vmin=0, vmax=50, add_colorbar=False)
     
     # Add a title with the current time
-    ax.set_title(f"{var} at time {da.time[frame].values}, lev = {da.lev[frame].values}", fontsize=14)
+    ax.set_title(f"{var} at time {da.time[frame].values}, lev = {daSurf.lev.values}", fontsize=14)
     
     return [im]
 
@@ -57,4 +59,4 @@ ani = FuncAnimation(fig, update, frames=len(da.time), interval=500, blit=False)
 # Display the animation
 plt.show()
 
-ani.save(os.path.join('model_animations', 'animations', f'{month}_{aviation}_{var}.mp4'), writer='ffmpeg', fps=4)
+# ani.save(os.path.join('model_animations', 'animations', f'{month}_{aviation}_{var}.mp4'), writer='ffmpeg', fps=4)

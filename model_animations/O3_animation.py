@@ -36,7 +36,7 @@ ax.coastlines(resolution='50m', linewidth=0.5, color='white')
 # Function to update the plot for each time step
 def update(frame):
     # Select the data for the current time step
-    daSurf = da.isel(time=frame).isel(lev=level)
+    daSurf = (da.isel(time=frame)).isel(lev=level)
     
     # Clear the previous plot
     ax.clear()
