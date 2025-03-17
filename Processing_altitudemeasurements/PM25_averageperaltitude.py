@@ -9,7 +9,7 @@ import os
 
 # Define the file path
 #file_path = "Measurements_Data/O3.csv"   # Adjust based on your folder structure
-file_path = "C:/Users/joaob/OneDrive/Documents/GitHub/Project_Aircraft_Pollution/Measurements_Data/O3.csv"
+file_path = "C:/Users/joaob/OneDrive/Documents/GitHub/Project_Aircraft_Pollution/Measurements_Data/PM25.csv"
 
 # Check if the file exists before reading
 if not os.path.exists(file_path):
@@ -106,7 +106,7 @@ sc = ax.scatter(
 cbar = plt.colorbar(sc, ax=ax, orientation="vertical", label="Air Quality Index (AQI)")
 
 # Set labels and title
-ax.set_title("Average 03 Concentration in The Atmosphere", fontsize=14)
+ax.set_title("Average PM2.5 Concentration in The Atmosphere", fontsize=14)
 ax.set_xlabel("Longitude")
 ax.set_ylabel("Latitude")
 
@@ -130,9 +130,9 @@ fig, ax = plt.subplots(subplot_kw={'projection': ccrs.PlateCarree()})
 c = ax.pcolormesh(lon_mesh, lat_mesh, aqi_values, cmap="coolwarm", transform=ccrs.PlateCarree())
 
 # Add colorbar and map features
-fig.colorbar(c, ax=ax, label="Average O3  (\u03BCg/m3) ")
+fig.colorbar(c, ax=ax, label="Average PM2.5 (\u03BCg/m3) ")
 ax.coastlines()
 ax.gridlines(draw_labels=True)
 
-plt.title("Average 03 Concentration in The Atmosphere")
+plt.title("Average PM2.5 Concentration in The Atmosphere")
 plt.show()
