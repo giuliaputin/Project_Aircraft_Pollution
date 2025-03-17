@@ -6497,3 +6497,7 @@ medium_airport,Lebyazhye Air Base,50.2016983,45.20830154,381,RU,XRWL,
 medium_airport,Smolensk North Airport,54.824,32.025,820,RU,,LNX
 small_airport,Sosnovka Airfield,53.261002,45.277,,RU,,
 medium_airport,Rtishchevo Air Base,52.297317,43.7241,673,RU,,
+medium_airport, Tekirdag Çorlu, 41.138198852539, 27.9190998077392, 574, TR
+small_airport, Istanbul Hezarfen Airfield, 41.1036, 28.5477, 57, TR
+large_airport, Istanbul Airport, 41.261297, 28.741951, 325, TR
+medium_airport, Kesan Air Base, 40.787068, 26.606655, 143, TR
