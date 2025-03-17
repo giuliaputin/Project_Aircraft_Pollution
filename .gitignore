@@ -1,2 +1,9 @@
 .gitattributes
+
+Plotting_Emissions/Map_Representation/plotting_fluxes_fuelburn.html
+Plotting_Emissions/Map_Representation/plotting_fluxes_PM_NO2_HC.html
+Plotting_Emissions/Map_Representation/plotting_fluxes_template.html
+Plotting_Emissions/Map_Representation/plotting_masses.html
+# =======
 .pyc
+
