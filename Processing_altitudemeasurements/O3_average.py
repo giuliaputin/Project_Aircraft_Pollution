@@ -8,8 +8,8 @@ import numpy as np
 import os
 
 # Define the file path
-#file_path = "Measurements_Data/O3.csv"   # Adjust based on your folder structure
-file_path = "C:/Users/joaob/OneDrive/Documents/GitHub/Project_Aircraft_Pollution/Measurements_Data/O3.csv"
+file_path = "Measurements_Data/O3.csv"   # Adjust based on your folder structure
+#file_path = "C:/Users/joaob/OneDrive/Documents/GitHub/Project_Aircraft_Pollution/Measurements_Data/O3.csv"
 
 # Check if the file exists before reading
 if not os.path.exists(file_path):
@@ -23,6 +23,7 @@ required_columns = {"Longitude", "Latitude", "Air Pollution Level"}
 if not required_columns.issubset(df.columns):
     raise ValueError(f"CSV file is missing one or more required columns: {required_columns}")
 
+'''
 maxlon = 0.0
 maxlat = 0.0
 
@@ -40,7 +41,7 @@ for i in range(len(df["Longitude"])):
         minlat = df["Latitude"][i]
 
 print(f"Longitude: {minlon} to {maxlon}, Latitude: {minlat} to {maxlat}")
-
+'''
 
 # Load your dataset (ensure it has 'latitude', 'longitude', and 'AQI' columns)
 # Example: df = pd.read_csv("air_quality_data.csv")
@@ -86,7 +87,7 @@ grid_avg.rename(columns={'lat_bin': 'latitude', 'lon_bin': 'longitude', 'AQI': '
 # Load dataset (Ensure your dataset has latitude, longitude, and avg_AQI columns)
 df = grid_avg.rename(columns={"lat_bin": "latitude", "lon_bin": "longitude", "AQI": "avg_AQI"})
 # Load dataset (Ensure your dataset has latitude, longitude, and avg_AQI columns)
-
+'''
 # Set up the figure and axis using Cartopy
 fig, ax = plt.subplots(figsize=(10, 6), subplot_kw={'projection': ccrs.PlateCarree()})
 
@@ -111,7 +112,7 @@ ax.set_xlabel("Longitude")
 ax.set_ylabel("Latitude")
 
 # Show the plot
-
+'''
 
 aqi_grid = grid_avg.pivot_table(index="latitude", columns="longitude", values="avg_AQI")
 
