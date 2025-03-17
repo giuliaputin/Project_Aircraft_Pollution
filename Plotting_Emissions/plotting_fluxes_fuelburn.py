@@ -10,7 +10,7 @@ import xarray as xr
 import os
 
 # Open DataSet and print an overview of it
-ds = xr.open_dataset(os.path.join('raw_data', 'emissions', 'AvEmFluxes.nc4'))
+ds = xr.open_dataset(os.path.join(os.path.dirname(__file__), "..", 'raw_data', 'emissions', 'AvEmFluxes.nc4'))
 print(ds)
 
 # Select a DataArray
@@ -87,7 +87,7 @@ HeatMap(data[['lat', 'lon', 'normalized_value']].values, min_opacity=0, radius=1
 
 
 # Add airport locations to the map
-airportscsv = "Airportdata/EU_airports.csv"
+airportscsv = os.path.join(os.path.dirname(__file__), "..","Airportdata", "EU_airports.csv")
 
 # Check if the file exists before reading
 if not os.path.exists(airportscsv):
@@ -136,7 +136,7 @@ for row in airports.itertuples(index=False):
 
 
 # Save map to file
-m.save('Plotting_Emissions/Map_Representation/plotting_fluxes_fuelburn.html')
+m.save(os.path.join(os.path.dirname(__file__), "..", 'Plotting_Emissions', 'Map_Representation','plotting_fluxes_fuelburn.html'))
 
 # Display map (if running in Jupyter Notebook, use `m` to show inline)
 print("Map has been saved as 'plotting_fluxes_fuelburn.html'. Open this file in a browser to view it.")

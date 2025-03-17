@@ -15,7 +15,7 @@ print(ds)
 
 # Select a DataArray
 var = 'nvPM'
-da = ds[var]  # No need for isel(lev=0) since there's no lev dimension
+da = (ds[var]).isel(lev=0)  # No need for isel(lev=0) since there's no lev dimension
 
 # Print dataset info
 print("\nDataset Structure:\n", ds)
@@ -84,7 +84,7 @@ HeatMap(data[['lat', 'lon', 'normalized_value']].values, min_opacity=0.2, radius
 
 
 # Add airport locations to the map
-airportscsv = os.path.join(os.path.dirname(__file__),"..","Airportdata","EU_airports.csv")
+airportscsv = "Airportdata/EU_airports.csv"
 
 # Check if the file exists before reading
 if not os.path.exists(airportscsv):
