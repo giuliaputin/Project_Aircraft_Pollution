@@ -8,7 +8,7 @@ import cartopy.crs as ccrs #projections list
 import cartopy.feature as cfeature
 
 # for venv use
-print(sys.executable)
+# print(sys.executable)
 
 def differencer(type, month, var, frame, level, average=False):
     dsoff = xr.open_dataset( os.path.join(os.path.dirname(__file__), ".." ,"raw_data", "model", f"{type}.{month}.OFF.nc4") )
@@ -28,7 +28,7 @@ def differencer(type, month, var, frame, level, average=False):
 
 # Some defaults:
 
-plt.rcParams['figure.figsize'] = (12, 5)  # Default plot size
+# plt.rcParams['figure.figsize'] = (12, 5)  # Default plot size
 
 # dsoff = xr.open_dataset( os.path.join(os.path.dirname(__file__), ".." ,"raw_data", "model", "Aerosol.JAN.OFF.nc4") )
 # dson = xr.open_dataset( os.path.join(os.path.dirname(__file__), ".." ,"raw_data", "model", "Aerosol.JAN.ON.nc4") )
