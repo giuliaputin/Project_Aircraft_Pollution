@@ -42,12 +42,18 @@ ax.add_feature(cfeature.BORDERS.with_scale('50m'), linewidth=0.5, edgecolor='dar
 ax.coastlines(resolution='50m', linewidth=0.5, color='white')
 
 average = False
+subtract = False
 # Function to update the plot for each time step
 def update(frame):
 
     # Select the data for the current time step
-    
-    daSurf = differencer("Aerosol",month,var,frame,level,average)
+    if subtract:
+        daSurf = differencer("Aerosol",month,var,frame,level,average)
+    else:
+        if average:
+            daSurf = da.mean(dim= "lev").isel(time=frame)
+        else:
+            daSurf = da.isel(lev = level).isel(time=frame)
 
     # Clear the previous plot
     ax.clear()
@@ -64,7 +70,7 @@ def update(frame):
     if average:
         # Add a title with the current time
         ax.set_title(f"{var} at time {date_str}, averaged over height", fontsize=14)
-        
+
     else:
         # Add a title with the current time
         ax.set_title(f"{var} at time {date_str}, level = {np.round(daSurf.lev.values, 3)}", fontsize=14)
