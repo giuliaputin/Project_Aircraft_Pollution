@@ -6,11 +6,12 @@ import xarray as xr
 import os
 import matplotlib.animation as animation
 from matplotlib.animation import FuncAnimation
+from difference_machine import differencer
 import numpy as np
 
 # From here you can set up the animation:
 # Select either July (JUL) or January (JAN)
-month = 'JUL'
+month = 'JAN'
 
 # select aviation ON or OFF
 aviation = 'ON'
@@ -30,7 +31,7 @@ average = True
 # --------------------------------------------------------------------------------------------------------------------
 # Starting of the preprocessing, no need to modify anything after this
 # Open DataSet and print an overview of it
-ds = xr.open_dataset(os.path.join('raw_data', 'model', f'Aerosol.{month}.{aviation}.nc4'))
+ds = xr.open_dataset(os.path.join(os.path.dirname(__file__),"..",'raw_data', 'model', f'Aerosol.{month}.{aviation}.nc4'))
 
 da = ds[var]
 
@@ -40,27 +41,36 @@ ax = plt.axes(projection=ccrs.EqualEarth(central_longitude=10))
 ax.add_feature(cfeature.BORDERS.with_scale('50m'), linewidth=0.5, edgecolor='darkgrey')
 ax.coastlines(resolution='50m', linewidth=0.5, color='white')
 
-
+average = False
+subtract = False
 # Function to update the plot for each time step
 def update(frame):
-    if average:
-        # Select the data for the current time step
-        daSurf = da.mean(dim= "lev").isel(time=frame)
-        
-        # Clear the previous plot
-        ax.clear()
-        
-        # Redraw the coastlines and borders for every frame
-        ax.add_feature(cfeature.BORDERS.with_scale('50m'), linewidth=0.5, edgecolor='darkgrey')
-        ax.coastlines(resolution='50m', linewidth=0.5, color='white')
-        
-        # Plot the data for the current time step
-        im = daSurf.plot(ax=ax, transform=ccrs.PlateCarree(), vmin=daSurf.min().values, vmax=daSurf.max().values, add_colorbar=False)
 
-        date_str = np.datetime_as_string(da.time[frame].values, unit='D') 
+    # Select the data for the current time step
+    if subtract:
+        daSurf = differencer("Aerosol",month,var,frame,level,average)
+    else:
+        if average:
+            daSurf = da.mean(dim= "lev").isel(time=frame)
+        else:
+            daSurf = da.isel(lev = level).isel(time=frame)
+
+    # Clear the previous plot
+    ax.clear()
+    
+    # Redraw the coastlines and borders for every frame
+    ax.add_feature(cfeature.BORDERS.with_scale('50m'), linewidth=0.5, edgecolor='darkgrey')
+    ax.coastlines(resolution='50m', linewidth=0.5, color='white')
+    
+    # Plot the data for the current time step
+    im = daSurf.plot(ax=ax, transform=ccrs.PlateCarree(), vmin=daSurf.min().values, vmax=daSurf.max().values, add_colorbar=False)
+
+    date_str = np.datetime_as_string(da.time[frame].values, unit='D') 
+
+    if average:
         # Add a title with the current time
         ax.set_title(f"{var} at time {date_str}, averaged over height", fontsize=14)
-        
+
     else:
         # Select the data for the current time step
         daSurf = da.isel(lev = level).isel(time=frame)
