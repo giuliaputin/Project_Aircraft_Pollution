@@ -12,7 +12,7 @@ ds_emission = xr.open_dataset(os.path.join(os.path.dirname(__file__),"..",'raw_d
 
 # Select a DataArray
 vars = ["FUELBURN", "NO2", "HC", "CO", 'nvPM']
-da_emission = ds_emission[vars[0]]
+da_emission = ds_emission[vars[1]]
 # for var in vars[1:]:
 #     da_add = ds_emission[var]
 #     da_emission += da_add
