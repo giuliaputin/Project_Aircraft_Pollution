@@ -4,19 +4,13 @@ import cartopy.crs as ccrs
 import cartopy.feature as cfeature
 import xarray as xr
 import os
-import matplotlib.animation as animation
-from matplotlib.animation import FuncAnimation
 import numpy as np
 
-# From here you can set up the animation:
+# Types and variables that will be plotted
 types = {'Aerosol': ['PM25', 'AerMassNIT', 'AerMassNH4', 'AerMassPOA', 'AerMassBC'],
                   'O3' : ['SpeciesConc_O3'],
                   'NO2' : ['SpeciesConc_NO2']}
-
-
-# It will now plot over: {'Aerosol': ['PM25', 'AerMassNIT', 'AerMassNH4', 'AerMassPOA', 'AerMassBC'],
-#                  'O3' : ['SpeciesConc_O3'],
-#                  'NO2' : ['SpeciesConc_O3']}                   
+               
 
 def differencer(type, month, var):
     dsoff = xr.open_dataset( os.path.join(os.path.dirname(__file__), ".." ,"raw_data", "model", f"{type}.{month}.OFF.nc4") )
@@ -34,9 +28,8 @@ def differencer(type, month, var):
 # Starting of the preprocessing, no need to modify anything after this
 
 months = ['Jan', 'JUL']
-# Set up the figure and axis
 
-
+# For loop to iterate through each type and through each variable withing each type
 for type in types:
     for var in types[type]:
         fig, ax = plt.subplots(1, 2, figsize= [12, 4], subplot_kw={"projection": ccrs.EqualEarth(central_longitude=10)})
@@ -55,7 +48,7 @@ for type in types:
             ax[i].set_title(f"{var}, monthly average {month}, level = {np.round(daSurf.lev.values, 3)}", fontsize=14)
         
        
-
-
-# Display the plots
-plt.show()
+        plt.savefig(os.path.join(os.path.dirname(__file__), '..', 'monthly_average', 'figures',f'{type}_{var}_timeaveraged.png'))
+        
+# Uncomment to display the plots on screen
+# plt.show()
