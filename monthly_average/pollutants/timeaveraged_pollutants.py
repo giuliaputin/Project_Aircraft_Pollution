@@ -13,8 +13,8 @@ types = {'Aerosol': ['PM25', 'AerMassNIT', 'AerMassNH4', 'AerMassPOA', 'AerMassB
                
 
 def differencer(type, month, var):
-    dsoff = xr.open_dataset( os.path.join(os.path.dirname(__file__), ".." ,"raw_data", "model", f"{type}.{month}.OFF.nc4") )
-    dson = xr.open_dataset( os.path.join(os.path.dirname(__file__), ".." ,"raw_data", "model", f"{type}.{month}.ON.nc4") )
+    dsoff = xr.open_dataset( os.path.join(os.path.dirname(__file__), ".." , "..", "raw_data", "model", f"{type}.{month}.OFF.nc4") )
+    dson = xr.open_dataset( os.path.join(os.path.dirname(__file__), ".." , "..", "raw_data", "model", f"{type}.{month}.ON.nc4") )
     daoff = dsoff[var]
     daon = dson[var]
 
@@ -48,7 +48,7 @@ for type in types:
             ax[i].set_title(f"{var}, monthly average {month}, level = {np.round(daSurf.lev.values, 3)}", fontsize=14)
         
        
-        plt.savefig(os.path.join(os.path.dirname(__file__), '..', 'monthly_average', 'figures',f'{type}_{var}_timeaveraged.png'))
+        plt.savefig(os.path.join(os.path.dirname(__file__), '..', '..', 'monthly_average', 'pollutants', 'figures',f'{type}_{var}_timeaveraged.png'))
         
 # Uncomment to display the plots on screen
 # plt.show()
