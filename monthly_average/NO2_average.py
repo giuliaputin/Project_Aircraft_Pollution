@@ -30,8 +30,9 @@ daSurf_JAN = differencer("NO2", "JAN", var)
 
 daSurf_JUL = differencer("NO2", "JUL", var)
 
-fig, ax = plt.subplots(2, 1, figsize= [12, 6], subplot_kw={"projection": ccrs.EqualEarth(central_longitude=10)})
 # Set up the figure and axis
+fig, ax = plt.subplots(1, 2, figsize= [12, 6], subplot_kw={"projection": ccrs.EqualEarth(central_longitude=10)})
+plt.tight_layout()
 
 # ax[0] = plt.axes(projection=ccrs.EqualEarth(central_longitude=10))
 ax[0].add_feature(cfeature.BORDERS.with_scale('50m'), linewidth=0.5, edgecolor='darkgrey')
