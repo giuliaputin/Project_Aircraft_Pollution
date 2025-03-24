@@ -8,25 +8,21 @@ import numpy as np
 
 
 # Open DataSet and print an overview of it
-ds_emission = xr.open_dataset(os.path.join(os.path.dirname(__file__),"..",'raw_data', 'emissions', 'AvEmMasses.nc4'))
+ds_emission = xr.open_dataset(os.path.join(os.path.dirname(__file__),"..","..",'raw_data', 'emissions', 'AvEmMasses.nc4'))
 
 # Select a DataArray
 vars = ["FUELBURN", "NO2", "HC", "CO", 'nvPM']
-da_emission = ds_emission[vars[1]]
-# for var in vars[1:]:
-#     da_add = ds_emission[var]
-#     da_emission += da_add
+for var in vars:
+    da_emission = ds_emission[var]
+    fig = plt.figure(figsize=[12, 4])
+    plt.tight_layout()
+    ax = plt.axes(projection=ccrs.EqualEarth(central_longitude=10))
+    ax.add_feature(cfeature.BORDERS.with_scale('50m'), linewidth=0.5, edgecolor='darkgrey')
+    ax.coastlines(resolution='50m', linewidth=0.5, color='black')
+    da_emission.plot(ax=ax, transform=ccrs.PlateCarree())
 
-print(da_emission)
 
-# fig = plt.figure(figsize=[12, 4])
-# plt.tight_layout()
-# ax = plt.axes(projection=ccrs.EqualEarth(central_longitude=10))
-# ax.add_feature(cfeature.BORDERS.with_scale('50m'), linewidth=0.5, edgecolor='darkgrey')
-# ax.coastlines(resolution='50m', linewidth=0.5, color='black')
-# ds_emission.plot(ax=ax, transform=ccrs.PlateCarree())
-
-# plt.show()
+plt.show()
 
 # # Types and variables that will be plotted
 # types = {'Aerosol': ['PM25', 'AerMassNIT', 'AerMassNH4', 'AerMassPOA', 'AerMassBC'],
