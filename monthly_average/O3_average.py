@@ -8,9 +8,10 @@ import matplotlib.animation as animation
 from matplotlib.animation import FuncAnimation
 import numpy as np
 
+
 # Select variable you want to animate
-# Choose: ['SpeciesConc_NO2']
-var = 'SpeciesConc_NO2'
+# Choose: ['SpeciesConc_O3']
+var = 'SpeciesConc_O3'
 
 def differencer(type, month, var):
     dsoff = xr.open_dataset( os.path.join(os.path.dirname(__file__), ".." ,"raw_data", "model", f"{type}.{month}.OFF.nc4") )
@@ -26,9 +27,9 @@ def differencer(type, month, var):
 # --------------------------------------------------------------------------------------------------------------------
 # Starting of the preprocessing, no need to modify anything after this
 
-daSurf_JAN = differencer("NO2", "JAN", var)
+daSurf_JAN = differencer("O3", "JAN", var)
 
-daSurf_JUL = differencer("NO2", "JUL", var)
+daSurf_JUL = differencer("O3", "JUL", var)
 
 fig, ax = plt.subplots(2, 1, figsize= [12, 6], subplot_kw={"projection": ccrs.EqualEarth(central_longitude=10)})
 # Set up the figure and axis
