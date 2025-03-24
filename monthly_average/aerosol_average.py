@@ -8,12 +8,13 @@ import matplotlib.animation as animation
 from matplotlib.animation import FuncAnimation
 import numpy as np
 
+# From here you can set up the animation:
 # Select either July (JUL) or January (JAN)
 month = 'JUL'
 
 # Select variable you want to animate
-# Choose: ['SpeciesConc_NO2']
-var = 'SpeciesConc_NO2'
+# Choose between: ['PM25', 'AerMassNIT', 'AerMassNH4', 'AerMassPOA', 'AerMassBC']
+var = 'AerMassNIT'
 
 def differencer(type, month, var):
     dsoff = xr.open_dataset( os.path.join(os.path.dirname(__file__), ".." ,"raw_data", "model", f"{type}.{month}.OFF.nc4") )
@@ -31,7 +32,7 @@ def differencer(type, month, var):
 # Starting of the preprocessing, no need to modify anything after this
 # Open DataSet and print an overview of it
 
-daSurf = differencer("NO2",month,var)
+daSurf = differencer("Aerosol",month,var)
 
 # Set up the figure and axis
 fig = plt.figure(figsize=[12, 6])
@@ -42,11 +43,8 @@ ax.coastlines(resolution='50m', linewidth=0.5, color='black')
 # Plot the data for the current time step
 daSurf.plot(ax=ax, transform=ccrs.PlateCarree(), add_colorbar=False)
 
-
-
 # Add a title with the current time
 ax.set_title(f"{var}, monthly average {month}, level = {np.round(daSurf.lev.values, 3)}", fontsize=14)
-
 
 # Display the animation
 plt.show()
