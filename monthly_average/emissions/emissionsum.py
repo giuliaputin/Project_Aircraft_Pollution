@@ -8,21 +8,27 @@ import numpy as np
 
 
 # Open DataSet and print an overview of it
-ds_emission = xr.open_dataset(os.path.join(os.path.dirname(__file__),"..","..",'raw_data', 'emissions', 'AvEmMasses.nc4'))
+ds_emission = xr.open_dataset(os.path.join(os.path.dirname(__file__), "..", "..", 'raw_data', 'emissions', 'AvEmMasses.nc4'))
 
 # Select a DataArray
 vars = ["FUELBURN", "NO2", "HC", "CO", 'nvPM']
+
 for var in vars:
     da_emission = ds_emission[var]
     fig = plt.figure(figsize=[12, 4])
     plt.tight_layout()
+    
     ax = plt.axes(projection=ccrs.EqualEarth(central_longitude=10))
     ax.add_feature(cfeature.BORDERS.with_scale('50m'), linewidth=0.5, edgecolor='darkgrey')
     ax.coastlines(resolution='50m', linewidth=0.5, color='black')
     da_emission.plot(ax=ax, transform=ccrs.PlateCarree())
+    
+    ax.set_title(f"{var}, yearly average, sum of all vertical levels", fontsize=14)
 
-
-plt.show()
+    plt.savefig(os.path.join(os.path.dirname(__file__), '..', '..', 'monthly_average', 'emissions', 'figures',f'{var}_timeaveraged.png'))
+    
+    
+# plt.show()
 
 # # Types and variables that will be plotted
 # types = {'Aerosol': ['PM25', 'AerMassNIT', 'AerMassNH4', 'AerMassPOA', 'AerMassBC'],
