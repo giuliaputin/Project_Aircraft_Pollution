@@ -14,6 +14,7 @@ ds_emission = xr.open_dataset(os.path.join(os.path.dirname(__file__), "..", ".."
 vars = ["FUELBURN", "NO2", "HC", "CO", 'nvPM']
 # print(ds_emission[vars[0]].sel(lat = 31, lon= 28, method= 'nearest').values)
 # print(ds_emission[vars[0]].sel(lat = 31, lon= 28, method= 'nearest'))
+
 for var in vars:
     da_emission = ds_emission[var]
     fig = plt.figure(figsize=[12, 4])
@@ -29,7 +30,7 @@ for var in vars:
     # plt.savefig(os.path.join(os.path.dirname(__file__), '..', '..', 'monthly_average', 'emissions', 'figures',f'{var}_timeaveraged.png'))
     
     
-# plt.show()
+plt.show()
 
 # # Types and variables that will be plotted
 # types = {'Aerosol': ['PM25', 'AerMassNIT', 'AerMassNH4', 'AerMassPOA', 'AerMassBC'],

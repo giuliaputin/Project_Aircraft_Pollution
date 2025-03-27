@@ -7,7 +7,7 @@ import os
 import numpy as np
 
 # Types and variables that will be plotted
-types = {'Aerosol': ['PM25', 'AerMassNIT', 'AerMassNH4', 'AerMassPOA', 'AerMassBC'],
+types = {'Aerosol': ['PM25', 'AerMassNIT', 'AerMassNH4', 'AerMassPOA', 'AerMassBC', 'AerMassSO4'],
                   'O3' : ['SpeciesConc_O3'],
                   'NO2' : ['SpeciesConc_NO2']}
                
