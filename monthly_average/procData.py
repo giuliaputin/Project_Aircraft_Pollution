@@ -28,7 +28,7 @@ types = {
 }
 
 # emittants:
-# NO2, HC, CO, NVPM
+# NO2, HC, CO, nvPM
 
     # Iterate through each pollutant
 for type, vars in types.items():
