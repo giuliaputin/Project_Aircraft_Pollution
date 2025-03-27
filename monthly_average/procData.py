@@ -29,20 +29,21 @@ types = {
 
 # emittants:
 # NO2, HC, CO, NVPM
-for month in months:
-    # Iterate through each pollutant
-    for type, var in types.items():
-        # Iterate through the emittants of each pollutant
-        # print(var.keys())
-        
-        
-        for pollutant, emittants in var.items():
-           print(emittants, list(var.keys())[0]) 
-           x = var.get(pollutant)
-           x
-           #da = differencer(type, month, pollutant)
 
-        pass
+    # Iterate through each pollutant
+for type, vars in types.items():
+    # Iterate through the emittants of each pollutant
+    for var, emittants in vars.items():
+        for emittant in emittants:
+            for month in months:
+                
+                pollutant = differencer(type, month, var)
+                
+                
+                
+                
+                
+                
 
 
 
