@@ -27,7 +27,7 @@ for var in vars:
     
     ax.set_title(f"{var}, yearly average, sum of all vertical levels", fontsize=14)
 
-    # plt.savefig(os.path.join(os.path.dirname(__file__), '..', '..', 'monthly_average', 'emissions', 'figures',f'{var}_timeaveraged.png'))
+    plt.savefig(os.path.join(os.path.dirname(__file__), '..', '..', 'monthly_average', 'emissions_figures',f'{var}_timeaveraged.png'))
     
     
 plt.show()

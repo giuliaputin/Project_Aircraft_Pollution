@@ -5,29 +5,16 @@ import cartopy.feature as cfeature
 import xarray as xr
 import os
 import numpy as np
-
+from utils import differencer
 # Types and variables that will be plotted
 types = {'Aerosol': ['PM25', 'AerMassNIT', 'AerMassNH4', 'AerMassPOA', 'AerMassBC', 'AerMassSO4'],
                   'O3' : ['SpeciesConc_O3'],
                   'NO2' : ['SpeciesConc_NO2']}
                
-
-def differencer(type, month, var):
-    dsoff = xr.open_dataset( os.path.join(os.path.dirname(__file__), ".." , "..", "raw_data", "model", f"{type}.{month}.OFF.nc4") )
-    dson = xr.open_dataset( os.path.join(os.path.dirname(__file__), ".." , "..", "raw_data", "model", f"{type}.{month}.ON.nc4") )
-    daoff = dsoff[var]
-    daon = dson[var]
-
-    daSurfoff = daoff.isel(lev=0).mean(dim = "time")
-    daSurfon = daon.isel(lev=0).mean(dim = "time")
-    daDiff = daSurfon - daSurfoff
-
-    return daDiff
-
 # --------------------------------------------------------------------------------------------------------------------
 # Starting of the preprocessing, no need to modify anything after this
 
-months = ['Jan', 'JUL']
+months = ['JAN', 'JUL']
 
 # For loop to iterate through each type and through each variable withing each type
 for type in types:
@@ -48,7 +35,7 @@ for type in types:
             ax[i].set_title(f"{var}, monthly average {month}, level = {np.round(daSurf.lev.values, 3)}", fontsize=14)
         
        
-        plt.savefig(os.path.join(os.path.dirname(__file__), '..', '..', 'monthly_average', 'pollutants', 'figures',f'{type}_{var}_timeaveraged.png'))
+        plt.savefig(os.path.join(os.path.dirname(__file__), '..', 'monthly_average', 'pollutants_figures',f'{type}_{var}_timeaveraged.png'))
         
 # Uncomment to display the plots on screen
 # plt.show()
