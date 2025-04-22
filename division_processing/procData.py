@@ -15,7 +15,7 @@ types = {
     'Aerosol': {
         'PM25': ['nvPM'],
         'AerMassNIT': ['NO2'],
-        'AerMassNH4': ['NO2'], # blimp BLOMP find something
+        'AerMassNH4': ['NO2'],
         'AerMassPOA': ['nvPM', 'HC'],
         'AerMassBC': ['nvPM']
     },
@@ -96,18 +96,18 @@ for type_, vars in types.items():
         for i, month in enumerate(months):
             ax[i].add_feature(cfeature.BORDERS.with_scale('50m'), linewidth=0.5, edgecolor='darkgrey')
             ax[i].coastlines(resolution='50m', linewidth=0.5, color='black')
-            # ax.hist(measures[i].values.flatten())
-            # ax.set_ylim(0, 10)
+            
             vmin = measures[i].values.min()
             vmax = measures[i].values.max()
             
             # Plot the data for the current time step
             measures[i].plot(ax=ax[i], transform=ccrs.PlateCarree(), vmin=vmin, vmax=vmax)
-            # ax.set_title(f"{var}, monthly average {month}", fontsize=14)
+
             # Add a title with the current time
             ax[i].set_title(f"{var}, monthly average {month}", fontsize=14)
             
+            plt.savefig(os.path.join(os.path.dirname(__file__), '..', 'division_processing', 'division_figures',f'{type_}_{var}_timeaveraged.png'))
 end = time.time()
-plt.show()
+# plt.show()
 
 print(f"Process run in {end - start} s")

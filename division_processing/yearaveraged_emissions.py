@@ -27,7 +27,7 @@ for var in vars:
     
     ax.set_title(f"{var}, yearly average, sum of all vertical levels", fontsize=14)
 
-    plt.savefig(os.path.join(os.path.dirname(__file__), '..', 'monthly_average', 'emissions_figures',f'{var}_timeaveraged.png'))
+    plt.savefig(os.path.join(os.path.dirname(__file__), '..', 'division_processing', 'emissions_figures',f'{var}_timeaveraged.png'))
     
     
 plt.show()
@@ -74,7 +74,7 @@ plt.show()
 #             ax[i].set_title(f"{var}, monthly average {month}, level = {np.round(daSurf.lev.values, 3)}", fontsize=14)
         
        
-#         plt.savefig(os.path.join(os.path.dirname(__file__), '..', 'monthly_average', 'figures',f'{type}_{var}_timeaveraged.png'))
+#         plt.savefig(os.path.join(os.path.dirname(__file__), '..', 'division_processing', 'figures',f'{type}_{var}_timeaveraged.png'))
         
 # # Uncomment to display the plots on screen
 # # plt.show()
