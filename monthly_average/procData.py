@@ -31,10 +31,11 @@ emissions = xr.open_dataset(os.path.join(os.path.dirname(__file__), '..', 'raw_d
 # emittants:
 # NO2, HC, CO, nvPM
 # Iterate through each pollutant
-for type, vars in types.items():
+for type_, vars in types.items():
     # Iterate through the emittants of each pollutant
     for var, emittants in vars.items():
         fig, ax = plt.subplots(1, 2, figsize= [12, 4], subplot_kw={"projection": ccrs.EqualEarth(central_longitude=10)})
+        # fig, ax = plt.subplots(1, 1)
         plt.tight_layout()
         
         vmin = float('inf')
@@ -42,7 +43,7 @@ for type, vars in types.items():
         measures = []
         
         for month in months:
-            pollutant = differencer(type, month, var)
+            pollutant = differencer(type_, month, var)
 
             sum_emittants = adder(emissions, emittants).drop_sel(lat=68.5).drop_isel(lon=-1)
             # print(sum_emittants.sel(coords= sum_emittants.coords[sum_emittants.coords != (68.5, 48.12)]))
@@ -63,20 +64,35 @@ for type, vars in types.items():
                 attrs=pollutant.attrs
             )
             #print(pollutant)
-            measure = (pollutant) / sum_emittants            
-            measures.append(measure)
+            measure = (pollutant) / sum_emittants    
             
-            vmin = min(vmin, measure.values.min())
-            vmax = max(vmax, measure.values.max())
-            average = np.mean(measure.values)
-        print(vmax, average)
+            median = np.median(measure.values)        
+            q1 = np.percentile(measure.values, 25)
+            q3 = np.percentile(measure.values, 75)
+            iqr = q3 - q1
+
+            lower_bound = q1 - 1.5 * iqr
+            upper_bound = q3 + 1.5 * iqr
+
+            measure = measure.where(
+                (measure >= lower_bound) & (measure <= upper_bound),
+                median
+            )
+                    
+            measures.append(measure)
+
+        
         for i, month in enumerate(months):
             ax[i].add_feature(cfeature.BORDERS.with_scale('50m'), linewidth=0.5, edgecolor='darkgrey')
             ax[i].coastlines(resolution='50m', linewidth=0.5, color='black')
-
+            # ax.hist(measures[i].values.flatten())
+            
+            vmin = measures[i].values.min()
+            vmax = measures[i].values.max()
+            
             # Plot the data for the current time step
             measures[i].plot(ax=ax[i], transform=ccrs.PlateCarree(), vmin=vmin, vmax=vmax)
-
+            # ax.set_title(f"{var}, monthly average {month}", fontsize=14)
             # Add a title with the current time
             ax[i].set_title(f"{var}, monthly average {month}", fontsize=14)
             
