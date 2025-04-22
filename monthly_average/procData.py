@@ -47,8 +47,6 @@ for type, vars in types.items():
             sum_emittants = adder(emissions, emittants).drop_sel(lat=68.5).drop_isel(lon=-1)
             # print(sum_emittants.sel(coords= sum_emittants.coords[sum_emittants.coords != (68.5, 48.12)]))
     
-            print(pollutant)
-            print(sum_emittants)
             sum_emittants_scaled = xr.DataArray(
                                     StandardScaler().fit_transform(sum_emittants.values),
                                     dims=sum_emittants.dims,
@@ -63,14 +61,18 @@ for type, vars in types.items():
                 attrs=pollutant.attrs
             )
 
-            measure = pollutant / sum_emittants * 1e7
-            print("\n\n MMMMM \n\n")
-            print(measure)
+            measure =xr.DataArray(
+                StandardScaler().fit_transform(pollutant_scaled / sum_emittants_scaled),
+                dims=pollutant.dims,
+                coords=pollutant.coords,
+                attrs=pollutant.attrs
+            )
+            
             measures.append(measure)
             
             vmin = min(vmin, measure.values.min())
             vmax = max(vmax, measure.values.max())
-            
+               
         for i, month in enumerate(months):
             ax[i].add_feature(cfeature.BORDERS.with_scale('50m'), linewidth=0.5, edgecolor='darkgrey')
             ax[i].coastlines(resolution='50m', linewidth=0.5, color='black')
@@ -84,7 +86,5 @@ for type, vars in types.items():
 end = time.time()
     
 plt.show()
-
-
 
 print(f"Process run in {end - start} s")
