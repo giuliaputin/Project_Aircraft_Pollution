@@ -28,6 +28,7 @@ types = {
 }
 
 emissions = xr.open_dataset(os.path.join(os.path.dirname(__file__), '..', 'raw_data', 'emissions', 'AvEmMasses.nc4'))
+
 # emittants:
 # NO2, HC, CO, nvPM
 # Iterate through each pollutant
@@ -74,11 +75,21 @@ for type_, vars in types.items():
             lower_bound = q1 - 1.5 * iqr
             upper_bound = q3 + 1.5 * iqr
 
+            # Old code
+            # measure = measure.where(
+            #     (measure >= lower_bound) & (measure <= upper_bound),
+            #     median
+            # )
+            
             measure = measure.where(
-                (measure >= lower_bound) & (measure <= upper_bound),
-                median
+                (measure >= lower_bound),
+                lower_bound
+            )   
+            measure = measure.where(
+                (measure <= upper_bound),
+                upper_bound
             )
-                    
+                 
             measures.append(measure)
 
         
@@ -86,7 +97,7 @@ for type_, vars in types.items():
             ax[i].add_feature(cfeature.BORDERS.with_scale('50m'), linewidth=0.5, edgecolor='darkgrey')
             ax[i].coastlines(resolution='50m', linewidth=0.5, color='black')
             # ax.hist(measures[i].values.flatten())
-            
+            # ax.set_ylim(0, 10)
             vmin = measures[i].values.min()
             vmax = measures[i].values.max()
             
