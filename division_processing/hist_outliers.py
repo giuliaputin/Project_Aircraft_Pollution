@@ -9,6 +9,9 @@ from utils import *
 from sklearn.preprocessing import StandardScaler
 import time
 import seaborn as sns
+from scipy.stats import zscore
+from sklearn.svm import OneClassSVM
+from sklearn.cluster import DBSCAN
 start = time.time()
 
 months = ['JAN', 'JUL']
@@ -28,6 +31,11 @@ types = {
         'SpeciesConc_NO2': ['NO2']
     }
 }
+def modified_z_score(data):
+    median = np.median(data)
+    mad = np.median(np.abs(data - median))
+    return 0.6745 * (data - median) / mad
+
 
 emissions = xr.open_dataset(os.path.join(os.path.dirname(__file__), '..', 'raw_data', 'emissions', 'AvEmMasses.nc4'))
 
@@ -37,51 +45,50 @@ emissions = xr.open_dataset(os.path.join(os.path.dirname(__file__), '..', 'raw_d
 for type_, vars in types.items():
     # Iterate through the emittants of each pollutant
     for var, emittants in vars.items():
-        # fig, ax = plt.subplots(1, 1, figsize=[12, 4])
+        fig, axs = plt.subplots(1, 2, figsize=[12, 4])
         plt.tight_layout()
         measures = []
         
         for month in months:
             pollutant = differencer(type_, month, var)
 
-            sum_emittants = adder(emissions, emittants).drop_sel(lat=68.5).drop_isel(lon=-1)
-
-            scaler = StandardScaler().fit(pollutant.values)
+            sum_emittants = adder(emissions, emittants)
             
-            sum_emittants_scaled = xr.DataArray(
-                                    scaler.transform(sum_emittants.values),
-                                    dims=sum_emittants.dims,
-                                    coords=sum_emittants.coords,
-                                    attrs=sum_emittants.attrs
-                                )
-            
-            pollutant_scaled = xr.DataArray(
-                scaler.transform(pollutant.values),
-                dims=pollutant.dims,
-                coords=pollutant.coords,
-                attrs=pollutant.attrs
-            )
-            
-            measure = (pollutant) / sum_emittants    
-        
-            # Old code
-            # measure = measure.where(
-            #     (measure >= lower_bound) & (measure <= upper_bound),
-            #     median
-            # )
-        
+            measure = pollutant/ (sum_emittants)     
+            print(f'Minimum emittants {pollutant.min()} max emittants {pollutant.max()}')
             measures.append(measure)
+            print(pollutant.coords)
+            
 
         
         for i, month in enumerate(months):
-        
+            data = (measures[i].values.flatten())
             
-            # Plot the data for the current time step
-            sns.boxplot(x= measures[i].values.flatten())
-            # Add a title with the current time
-            # ax.set_title(f"{var}, monthly average {month}", fontsize=14)
-            plt.show()
-            # plt.savefig(os.path.join(os.path.dirname(__file__), '..', 'division_processing', 'division_figures',f'{type_}_{var}_timeaveraged.png'))
+            # # Calculate Q1 (25th percentile) and Q3 (75th percentile)
+            # Q1 = np.percentile(data, 25)
+            # Q3 = np.percentile(data, 75)
+
+            # # Calculate the interquartile range (IQR)
+            # IQR = Q3 - Q1
+            
+            # # Calculate the lower and upper bounds for outliers
+            # lower_bound = Q1 - 25 * IQR
+            # upper_bound = Q3 + 25 * IQR
+
+            # # Identify outliers (values outside the whiskers)
+            # outliers = data[(data < lower_bound) | (data > upper_bound)]
+
+            # # Count outliers
+            # num_outliers = len(outliers)
+            
+            # print(f"Number of outliers: {num_outliers}, data length {len(data)}")
+            # sns.boxplot(data, ax=axs[i])
+            axs[i].hist(data)
+            
+            
+            
+plt.show()   
+            
 end = time.time()
 
 
