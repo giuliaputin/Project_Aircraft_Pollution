@@ -5,11 +5,11 @@ import cartopy.feature as cfeature
 import xarray as xr
 
 # Open the datasets
-ds_on = xr.open_dataset('O3.JUL.ON.nc4')   # Aviation ON
-ds_off = xr.open_dataset('O3.JUL.OFF.nc4') # Aviation OFF
+ds_on = xr.open_dataset('NO2.JUL.ON.nc4')   # Aviation ON
+ds_off = xr.open_dataset('NO2.JUL.OFF.nc4') # Aviation OFF
 
 # Select the variable for ozone concentration
-var = 'SpeciesConc_O3'  # Ozone variable
+var = 'SpeciesConc_NO2'  # Ozone variable
 da_on = ds_on[var]
 da_off = ds_off[var]
 
@@ -47,7 +47,7 @@ da_diff.plot(ax=ax, transform=ccrs.PlateCarree(), cmap='RdBu_r', center=0,
              vmin=-abs(da_diff).max(), vmax=abs(da_diff).max())
 
 # Set title and labels
-ax.set_title('Aviation Contribution to Ozone (O₃) over Europe on 2019-01-15')
+ax.set_title('Aviation Contribution to Nitrogen (NO2) over Europe on 2019-06-15')
 
 # Show the plot
 plt.show()
