@@ -5,7 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="62651fb8-0f05-4f77-b83f-cd868894294e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/raw_data/model/aerosols_types.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements/O3.JAN.ON.nc4" beforeDir="false" afterPath="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements/O3.JAN.ON.nc4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements/O3.JUL.OFF.nc4" beforeDir="false" afterPath="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements/O3.JUL.OFF.nc4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements/O3.JUL.ON.nc4" beforeDir="false" afterPath="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements/O3.JUL.ON.nc4" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,21 +25,21 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "giuliaputin"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;giuliaputin&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/giuliaputin/Project_Aircraft_Pollution.git",
-    "accountId": "001c849d-366b-47e4-86c1-52e4c4d1a69e"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/giuliaputin/Project_Aircraft_Pollution.git&quot;,
+    &quot;accountId&quot;: &quot;001c849d-366b-47e4-86c1-52e4c4d1a69e&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="2uRSWW2eFXO6qkEyQUEloGjDbcR" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -44,9 +47,11 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python.O3_plotting_JUL_diff.executor": "Run",
     "Python.aerosols_types.executor": "Run",
+    "Python.index plotting.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "simulationPlots",
+    "git-widget-placeholder": "main",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
@@ -71,6 +76,7 @@
       <option name="presentableId" value="Default" />
       <updated>1742209930535</updated>
       <workItem from="1742209931712" duration="184000" />
+      <workItem from="1745828896715" duration="400000" />
     </task>
     <servers />
   </component>
@@ -78,6 +84,7 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/O3_JAN_ON_nc4$O3_plotting_JUL_diff.coverage" NAME="O3_plotting_JUL_diff Coverage Results" MODIFIED="1745829177499" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements" />
     <SUITE FILE_PATH="coverage/Project_Aircraft_Pollution$O3_plotting_JUL_ON.coverage" NAME="O3_plotting_JUL_ON Coverage Results" MODIFIED="1741862929092" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/JUL_Model_Measurements" />
     <SUITE FILE_PATH="coverage/_gitignore$O3_plotting_JUL_ON.coverage" NAME="O3_plotting_JUL_ON Coverage Results" MODIFIED="1742199442052" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/JUL_Model_Measurements" />
     <SUITE FILE_PATH="coverage/Project_Aircraft_Pollution$O3_plotting_JUL_diff_interactive.coverage" NAME="O3_plotting_JUL_diff_interactive Coverage Results" MODIFIED="1741859069143" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements" />
@@ -89,6 +96,7 @@
     <SUITE FILE_PATH="coverage/Project_Aircraft_Pollution$O3_plotting_JUL_diff.coverage" NAME="O3_plotting_JUL_diff Coverage Results" MODIFIED="1741862050537" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/JUL_Model_Measurements" />
     <SUITE FILE_PATH="coverage/Project_Aircraft_Pollution$aerosol_animation.coverage" NAME="aerosol_animation Coverage Results" MODIFIED="1742200890471" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/model_animations" />
     <SUITE FILE_PATH="coverage/_gitignore$Plotting_JUL_ON.coverage" NAME="Plotting_JUL_ON Coverage Results" MODIFIED="1742200119975" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/JUL_Model_Measurements" />
+    <SUITE FILE_PATH="coverage/O3_JAN_ON_nc4$index_plotting.coverage" NAME="index plotting Coverage Results" MODIFIED="1745828914595" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements" />
     <SUITE FILE_PATH="coverage/Project_Aircraft_Pollution$O3_plotting_JUL_OFF.coverage" NAME="O3_plotting_JUL_OFF Coverage Results" MODIFIED="1741861904841" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/JUL_Model_Measurements" />
     <SUITE FILE_PATH="coverage/_gitignore$aerosol_trial.coverage" NAME="aerosol_trial Coverage Results" MODIFIED="1742199312837" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/JUL_Model_Measurements" />
     <SUITE FILE_PATH="coverage/Project_Aircraft_Pollution$Alt_Plotting_ON.coverage" NAME="Alt_Plotting_ON Coverage Results" MODIFIED="1741859104808" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements" />
