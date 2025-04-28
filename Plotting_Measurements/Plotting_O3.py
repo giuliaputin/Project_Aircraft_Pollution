@@ -5,7 +5,7 @@ from folium.plugins import HeatMap
 import os
 
 # Define the file path
-file_path = "Measurements_Data/O3.csv"  # Adjust based on your folder structure
+file_path = "raw_data/measurements/O3.csv"  # Adjust based on your folder structure
 
 # Check if the file exists before reading
 if not os.path.exists(file_path):
