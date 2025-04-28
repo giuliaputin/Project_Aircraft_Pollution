@@ -11,6 +11,7 @@ ds_off = xr.open_dataset(os.path.join(os.path.dirname(__file__), ".", 'NO2.JUL.O
 
 # Select the variable for ozone concentration
 var = 'SpeciesConc_NO2'  # Ozone variable
+var = 'SpeciesConc_NO2'  # Ozone variable
 da_on = ds_on[var]
 da_off = ds_off[var]
 
