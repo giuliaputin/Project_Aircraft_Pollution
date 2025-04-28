@@ -3,10 +3,10 @@ import pandas as pd
 import folium
 import numpy as np
 from folium.plugins import HeatMap
+import os
 
 # Load the dataset
-file_path = "PM25.annual.OFF.nc4"
-ds = xr.open_dataset(file_path)
+ds = xr.open_dataset(os.path.join(os.path.dirname(__file__), ".", 'PM25.annual.OFF.nc4'))
 
 # Extract latitude, longitude, and PM2.5 data
 lat = ds['lat'].values
