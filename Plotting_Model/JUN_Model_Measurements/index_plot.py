@@ -11,7 +11,7 @@ import NO2_plotting_JUL_diff as no2_diff
 import PM25_plotting_JUL_diff as pm25_diff
 
 # Assume each .py file defines a variable called da_diff
-datasets = {
+pollutants = {
     'O3': o3_diff.da_diff,
     'NO2': no2_diff.da_diff,
     'PM25': pm25_diff.da_diff
@@ -19,9 +19,8 @@ datasets = {
 
 
 # Open the datasets
-datasets = {}
 for pol, (filename, varname) in pollutants.items():
-    datasets[pol] = xr.open_dataset(filename)[varname]
+    pollutants[pol] = xr.open_dataset(filename)[varname]
 
 
 # Define the function to assign pollution index based on concentration
@@ -49,7 +48,7 @@ def assign_index(pollutant, concentration):
 # Assign index for each pollutant
 indexes = {}
 for pol in pollutants.keys():
-    indexes[pol] = assign_index(pol, datasets[pol])
+    indexes[pol] = assign_index(pol, pollutants[pol])
 
 # Sum the indexes
 total_index = indexes['O3'] + indexes['NO2'] + indexes['PM25']
@@ -64,7 +63,7 @@ ax.coastlines(resolution='50m', linewidth=0.5, color='white')
 
 # Plot the total index
 im = ax.pcolormesh(
-    datasets['O3']['lon'], datasets['O3']['lat'], total_index,
+    pollutants['O3']['lon'], pollutants['O3']['lat'], total_index,
     transform=ccrs.PlateCarree(),
     cmap='RdYlGn_r'
 )

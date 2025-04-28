@@ -6,8 +6,8 @@ import xarray as xr
 import os
 
 # Open the datasets
-ds_on = xr.open_dataset(os.path.join(os.path.dirname(__file__), ".", 'O3.JUL.ON.nc4'))   # Aviation ON
-ds_off = xr.open_dataset(os.path.join(os.path.dirname(__file__), ".", 'O3.JUL.OFF.nc4'))  # Aviation OFF
+ds_on = xr.open_dataset(os.path.join(os.path.dirname(__file__), "..", "..", 'raw_data', 'model', 'O3.JUL.ON.nc4'))   # Aviation ON
+ds_off = xr.open_dataset(os.path.join(os.path.dirname(__file__), "..", "..", 'raw_data', 'model', 'O3.JUL.OFF.nc4'))  # Aviation OFF
 
 print(ds_on)
 
@@ -26,7 +26,7 @@ da_on_time = da_on_avg.sel(time=time_point, method='nearest')
 da_off_time = da_off_avg.sel(time=time_point, method='nearest')
 
 # Compute the difference (aviation contribution)
-da_diff = da_on_time - da_off_time
+da_diff = (da_on_time - da_off_time)
 
 # Manually set the units for da_diff
 da_diff.attrs["units"] = da_on_time.attrs.get("units", "unknown")  # Use "unknown" if not found
