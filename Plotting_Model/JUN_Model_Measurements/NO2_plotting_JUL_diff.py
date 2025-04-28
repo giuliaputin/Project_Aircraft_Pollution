@@ -20,7 +20,7 @@ da_on_avg = da_on.mean(dim='lev')
 da_off_avg = da_off.mean(dim='lev')
 
 # Select the same time point for both datasets
-time_point = '2019-01-15'
+time_point = '2019-06-15'
 da_on_time = da_on_avg.sel(time=time_point, method='nearest')
 da_off_time = da_off_avg.sel(time=time_point, method='nearest')
 
