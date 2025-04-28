@@ -7,7 +7,7 @@ import os
 
 # Open the datasets
 ds_on = xr.open_dataset(os.path.join(os.path.dirname(__file__), ".", 'PM25.annual.ON.nc4'))   # Aviation ON
-ds_off = xr.open_dataset(os.path.join(os.path.dirname(__file__), ".", 'PM25.annual.ON.nc4'))  # Aviation OFF
+ds_off = xr.open_dataset(os.path.join(os.path.dirname(__file__), ".", 'PM25.annual.OFF.nc4'))  # Aviation OFF
 
 print(ds_on)
 
