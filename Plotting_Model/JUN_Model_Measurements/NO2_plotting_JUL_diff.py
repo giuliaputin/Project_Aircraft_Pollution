@@ -3,12 +3,14 @@ import matplotlib.pyplot as plt
 import cartopy.crs as ccrs
 import cartopy.feature as cfeature
 import xarray as xr
+import os
 
 # Open the datasets
-ds_on = xr.open_dataset('NO2.JUL.ON.nc4')   # Aviation ON
-ds_off = xr.open_dataset('NO2.JUL.OFF.nc4') # Aviation OFF
+ds_on = xr.open_dataset(os.path.join(os.path.dirname(__file__), ".", 'NO2.JUL.ON.nc4'))   # Aviation ON
+ds_off = xr.open_dataset(os.path.join(os.path.dirname(__file__), ".", 'NO2.JUL.ON.nc4'))  # Aviation OFF
 
 # Select the variable for ozone concentration
+var = 'SpeciesConc_NO2'  # Ozone variable
 var = 'SpeciesConc_NO2'  # Ozone variable
 da_on = ds_on[var]
 da_off = ds_off[var]
@@ -29,7 +31,7 @@ da_diff = da_on_time - da_off_time
 da_diff.attrs["units"] = da_on_time.attrs.get("units", "unknown")  # Use "unknown" if not found
 
 # Print mean impact of aviation
-print(f'\nMean aviation contribution to O3 over Europe = {float(da_diff.mean().values):.1f} {da_diff.attrs["units"]}')
+print(f'\nMean aviation contribution to NO2 over Europe = {float(da_diff.mean().values):.1f} {da_diff.attrs["units"]}')
 
 # Print mean impact of aviation
 
