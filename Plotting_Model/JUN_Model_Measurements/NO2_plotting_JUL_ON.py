@@ -4,7 +4,7 @@ import cartopy.feature as cfeature
 import xarray as xr
 
 # Open the dataset and print an overview
-ds = xr.open_dataset('NO2.JUL.ON.nc4')
+ds = xr.open_dataset('Plotting_Model\JUN_Model_Measurements\NO2.JUL.ON.nc4')
 print(ds)
 
 # Select the variable for ozone concentration
