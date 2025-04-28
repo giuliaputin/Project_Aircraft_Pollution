@@ -3,9 +3,10 @@ import matplotlib.pyplot as plt
 import cartopy.crs as ccrs
 import cartopy.feature as cfeature
 import xarray as xr
+import os
 
 # Open the dataset and print an overview
-ds = xr.open_dataset('Plotting_Model\JUN_Model_Measurements\O3.JUL.ON.nc4')
+ds = xr.open_dataset(os.path.join(os.path.dirname(__file__), ".", 'O3.JUL.ON.nc4'))
 print(ds)
 
 # Select the variable for ozone concentration

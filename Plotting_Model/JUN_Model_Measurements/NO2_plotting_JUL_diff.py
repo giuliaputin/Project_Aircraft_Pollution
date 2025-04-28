@@ -7,7 +7,7 @@ import os
 
 # Open the datasets
 ds_on = xr.open_dataset(os.path.join(os.path.dirname(__file__), ".", 'NO2.JUL.ON.nc4'))   # Aviation ON
-ds_off = xr.open_dataset(os.path.join(os.path.dirname(__file__), ".", 'NO2.JUL.ON.nc4'))  # Aviation OFF
+ds_off = xr.open_dataset(os.path.join(os.path.dirname(__file__), ".", 'NO2.JUL.OFF.nc4'))  # Aviation OFF
 
 # Select the variable for ozone concentration
 var = 'SpeciesConc_NO2'  # Ozone variable
