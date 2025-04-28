@@ -17,7 +17,7 @@ da = ds[var]
 da_avg = da.mean(dim='lev')
 
 # Select data at a specific time, using nearest available time point
-da_time = da_avg.sel(time='2019-01-15', method='nearest')
+da_time = da_avg.sel(time='2019-06-15', method='nearest')
 
 # Print the mean value of this selection
 print(f'\nMean of {var} over Europe is = {float(da_time.mean().values):.1f} {da.attrs["units"]}')
