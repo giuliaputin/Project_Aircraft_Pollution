@@ -3,16 +3,16 @@ import matplotlib.pyplot as plt
 import cartopy.crs as ccrs
 import cartopy.feature as cfeature
 import xarray as xr
+import os
 
 # Open the datasets
-ds_on = xr.open_dataset('Plotting_Model\JUN_Model_Measurements\PM25.annual.ON.nc4')   # Aviation ON
-ds_off = xr.open_dataset('Plotting_Model\JUN_Model_Measurements\PM25.annual.OFF.nc4') # Aviation OFF
+ds_on = xr.open_dataset(os.path.join(os.path.dirname(__file__), ".", 'PM25.annual.ON.nc4'))   # Aviation ON
+ds_off = xr.open_dataset(os.path.join(os.path.dirname(__file__), ".", 'PM25.annual.ON.nc4'))  # Aviation OFF
 
 print(ds_on)
 
-
 # Select the variable for ozone concentration
-var = 'SpeciesConc_PM25'  # Ozone variable
+var = 'PM25'  # Ozone variable
 da_on = ds_on[var]
 da_off = ds_off[var]
 
