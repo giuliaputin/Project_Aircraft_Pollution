@@ -91,5 +91,4 @@ plt.show()
             
 end = time.time()
 
-
 print(f"Process run in {end - start} s")

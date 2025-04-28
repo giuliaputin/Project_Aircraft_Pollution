@@ -46,7 +46,7 @@ for type in types:
             ax[i].set_title(f"{var}, monthly average {month}, level = {np.round(daSurf[i].lev.values, 3)}", fontsize=14)
         
        
-        plt.savefig(os.path.join(os.path.dirname(__file__), '..', 'division_processing', 'pollutants_figures',f'{type}_{var}_timeaveraged.png'))
+        # plt.savefig(os.path.join(os.path.dirname(__file__), '..', 'division_processing', 'pollutants_figures',f'{type}_{var}_timeaveraged.png'))
         
 # Uncomment to display the plots on screen
 # plt.show()
