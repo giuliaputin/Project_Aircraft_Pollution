@@ -1,4 +1,3 @@
-# Import modules
 import matplotlib.pyplot as plt
 import cartopy.crs as ccrs
 import cartopy.feature as cfeature
@@ -6,18 +5,18 @@ import xarray as xr
 import os
 
 # Open the dataset and print an overview
-ds = xr.open_dataset(os.path.join(os.path.dirname(__file__), ".", 'O3.JUL.OFF.nc4'))
+ds = xr.open_dataset(os.path.join(os.path.dirname(__file__), ".", 'NO2.JUL.ON.nc4'))
 print(ds)
 
 # Select the variable for ozone concentration
-var = 'SpeciesConc_O3'  # Corrected variable name for ozone
+var = 'SpeciesConc_NO2'  # Corrected variable name for ozone
 da = ds[var]
 
 # Average over the vertical dimension (lev) to get the total or averaged O3 concentration at each location
 da_avg = da.mean(dim='lev')
 
 # Select data at a specific time, using nearest available time point
-da_time = da_avg.sel(time='2019-01-15', method='nearest')
+da_time = da_avg.sel(time='2019-06-15', method='nearest')
 
 # Print the mean value of this selection
 print(f'\nMean of {var} over Europe is = {float(da_time.mean().values):.1f} {da.attrs["units"]}')
@@ -35,7 +34,7 @@ da_time.plot(ax=ax, transform=ccrs.PlateCarree(), cmap='viridis',
              vmin=da_time.min().values, vmax=da_time.max().values)
 
 # Set title and labels
-ax.set_title('Ozone (O₃) Distribution over Europe on 2019-01-15')
+ax.set_title('Ozone (O₃) Distribution over Europe on 2019-06-15')
 
 # Show the plot
 plt.show()

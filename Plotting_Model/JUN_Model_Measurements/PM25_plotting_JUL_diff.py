@@ -6,30 +6,21 @@ import xarray as xr
 import os
 
 # Open the datasets
-ds_on = xr.open_dataset(os.path.join(os.path.dirname(__file__), ".", 'O3.JUL.ON.nc4'))   # Aviation ON
-ds_off = xr.open_dataset(os.path.join(os.path.dirname(__file__), ".", 'O3.JUL.OFF.nc4'))  # Aviation OFF
+ds_on = xr.open_dataset(os.path.join(os.path.dirname(__file__), ".", 'PM25.annual.ON.nc4'))   # Aviation ON
+ds_off = xr.open_dataset(os.path.join(os.path.dirname(__file__), ".", 'PM25.annual.OFF.nc4'))  # Aviation OFF
 
 print(ds_on)
 
 # Select the variable for ozone concentration
-var = 'SpeciesConc_O3'  # Ozone variable
+var = 'PM25'  # Ozone variable
 da_on = ds_on[var]
 da_off = ds_off[var]
 
-# Average over the vertical dimension (lev)
-da_on_avg = da_on.mean(dim='lev')
-da_off_avg = da_off.mean(dim='lev')
-
-# Select the same time point for both datasets
-time_point = '2019-01-15'
-da_on_time = da_on_avg.sel(time=time_point, method='nearest')
-da_off_time = da_off_avg.sel(time=time_point, method='nearest')
-
 # Compute the difference (aviation contribution)
-da_diff = da_on_time - da_off_time
+da_diff = da_on - da_off
 
 # Manually set the units for da_diff
-da_diff.attrs["units"] = da_on_time.attrs.get("units", "unknown")  # Use "unknown" if not found
+da_diff.attrs["units"] = da_on.attrs.get("units", "unknown")  # Use "unknown" if not found
 
 # Print mean impact of aviation
 print(f'\nMean aviation contribution to O3 over Europe = {float(da_diff.mean().values):.1f} {da_diff.attrs["units"]}')
@@ -50,7 +41,7 @@ da_diff.plot(ax=ax, transform=ccrs.PlateCarree(), cmap='RdBu_r', center=0,
              vmin=-abs(da_diff).max(), vmax=abs(da_diff).max())
 
 # Set title and labels
-ax.set_title('Aviation Contribution to Ozone (O₃) over Europe on 2019-01-15')
+ax.set_title('Aviation Contribution to Particulate Matter (PM2.5) over Europe on 2019-01-15')
 
 # Show the plot
 plt.show()

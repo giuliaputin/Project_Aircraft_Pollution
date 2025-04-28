@@ -6,11 +6,11 @@ import xarray as xr
 import os
 
 # Open the dataset and print an overview
-ds = xr.open_dataset(os.path.join(os.path.dirname(__file__), ".", 'O3.JUL.OFF.nc4'))
+ds = xr.open_dataset(os.path.join(os.path.dirname(__file__), ".", 'NO2.JUL.OFF.nc4'))
 print(ds)
 
 # Select the variable for ozone concentration
-var = 'SpeciesConc_O3'  # Corrected variable name for ozone
+var = 'SpeciesConc_NO2'  # Corrected variable name for ozone
 da = ds[var]
 
 # Average over the vertical dimension (lev) to get the total or averaged O3 concentration at each location
