@@ -5,68 +5,88 @@ import cartopy.feature as cfeature
 import xarray as xr
 import numpy as np
 
-# Pollutant settings
-pollutants = {
-    'O3': 'SpeciesConc_O3',
-    'NO2': 'SpeciesConc_NO2',
-    'PM25': 'SpeciesConc_PM25'
-}
+
+# Function to assign index based on pollutant concentration
+def assign_index(pollutant, concentration):
+    if pollutant == 'NO2':
+        if concentration <= 50:
+            return 12.5
+        elif concentration <= 100:
+            return 37.5
+        elif concentration <= 200:
+            return 62.5
+        elif concentration <= 400:
+            return 87.5
+        else:
+            return 125
+    elif pollutant == 'O3':
+        if concentration <= 60:
+            return 12.5
+        elif concentration <= 120:
+            return 37.5
+        elif concentration <= 180:
+            return 62.5
+        elif concentration <= 240:
+            return 87.5
+        else:
+            return 125
+    elif pollutant == 'PM25':
+        if concentration <= 15:
+            return 12.5
+        elif concentration <= 30:
+            return 37.5
+        elif concentration <= 55:
+            return 62.5
+        elif concentration <= 110:
+            return 87.5
+        else:
+            return 125
+    else:
+        raise ValueError('Unknown pollutant')
+
 
 # Open the datasets
 datasets = {}
-for pol in pollutants.keys():
-    datasets[pol+'_on'] = xr.open_dataset(f'{pol}.JUL.ON.nc4')
-    datasets[pol+'_off'] = xr.open_dataset(f'{pol}.JUL.OFF.nc4')
+variables = {'NO2': 'SpeciesConc_NO2', 'O3': 'SpeciesConc_O3', 'PM25': 'SpeciesConc_PM25'}
 
-# Choose the time point
+fodatasets = {}
+
+# Explicit filenames
+datasets['NO2_on'] = xr.open_dataset('your_filename_for_NO2_ON.nc4')
+datasets['NO2_off'] = xr.open_dataset('your_filename_for_NO2_OFF.nc4')
+
+datasets['O3_on'] = xr.open_dataset('O3.JUL.ON.nc4')    # If this is correct
+datasets['O3_off'] = xr.open_dataset('O3.JUL.OFF.nc4')
+
+datasets['PM25_on'] = xr.open_dataset('your_filename_for_PM25_ON.nc4')
+datasets['PM25_off'] = xr.open_dataset('your_filename_for_PM25_OFF.nc4')
+
+
+# Select the time point
 time_point = '2019-01-15'
 
-# Function to compute the aviation contribution
-def compute_diff(ds_on, ds_off, varname):
-    da_on = ds_on[varname]
-    da_off = ds_off[varname]
-    da_on_avg = da_on.mean(dim='lev')
-    da_off_avg = da_off.mean(dim='lev')
-    da_on_time = da_on_avg.sel(time=time_point, method='nearest')
-    da_off_time = da_off_avg.sel(time=time_point, method='nearest')
-    da_diff = da_on_time - da_off_time
-    return da_diff
+# Calculate the aviation contribution and assign indexes
+indexes = []
 
-# Compute differences
-diffs = {}
-for pol, varname in pollutants.items():
-    diffs[pol] = compute_diff(datasets[pol+'_on'], datasets[pol+'_off'], varname)
+for pollutant in ['NO2', 'O3', 'PM25']:
+    var = variables[pollutant]
 
-# Define function to assign index based on concentration
-def assign_index(pollutant, concentration):
-    if pollutant == 'NO2':
-        bins = [0, 50, 100, 200, 400]
-    elif pollutant == 'O3':
-        bins = [0, 60, 120, 180, 240]
-    elif pollutant == 'PM25':
-        bins = [0, 15, 30, 55, 110]
-    else:
-        raise ValueError("Unknown pollutant")
+    da_on = datasets[pollutant + '_on'][var].mean(dim='lev').sel(time=time_point, method='nearest')
+    da_off = datasets[pollutant + '_off'][var].mean(dim='lev').sel(time=time_point, method='nearest')
 
-    index = np.zeros_like(concentration)
+    da_diff = da_on - da_off
 
-    index = np.where(concentration <= bins[1], 12.5, index)          # 0-25
-    index = np.where((concentration > bins[1]) & (concentration <= bins[2]), 37.5, index)   # 25-50
-    index = np.where((concentration > bins[2]) & (concentration <= bins[3]), 62.5, index)   # 50-75
-    index = np.where((concentration > bins[3]) & (concentration <= bins[4]), 87.5, index)   # 75-100
-    index = np.where(concentration > bins[4], 125, index)             # >100
+    # Apply index assignment function vectorized
+    index = xr.apply_ufunc(lambda x: assign_index(pollutant, x),
+                           da_diff,
+                           vectorize=True)
 
-    return index
+    indexes.append(index)
 
-# Assign index for each pollutant
-indexes = {}
-for pol in ['O3', 'NO2', 'PM25']:
-    indexes[pol] = assign_index(pol, diffs[pol])
+# Sum the three indexes
+total_index = sum(indexes)
 
-# Sum the indexes
-total_index = indexes['O3'] + indexes['NO2'] + indexes['PM25']
-
-# Plot the result
+# Plot the total index
 fig = plt.figure(figsize=[12, 8])
 ax = plt.axes(projection=ccrs.EqualEarth(central_longitude=10))
 
@@ -74,19 +94,10 @@ ax = plt.axes(projection=ccrs.EqualEarth(central_longitude=10))
 ax.add_feature(cfeature.BORDERS.with_scale('50m'), linewidth=0.5, edgecolor='darkgrey')
 ax.coastlines(resolution='50m', linewidth=0.5, color='white')
 
-# Plot the total index
-im = ax.pcolormesh(
-    total_index['lon'], total_index['lat'], total_index,
-    transform=ccrs.PlateCarree(),
-    cmap='RdYlGn_r'
-)
+# Plot total index
+cmap = plt.get_cmap('Reds')
+total_index.plot(ax=ax, transform=ccrs.PlateCarree(), cmap=cmap,
+                 vmin=0, vmax=375)  # 3 pollutants * 125 max index
 
-# Colorbar
-cbar = plt.colorbar(im, ax=ax, orientation='horizontal', pad=0.05)
-cbar.set_label('Total Pollution Index (Aviation Contribution)')
-
-# Set title
-ax.set_title('Overall Aviation Pollution Index over Europe on 2019-01-15')
-
-# Show plot
+ax.set_title('Total Aviation Pollution Impact Index over Europe on 2019-01-15')
 plt.show()
