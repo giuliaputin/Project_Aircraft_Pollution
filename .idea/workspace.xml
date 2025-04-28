@@ -5,15 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="62651fb8-0f05-4f77-b83f-cd868894294e" name="Changes" comment="index file added">
-      <change afterPath="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements/NO2_plotting_JUL_OFF.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements/NO2_plotting_JUL_ON.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements/NO2_plotting_JUL_diff.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements/PM2.5_annual_ON.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plotting_Model/Annual_Model_Measurements/PM25_Europe_Map.html" beforeDir="false" afterPath="$PROJECT_DIR$/Plotting_Model/Annual_Model_Measurements/PM25_Europe_Map.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/raw_data/model/NO2.JUL.OFF.nc4" beforeDir="false" afterPath="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements/NO2.JUL.OFF.nc4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/raw_data/model/NO2.JUL.ON.nc4" beforeDir="false" afterPath="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements/NO2.JUL.ON.nc4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/raw_data/model/PM25.annual.OFF.nc4" beforeDir="false" afterPath="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements/PM25.annual.OFF.nc4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/raw_data/model/PM25.annual.ON.nc4" beforeDir="false" afterPath="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements/PM25.annual.ON.nc4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements/index_plot.py" beforeDir="false" afterPath="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements/index_plot.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,6 +50,7 @@
     "Python.New_Plotting.executor": "Run",
     "Python.O3_plotting_JUL_OFF.executor": "Run",
     "Python.O3_plotting_JUL_diff.executor": "Run",
+    "Python.PM2.5_annual_OFF.executor": "Run",
     "Python.PM2.5_annual_ON.executor": "Run",
     "Python.PM25_average.executor": "Run",
     "Python.aerosols_types.executor": "Run",
@@ -95,7 +88,7 @@
       <updated>1742209930535</updated>
       <workItem from="1742209931712" duration="184000" />
       <workItem from="1745828896715" duration="400000" />
-      <workItem from="1745829363756" duration="823000" />
+      <workItem from="1745829363756" duration="1235000" />
     </task>
     <task id="LOCAL-00001" summary="index file added">
       <option name="closed" value="true" />
@@ -105,7 +98,31 @@
       <option name="project" value="LOCAL" />
       <updated>1745829466349</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="index file added">
+      <option name="closed" value="true" />
+      <created>1745830297460</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1745830297460</updated>
+    </task>
+    <task id="LOCAL-00003" summary="index file added">
+      <option name="closed" value="true" />
+      <created>1745830317611</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1745830317611</updated>
+    </task>
+    <task id="LOCAL-00004" summary="index file added">
+      <option name="closed" value="true" />
+      <created>1745830404792</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1745830404792</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -137,11 +154,12 @@
     <SUITE FILE_PATH="coverage/O3_JAN_ON_nc4$NO2_plotting_JUL_diff.coverage" NAME="NO2_plotting_JUL_diff Coverage Results" MODIFIED="1745829922453" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements" />
     <SUITE FILE_PATH="coverage/_gitignore$Plotting_JUL_ON.coverage" NAME="Plotting_JUL_ON Coverage Results" MODIFIED="1742200119975" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/JUL_Model_Measurements" />
     <SUITE FILE_PATH="coverage/O3_JAN_ON_nc4$index_plotting.coverage" NAME="index plotting Coverage Results" MODIFIED="1745828914595" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements" />
+    <SUITE FILE_PATH="coverage/O3_JAN_ON_nc4$PM2_5_annual_OFF.coverage" NAME="PM2.5_annual_OFF Coverage Results" MODIFIED="1745830258325" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements" />
     <SUITE FILE_PATH="coverage/Project_Aircraft_Pollution$O3_plotting_JUL_OFF.coverage" NAME="O3_plotting_JUL_OFF Coverage Results" MODIFIED="1741861904841" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/JUL_Model_Measurements" />
     <SUITE FILE_PATH="coverage/_gitignore$aerosol_trial.coverage" NAME="aerosol_trial Coverage Results" MODIFIED="1742199312837" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/JUL_Model_Measurements" />
     <SUITE FILE_PATH="coverage/Project_Aircraft_Pollution$Alt_Plotting_ON.coverage" NAME="Alt_Plotting_ON Coverage Results" MODIFIED="1741859104808" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements" />
-    <SUITE FILE_PATH="coverage/O3_JAN_ON_nc4$index_plot.coverage" NAME="index_plot Coverage Results" MODIFIED="1745829390896" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements" />
     <SUITE FILE_PATH="coverage/O3_JAN_ON_nc4$NO2_plotting_JUL_ON.coverage" NAME="NO2_plotting_JUL_ON Coverage Results" MODIFIED="1745829843047" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements" />
+    <SUITE FILE_PATH="coverage/O3_JAN_ON_nc4$index_plot.coverage" NAME="index_plot Coverage Results" MODIFIED="1745830590500" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements" />
     <SUITE FILE_PATH="coverage/Project_Aircraft_Pollution$Difference_Aviation_O3_JUL.coverage" NAME="Difference_Aviation_O3_JUL Coverage Results" MODIFIED="1741858855370" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements" />
   </component>
 </project>
