@@ -5,7 +5,7 @@ import numpy as np
 from folium.plugins import HeatMap
 
 # Load the dataset
-file_path = "Plotting_Model\JUN_Model_Measurements\PM25.annual.OFF.nc4"
+file_path = "PM25.annual.OFF.nc4"
 ds = xr.open_dataset(file_path)
 
 # Extract latitude, longitude, and PM2.5 data
