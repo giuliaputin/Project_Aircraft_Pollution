@@ -70,7 +70,7 @@ im = ax.pcolormesh(
 # Blue markers and labels
 for lat, lon, index_value in top10_coords:
     ax.plot(lon, lat, 'bo', markersize=5, transform=ccrs.PlateCarree())
-    ax.text(lon + 0.5, lat + 0.5, f'{index_value:.1f}', color='blue', fontsize=8,
+    ax.text(lon + 0.5, lat + 0.5, f'{index_value:.1f}', color='blue', fontsize=10,
             transform=ccrs.PlateCarree())
     print(lat, lon, index_value)
 
@@ -78,6 +78,8 @@ for lat, lon, index_value in top10_coords:
 # Add colorbar and title
 cbar = plt.colorbar(im, ax=ax, orientation='horizontal', pad=0.05)
 cbar.set_label('Total Pollution Index (Aviation Contribution)')
-ax.set_title('Overall Aircraft Pollution Impact (July)')
+ax.set_title('Overall Aircraft Pollution Impact Over Europe')
+
+plt.savefig("aircraft_pollution_europe.svg", format="svg", bbox_inches='tight')  # Vector format
 
 plt.show()
