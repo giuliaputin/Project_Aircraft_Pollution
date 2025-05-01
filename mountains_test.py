@@ -14,8 +14,8 @@ ax.add_image(tiles, 8)  # Zoom level 8 for a moderate view
 
 # Add a shapefile (or manually created shapely geometries)
 # For this example, we'll create a polygon using Shapely
-polygon = Polygon([(-80, 30), (-80, 35), (-75, 35), (-75, 30)])
-ax.set_extent([-80.5, -74.5, 29.5, 35.5], crs=ccrs.PlateCarree())  # Adjust extent for the region
+polygon = Polygon([(0, 30), (0, 50), (60, 50), (60, 90)])
+ax.set_extent([0, 40, 29.5, 90], crs=ccrs.PlateCarree())  # Adjust extent for the region
 
 # Use Shapely geometry to plot the region on the map
 x, y = polygon.exterior.xy

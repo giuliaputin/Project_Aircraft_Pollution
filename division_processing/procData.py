@@ -91,7 +91,7 @@ for type_, vars in types.items():
             sum_emittants = adder(emissions, emittants)
 
             # Slice pollutants, top 20% chosen
-            pollutant_top20 = np.nanpercentile(pollutant.values, 80)
+            pollutant_top20 = np.nanpercentile(pollutant.values, 100*0)
             select_pollutant = pollutant.where(pollutant.values >= pollutant_top20, np.nan)
 
             measure = select_pollutant / sum_emittants ## select_pollutant
@@ -99,13 +99,11 @@ for type_, vars in types.items():
             
             measures.append(measure)
             
-            
         fig, ax = plt.subplots(1, 2, figsize=[16, 6], subplot_kw={"projection": ccrs.PlateCarree()})
         plt.tight_layout()
         for i, month in enumerate(months):
             
             ax[i].add_feature(cfeature.BORDERS.with_scale('10m'), linewidth=0.5, edgecolor='darkgrey')
-            ax[i].add_feature(cfeature)
             ax[i].coastlines(resolution='10m', linewidth=0.5, color='black')
             
             masked_measure = mask_ocean(measures[i])
