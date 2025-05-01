@@ -6,7 +6,7 @@ from folium.plugins import HeatMap
 import os
 
 # Load the dataset
-ds = xr.open_dataset(os.path.join(os.path.dirname(__file__), ".", 'PM25.annual.ON.nc4'))
+ds = xr.open_dataset(os.path.join(os.path.dirname(__file__), "..", "..", 'raw_data', 'model', 'PM25.annual.ON.nc4'))
 
 # Extract latitude, longitude, and PM2.5 data
 lat = ds['lat'].values

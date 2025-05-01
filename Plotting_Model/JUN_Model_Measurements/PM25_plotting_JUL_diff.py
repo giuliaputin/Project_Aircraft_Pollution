@@ -6,8 +6,8 @@ import xarray as xr
 import os
 
 # Open the datasets
-ds_on = xr.open_dataset(os.path.join(os.path.dirname(__file__), ".", 'PM25.annual.ON.nc4'))   # Aviation ON
-ds_off = xr.open_dataset(os.path.join(os.path.dirname(__file__), ".", 'PM25.annual.OFF.nc4'))  # Aviation OFF
+ds_on = xr.open_dataset(os.path.join(os.path.dirname(__file__), "..", "..", 'raw_data', 'model', 'PM25.annual.ON.nc4'))   # Aviation ON
+ds_off = xr.open_dataset(os.path.join(os.path.dirname(__file__), "..", "..", 'raw_data', 'model', 'PM25.annual.OFF.nc4'))  # Aviation OFF
 
 print(ds_on)
 
@@ -41,7 +41,7 @@ da_diff.plot(ax=ax, transform=ccrs.PlateCarree(), cmap='RdBu_r', center=0,
              vmin=-abs(da_diff).max(), vmax=abs(da_diff).max())
 
 # Set title and labels
-ax.set_title('Aviation Contribution to Particulate Matter (PM2.5) over Europe on 2019-01-15')
+ax.set_title('Aviation Contribution to Particulate Matter (PM2.5) over Europe annually')
 
 # Show the plot
 plt.show()
