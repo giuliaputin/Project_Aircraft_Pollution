@@ -82,11 +82,11 @@ cbar = plt.colorbar(im, ax=ax, orientation='horizontal', pad=0.05)
 cbar.set_label('Total Pollution Index (Aviation Contribution)', fontsize=23)
 cbar.ax.tick_params(labelsize=20)
 
-ax.set_title('Overall Aircraft Pollution Impact Over Europe in July', fontsize=25)
+ax.set_title('Overall Aircraft Pollution Impact Over Europe in January', fontsize=25)
 
 # Save figure
-plt.savefig(r"C:\Users\unigi\Downloads\aircraft_pollution_europe.svg", format="svg", bbox_inches='tight')
-plt.savefig("aircraft_pollution_europe_jul.pdf", format="pdf", bbox_inches='tight')
+# plt.savefig(r"C:\Users\unigi\Downloads\aircraft_pollution_europe.svg", format="svg", bbox_inches='tight')
+# plt.savefig("aircraft_pollution_europe_jan.pdf", format="pdf", bbox_inches='tight')
 
 # Blue markers and labels
 # for lat, lon, index_value in top10_coords:
