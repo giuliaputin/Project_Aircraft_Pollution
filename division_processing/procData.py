@@ -97,7 +97,10 @@ for type_, vars in types.items():
             select_pollutant = pollutant.where(pollutant.values >= pollutant_top20, np.nan)
 
             measure = select_pollutant / sum_emittants
+            
             measures.append(measure)
+            # 48.125 in lon cutoff
+            # 68.5 in lat is cutoff
         
         fig, ax = plt.subplots(1, 2, figsize=[16, 6], subplot_kw={"projection": ccrs.PlateCarree()})
         plt.tight_layout()
