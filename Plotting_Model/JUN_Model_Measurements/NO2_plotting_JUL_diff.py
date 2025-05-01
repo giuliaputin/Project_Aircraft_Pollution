@@ -20,9 +20,14 @@ da_on_avg = da_on.mean(dim='lev')
 da_off_avg = da_off.mean(dim='lev')
 
 # Select the same time point for both datasets
-time_point = '2019-07-15'
-da_on_time = da_on_avg.sel(time=time_point, method='nearest')
-da_off_time = da_off_avg.sel(time=time_point, method='nearest')
+# Select all time points in January 2019
+da_on_month = da_on_avg.sel(time=slice('2019-07-01', '2019-07-31'))
+da_off_month = da_off_avg.sel(time=slice('2019-07-01', '2019-07-31'))
+
+# Compute the mean across the time dimension
+da_on_time = da_on_month.mean(dim='time')
+da_off_time = da_off_month.mean(dim='time')
+
 
 # Compute the difference (aviation contribution)
 da_diff = da_on_time - da_off_time
