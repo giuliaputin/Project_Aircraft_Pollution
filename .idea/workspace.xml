@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="62651fb8-0f05-4f77-b83f-cd868894294e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/raw_data/model/aerosols_types.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "giuliaputin"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/giuliaputin/Project_Aircraft_Pollution.git",
+    "accountId": "001c849d-366b-47e4-86c1-52e4c4d1a69e"
+  }
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 4
+}]]></component>
+  <component name="ProjectId" id="2uRSWW2eFXO6qkEyQUEloGjDbcR" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.aerosols_types.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "simulationPlots",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-PY-241.19072.16" />
+        <option value="bundled-python-sdk-8336bb23522e-2767605e8bc2-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-241.19072.16" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="62651fb8-0f05-4f77-b83f-cd868894294e" name="Changes" comment="" />
+      <created>1742209930535</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1742209930535</updated>
+      <workItem from="1742209931712" duration="184000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Project_Aircraft_Pollution$O3_plotting_JUL_ON.coverage" NAME="O3_plotting_JUL_ON Coverage Results" MODIFIED="1741862929092" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/JUL_Model_Measurements" />
+    <SUITE FILE_PATH="coverage/_gitignore$O3_plotting_JUL_ON.coverage" NAME="O3_plotting_JUL_ON Coverage Results" MODIFIED="1742199442052" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/JUL_Model_Measurements" />
+    <SUITE FILE_PATH="coverage/Project_Aircraft_Pollution$O3_plotting_JUL_diff_interactive.coverage" NAME="O3_plotting_JUL_diff_interactive Coverage Results" MODIFIED="1741859069143" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements" />
+    <SUITE FILE_PATH="coverage/Project_Aircraft_Pollution$New_Plotting.coverage" NAME="New_Plotting Coverage Results" MODIFIED="1741864251906" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/Annual_Model_Measurements" />
+    <SUITE FILE_PATH="coverage/Project_Aircraft_Pollution$check.coverage" NAME="check Coverage Results" MODIFIED="1741854743412" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/Model_Measurements" />
+    <SUITE FILE_PATH="coverage/Project_Aircraft_Pollution$Alternative_Plotting.coverage" NAME="Alternative_Plotting Coverage Results" MODIFIED="1741857897180" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements" />
+    <SUITE FILE_PATH="coverage/Project_Aircraft_Pollution$Given_Plotting.coverage" NAME="Given_Plotting Coverage Results" MODIFIED="1741855505476" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/Model_Measurements" />
+    <SUITE FILE_PATH="coverage/Project_Aircraft_Pollution$sampleplot.coverage" NAME="sampleplot Coverage Results" MODIFIED="1741857614456" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements" />
+    <SUITE FILE_PATH="coverage/Project_Aircraft_Pollution$O3_plotting_JUL_diff.coverage" NAME="O3_plotting_JUL_diff Coverage Results" MODIFIED="1741862050537" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/JUL_Model_Measurements" />
+    <SUITE FILE_PATH="coverage/Project_Aircraft_Pollution$aerosol_animation.coverage" NAME="aerosol_animation Coverage Results" MODIFIED="1742200890471" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/model_animations" />
+    <SUITE FILE_PATH="coverage/_gitignore$Plotting_JUL_ON.coverage" NAME="Plotting_JUL_ON Coverage Results" MODIFIED="1742200119975" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/JUL_Model_Measurements" />
+    <SUITE FILE_PATH="coverage/Project_Aircraft_Pollution$O3_plotting_JUL_OFF.coverage" NAME="O3_plotting_JUL_OFF Coverage Results" MODIFIED="1741861904841" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/JUL_Model_Measurements" />
+    <SUITE FILE_PATH="coverage/_gitignore$aerosol_trial.coverage" NAME="aerosol_trial Coverage Results" MODIFIED="1742199312837" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/JUL_Model_Measurements" />
+    <SUITE FILE_PATH="coverage/Project_Aircraft_Pollution$Alt_Plotting_ON.coverage" NAME="Alt_Plotting_ON Coverage Results" MODIFIED="1741859104808" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements" />
+    <SUITE FILE_PATH="coverage/Project_Aircraft_Pollution$Alt_Plotting_OFF.coverage" NAME="Alt_Plotting_OFF Coverage Results" MODIFIED="1741859332656" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/JUL_Model_Measurements" />
+    <SUITE FILE_PATH="coverage/Project_Aircraft_Pollution$aerosols_types.coverage" NAME="aerosols_types Coverage Results" MODIFIED="1742210013815" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/raw_data/model" />
+    <SUITE FILE_PATH="coverage/Project_Aircraft_Pollution$Difference_Aviation_O3_JUL.coverage" NAME="Difference_Aviation_O3_JUL Coverage Results" MODIFIED="1741858855370" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Plotting_Model/JUN_Model_Measurements" />
+  </component>
+</project>
