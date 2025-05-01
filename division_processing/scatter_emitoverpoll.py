@@ -41,24 +41,24 @@ for type_, vars in types.items():
         emittants_lst = []
         
         for month in months:
-            pollutant = differencer(type_, month, var)
-            sum_emittant = adder(emissions, emittants)
-
+            pollutant = differencer(type_, month, var) # 74 by 122
+            sum_emittant = adder(emissions, emittants) # 75 by 123
+             
             pollutants_lst.append(pollutant)
             
             emittants_lst.append(sum_emittant)
             
-        for i, month in enumerate(months):
-            ax[i].add_feature(cfeature.BORDERS.with_scale('50m'), linewidth=0.5, edgecolor='darkgrey')
-            ax[i].coastlines(resolution='50m', linewidth=0.5, color='black')
+        # for i, month in enumerate(months):
+        #     ax[i].add_feature(cfeature.BORDERS.with_scale('50m'), linewidth=0.5, edgecolor='darkgrey')
+        #     ax[i].coastlines(resolution='50m', linewidth=0.5, color='black')
             
-            print(len(emittants_lst[i]), len(pollutants_lst[i]))
-            plt.scatter(emittants_lst, pollutants_lst)
-            ax[i].set_title(f"{var}, monthly average {month}", fontsize=14)
+            
+        #     plt.scatter(emittants_lst, pollutants_lst)
+        #     ax[i].set_title(f"{var}, monthly average {month}", fontsize=14)
 
-        plt.savefig(os.path.join(os.path.dirname(__file__), '..', 'division_processing', 'division_figures', f'{type_}_{var}_timeaveraged_Europe.png'))
+#        plt.savefig(os.path.join(os.path.dirname(__file__), '..', 'division_processing', 'division_figures', f'{type_}_{var}_timeaveraged_Europe.png'))
 
 end = time.time()
-plt.show()
+# plt.show()
 
 print(f"Process run in {end - start} s")

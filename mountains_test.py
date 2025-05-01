@@ -1,30 +1,37 @@
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
 import matplotlib.pyplot as plt
-import cartopy.crs as ccrs
-import cartopy.io.img_tiles as cimgt
-import geopandas as gpd
-from shapely.geometry import Point
-from shapely.geometry.polygon import Polygon
+from PIL import Image
+import requests
+from io import BytesIO
+import time
 
-# Create a Cartopy map with satellite imagery
-fig, ax = plt.subplots(figsize=(10, 10), subplot_kw={'projection': ccrs.PlateCarree()})
+# Set Chrome options
+chrome_options = Options()
+chrome_options.add_argument("--headless")  # Run in headless mode
 
-# Use Cartopy's Google Maps (satellite) tile service
-tiles = cimgt.GoogleTiles(style='satellite')
-ax.add_image(tiles, 8)  # Zoom level 8 for a moderate view
+# Automatically use the right ChromeDriver
+service = Service(ChromeDriverManager().install())
+driver = webdriver.Chrome(service=service, options=chrome_options)
 
-# Add a shapefile (or manually created shapely geometries)
-# For this example, we'll create a polygon using Shapely
-polygon = Polygon([(0, 30), (0, 50), (60, 50), (60, 90)])
-ax.set_extent([0, 40, 29.5, 90], crs=ccrs.PlateCarree())  # Adjust extent for the region
+# Open NASA Earth Observatory
+driver.get("https://earthobservatory.nasa.gov/images")
 
-# Use Shapely geometry to plot the region on the map
-x, y = polygon.exterior.xy
-ax.plot(x, y, color='blue', linewidth=2, marker='o', markersize=4, transform=ccrs.PlateCarree())
+# Wait and grab image
+time.sleep(2)
+first_image = driver.find_element(By.CSS_SELECTOR, "div.item a img")
+img_url = first_image.get_attribute("src")
 
-# Add a point using Shapely
-point = Point(-77, 33)
-ax.scatter(point.x, point.y, color='red', transform=ccrs.PlateCarree())
+driver.quit()
 
-# Add title and show the plot
-ax.set_title("Satellite Map with Shapely Overlay")
+# Download and display image
+response = requests.get(img_url)
+img = Image.open(BytesIO(response.content))
+
+plt.imshow(img)
+plt.axis("off")
+plt.title("Earth Image from NASA")
 plt.show()
