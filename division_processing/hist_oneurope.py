@@ -75,21 +75,28 @@ for type_, vars in types.items():
             
             # Filter data for europe 
             lon2d, lat2d = np.meshgrid(sum_emittant['lon'].values, sum_emittant['lat'].values)
-            
             mask = contains(europe_geom, lon2d, lat2d)
-            print(mask.size)
+            
             pollutants_lst.append(pollutant.where(mask))
             
-            emittants_lst.append(sum_emittant.where(mask))  
+            emittants_lst.append(sum_emittant.where(mask)) 
             
             
         for i, month in enumerate(months):
+            np.set_printoptions(threshold=np.inf)
+
+            # mask the top emissions data
+            threshold = np.nanpercentile(emittants_lst[i], 97.5)
+            mask_emit = emittants_lst[i] > threshold
             
-            ax[i].scatter(emittants_lst[i], pollutants_lst[i])
+            ax[i].scatter(emittants_lst[i].where(~mask_emit), pollutants_lst[i].where(~mask_emit), color='blue')
+            ax[i].scatter(emittants_lst[i].where(mask_emit), pollutants_lst[i].where(mask_emit), color='orange')
             ax[i].set_title(f"{var}, monthly average {month}", fontsize=14)
+            ax[i].set_xscale('log')
+            ax[i].set_yscale('log')
             ax[i].set_xlabel('Sum Emittants (kg/year)')
             ax[i].set_ylabel('Pollutants')
-#        plt.savefig(os.path.join(os.path.dirname(__file__), '..', 'division_processing', 'division_figures', f'{type_}_{var}_timeaveraged_Europe.png'))
+        plt.savefig(os.path.join(os.path.dirname(__file__), '..', 'division_processing', 'scatter_figures_log', f'{type_}_{var}_timeaveraged_Europe_scatter_log.png'))
 
 end = time.time()
 plt.show()
