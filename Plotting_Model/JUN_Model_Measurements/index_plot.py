@@ -66,7 +66,7 @@ plt.rcParams.update({'font.size': 40})  # You can increase this value for even l
 
 # Plotting
 fig = plt.figure(figsize=(12, 8))
-ax = plt.axes(projection=ccrs.EqualEarth(central_longitude=10))
+ax = plt.axes(projection=ccrs.PlateCarree(central_longitude=10))
 ax.add_feature(cfeature.BORDERS.with_scale('50m'), linewidth=0.5, edgecolor='darkgrey')
 ax.coastlines(resolution='50m', linewidth=0.5, color='white')
 
@@ -79,14 +79,14 @@ im = ax.pcolormesh(
 
 # Add colorbar and title with larger font sizes
 cbar = plt.colorbar(im, ax=ax, orientation='horizontal', pad=0.05)
-cbar.set_label('Total Pollution Index (Aviation Contribution)', fontsize=23)
+#cbar.set_label('Total Pollution Index (Aviation Contribution)', fontsize=23)
 cbar.ax.tick_params(labelsize=20)
 
-ax.set_title('Overall Aircraft Pollution Impact Over Europe in January', fontsize=25)
+#ax.set_title('Overall Aircraft Pollution Impact Over Europe in January', fontsize=25)
 
 # Save figure
 # plt.savefig(r"C:\Users\unigi\Downloads\aircraft_pollution_europe.svg", format="svg", bbox_inches='tight')
-# plt.savefig("aircraft_pollution_europe_jan.pdf", format="pdf", bbox_inches='tight')
+plt.savefig("aircraft_pollution_europe_jul.pdf", format="pdf", bbox_inches='tight')
 
 # Blue markers and labels
 # for lat, lon, index_value in top10_coords:
