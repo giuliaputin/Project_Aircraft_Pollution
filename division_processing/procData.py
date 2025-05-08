@@ -173,6 +173,6 @@ for type_, vars in types.items():
         plt.savefig(os.path.join(os.path.dirname(__file__), '..', 'division_processing', 'division_figures', f'{type_}_{var}_timeaveraged_logscale.png'))
 
 end = time.time()
-# plt.show()
+plt.show()
 
 print(f"Process run in {end - start} s")

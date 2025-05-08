@@ -86,19 +86,33 @@ for type_, vars in types.items():
             np.set_printoptions(threshold=np.inf)
 
             # mask the top emissions data
-            threshold = np.nanpercentile(emittants_lst[i], 97.5)
+            threshold = np.nanpercentile(emittants_lst[i], 100)
             mask_emit = emittants_lst[i] > threshold
             
-            ax[i].scatter(emittants_lst[i].where(~mask_emit), pollutants_lst[i].where(~mask_emit), color='blue')
-            ax[i].scatter(emittants_lst[i].where(mask_emit), pollutants_lst[i].where(mask_emit), color='orange')
+            x = (emittants_lst[i].values)
+            y = (pollutants_lst[i].values)
+            
+            mask_nan = ~np.isnan(x) & ~np.isnan(y)
+            x_clean = x[mask_nan]
+            y_clean = y[mask_nan]
+            lg_emittants = np.log10(emittants_lst)
+            lg_pollutants = np.log10(pollutants_lst)
+            ax[i].scatter(lg_emittants, lg_pollutants, color='blue')
+            
+            # ax[i].scatter(emittants_lst[i].where(mask_emit), pollutants_lst[i].where(mask_emit), color='orange')
+            fit = np.polyfit(lg_emittants[i].flatten(), lg_pollutants[i].flatten(), 1)
+            # 
+            space = np.linspace(min(x_clean.flatten()), max(x_clean.flatten()))
+            ax[i].plot(space, np.log10(fit[1] + space * fit[0])) 
+            
             ax[i].set_title(f"{var}, monthly average {month}", fontsize=14)
-            ax[i].set_xscale('log')
-            ax[i].set_yscale('log')
+            # ax[i].set_xscale('log')
+            # ax[i].set_yscale('log')
             ax[i].set_xlabel('Sum Emittants (kg/year)')
             ax[i].set_ylabel('Pollutants')
-        plt.savefig(os.path.join(os.path.dirname(__file__), '..', 'division_processing', 'scatter_figures_log', f'{type_}_{var}_timeaveraged_Europe_scatter_log.png'))
+        # plt.savefig(os.path.join(os.path.dirname(__file__), '..', 'division_processing', 'scatter_figures_log', f'{type_}_{var}_timeaveraged_Europe_scatter_log.png'))
 
 end = time.time()
-plt.show()
+# plt.show()
 
 print(f"Process run in {end - start} s")
