@@ -10,10 +10,10 @@ import numpy as np
 from difference_machine import differencer
 
 # Select either July (JUL) or January (JAN)
-month = 'JAN'
+month = 'JUL'
 
 # select aviation ON or OFF
-aviation = 'OFF'
+aviation = 'ON'
 
 # Select variable you want to animate
 # Choose: ['SpeciesConc_O3']
@@ -28,10 +28,13 @@ subtract = True
 # --------------------------------------------------------------------------------------------------------------------
 # Starting of the preprocessing, no need to modify anything after this
 # Open DataSet and print an overview of it
-ds = xr.open_dataset(os.path.join(os.path.dirname(__file__), "..", 'raw_data', 'model', f'O3.{month}.{aviation}.nc4'))
+ds_ON = xr.open_dataset(os.path.join(os.path.dirname(__file__), "..", 'raw_data', 'model', f'O3.{month}.ON.nc4'))
+ds_OFF = xr.open_dataset(os.path.join(os.path.dirname(__file__), "..", 'raw_data', 'model', f'O3.{month}.OFF.nc4'))
 
-da = ds[var]
+da_ON = ds_ON[var]
 
+da_OFF = ds_OFF[var]
+da_diff = da_ON - da_OFF
 
 # Set up the figure and axis
 fig = plt.figure(figsize=[12, 6])
@@ -48,9 +51,9 @@ def update(frame):
         daSurf = differencer("O3",month,var,frame,level,average)
     else:
         if average:
-            daSurf = da.mean(dim= "lev").isel(time=frame)
+            daSurf = da_diff.mean(dim= "lev").isel(time=frame)
         else:
-            daSurf = da.isel(lev = level).isel(time=frame)
+            daSurf = da_diff.isel(lev = level).isel(time=frame)
 
     # Clear the previous plot
     ax.clear()
@@ -62,7 +65,7 @@ def update(frame):
     # Plot the data for the current time step
     im = daSurf.plot(ax=ax, transform=ccrs.PlateCarree(), add_colorbar=False)
 
-    date_str = np.datetime_as_string(da.time[frame].values, unit='D') 
+    date_str = np.datetime_as_string(da_diff.time[frame].values, unit='D')
 
     if average:
         # Add a title with the current time
@@ -75,7 +78,7 @@ def update(frame):
     return [im]
 
 # Create the animation
-ani = FuncAnimation(fig, update, frames=len(da.time), interval=500, blit=False)
+ani = FuncAnimation(fig, update, frames=len(da_diff.time), interval=500, blit=False)
 
 # Display the animation
 plt.show()
