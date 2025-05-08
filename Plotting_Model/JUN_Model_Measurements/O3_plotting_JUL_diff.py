@@ -6,8 +6,8 @@ import xarray as xr
 import os
 
 # Open the datasets
-ds_on = xr.open_dataset(os.path.join(os.path.dirname(__file__), "..", "..", 'raw_data', 'model', 'O3.JAN.ON.nc4'))   # Aviation ON
-ds_off = xr.open_dataset(os.path.join(os.path.dirname(__file__), "..", "..", 'raw_data', 'model', 'O3.JAN.OFF.nc4'))  # Aviation OFF
+ds_on = xr.open_dataset(os.path.join(os.path.dirname(__file__), "..", "..", 'raw_data', 'model', 'O3.JUL.ON.nc4'))   # Aviation ON
+ds_off = xr.open_dataset(os.path.join(os.path.dirname(__file__), "..", "..", 'raw_data', 'model', 'O3.JUL.OFF.nc4'))  # Aviation OFF
 
 print(ds_on)
 
@@ -21,8 +21,8 @@ da_on_avg = da_on.mean(dim='lev')
 da_off_avg = da_off.mean(dim='lev')
 
 # Select all time points in January 2019
-da_on_month = da_on_avg.sel(time=slice('2019-01-01', '2019-01-31'))
-da_off_month = da_off_avg.sel(time=slice('2019-01-01', '2019-01-31'))
+da_on_month = da_on_avg.sel(time=slice('2019-07-01', '2019-07-31'))
+da_off_month = da_off_avg.sel(time=slice('2019-07-01', '2019-07t-31'))
 
 # Compute the mean across the time dimension
 da_on_time = da_on_month.mean(dim='time')

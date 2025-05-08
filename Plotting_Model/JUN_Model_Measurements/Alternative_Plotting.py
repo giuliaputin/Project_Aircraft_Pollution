@@ -3,7 +3,7 @@ import plotly.express as px
 import pandas as pd
 
 # Open the dataset
-ds = xr.open_dataset('O3.JUL.ON.nc4')
+ds = xr.open_dataset('../../raw_data/model/O3.JUL.ON.nc4')
 print(ds)
 
 # Select the variable for ozone concentration
