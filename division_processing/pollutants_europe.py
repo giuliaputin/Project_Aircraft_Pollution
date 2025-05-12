@@ -49,4 +49,4 @@ for type in types:
         # plt.savefig(os.path.join(os.path.dirname(__file__), '..', 'division_processing', 'pollutants_figures',f'{type}_{var}_timeaveraged.png'))
         
 # Uncomment to display the plots on screen
-# plt.show()
+plt.show()
