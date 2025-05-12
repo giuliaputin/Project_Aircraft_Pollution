@@ -4,7 +4,7 @@ from shapely.geometry import MultiPolygon
 from shapely.vectorized import contains
 import os
 import numpy as np
-from utils import *
+from utils import differencer, adder
 import time
 from cartopy.io.shapereader import natural_earth, Reader
 from shapely.prepared import prep
@@ -45,10 +45,10 @@ prep_europe = prep(europe_geom)
 types = {
     'Aerosol': {
         'PM25': ['nvPM'],
-        'AerMassNIT': ['NO2'],
-        'AerMassNH4': ['NO2'],
-        'AerMassPOA': ['nvPM', 'HC'],
-        'AerMassBC': ['nvPM']
+        # 'AerMassNIT': ['NO2'],
+        # 'AerMassNH4': ['NO2'],
+        # 'AerMassPOA': ['nvPM', 'HC'],
+        # 'AerMassBC': ['nvPM']
     },
     'O3': {
         'SpeciesConc_O3': ['NO2', 'HC', 'CO']
@@ -81,26 +81,32 @@ for type_, vars in types.items():
             
             emittants_lst.append(sum_emittant.where(mask)) 
             
-            
         for i, month in enumerate(months):
             np.set_printoptions(threshold=np.inf)
 
             # mask the top emissions data
-            mask = pollutants_lst[i].values > 0
-            
-            
-            
-            ax[i].scatter(emittants_lst[i].values, pollutants_lst[i].values, color='blue', alpha = 0.2)
-            
-            
-            ax[i].set_title(f"{var}, monthly average {month}", fontsize=14)
-            
-            ax[i].set_xlabel('Sum Emittants (kg/year)')
-            ax[i].set_ylabel('Pollutants')
+            mask = (pollutants_lst[i].values > 0) & (~np.isnan(pollutants_lst[i].values))
+            neg_mask = (pollutants_lst[i].values < 0) & (~np.isnan(pollutants_lst[i].values))
+            # Apply the mask to get valid data
+            positive_pollutants = pollutants_lst[i].values[mask]
+            positive_emittants = emittants_lst[i].values[mask]
+            negative_pollutants = np.abs(pollutants_lst[i].values[neg_mask])
+            negative_emittants = np.abs(emittants_lst[i].values[neg_mask])
+
+            # Plot
+            ax[i].scatter(positive_emittants, positive_pollutants, color='tab:blue', alpha=0.1, label= "Positive")
+            ax[i].scatter(negative_emittants, negative_pollutants, color='tab:orange', alpha=0.1, label= "Negative", marker="^")
+            # ax[i].set_title(f"{var}, monthly average {month}", fontsize=14)
+            ax[i].set_xlabel(r'$\Sigma$ Emissions (kg/year)')
+            ax[i].set_ylabel('Pollutants (UNITS UNITS UNITS)')
             ax[i].set_xscale('log')
             ax[i].set_yscale('log')
-            
-        # plt.savefig(os.path.join(os.path.dirname(__file__), '..', 'division_processing', 'scatter_figures_log', f'{type_}_{var}_timeaveraged_Europe_scatter_log.png'))
+            legend = ax[i].legend(frameon=False)
+            for legend_handle in legend.legend_handles:
+                legend_handle.set_alpha(1)
+            plt.tight_layout()
+        
+        plt.savefig(os.path.join(os.path.dirname(__file__), '..', 'division_processing', 'scatter_figures_log', f'{type_}_{var}_timeaveraged_Europe_scatter_log.png'))
 
 end = time.time()
 plt.show()
