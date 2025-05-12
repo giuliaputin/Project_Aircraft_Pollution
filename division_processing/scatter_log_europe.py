@@ -58,9 +58,12 @@ types = {
     }
 }
 
+multipliers = [1, 44.6*48*1e6, 44.6*46.01*1e6]
+
 emissions = xr.open_dataset(os.path.join(os.path.dirname(__file__), '..', 'raw_data', 'emissions', 'AvEmMasses.nc4'))
 
-for type_, vars in types.items():
+for i, value in enumerate(types.items()):
+    type_, vars = value
     for var, emittants in vars.items():
         fig, ax = plt.subplots(1, 2, figsize=[12, 3])
         plt.tight_layout()
@@ -68,7 +71,7 @@ for type_, vars in types.items():
         emittants_lst = []
         
         for month in months:
-            pollutant = differencer(type_, month, var) # 74 by 122
+            pollutant = differencer(type_, month, var) * multipliers[i] # 74 by 122
             sum_emittant = adder(emissions, emittants) # 75 by 123
             
             sum_emittant = (sum_emittant.drop_isel({'lat':-1, 'lon': -1}))
@@ -98,7 +101,7 @@ for type_, vars in types.items():
             ax[i].scatter(negative_emittants, negative_pollutants, color='tab:orange', alpha=0.1, label= "Negative", marker="^")
             # ax[i].set_title(f"{var}, monthly average {month}", fontsize=14)
             ax[i].set_xlabel(r'$\Sigma$ Emissions (kg/year)')
-            ax[i].set_ylabel('Pollutants (UNITS UNITS UNITS)')
+            ax[i].set_ylabel(r'Pollutants ($\mu g /  m^3$)')
             ax[i].set_xscale('log')
             ax[i].set_yscale('log')
             legend = ax[i].legend(frameon=False)
@@ -109,6 +112,6 @@ for type_, vars in types.items():
         plt.savefig(os.path.join(os.path.dirname(__file__), '..', 'division_processing', 'scatter_figures_log', 'analysis',f'{type_}_{var}_timeaveraged_Europe_scatter_log.png'))
 
 end = time.time()
-plt.show()
+# plt.show()
 
 print(f"Process run in {end - start} s")
