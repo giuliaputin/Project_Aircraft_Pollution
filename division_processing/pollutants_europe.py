@@ -2,8 +2,6 @@
 import matplotlib.pyplot as plt
 import cartopy.crs as ccrs
 import cartopy.feature as cfeature
-import xarray as xr
-import os
 import numpy as np
 from utils import differencer
 # Types and variables that will be plotted

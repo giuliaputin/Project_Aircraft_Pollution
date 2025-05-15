@@ -62,32 +62,36 @@ print(f"Global vmin: {vmin}, vmax: {vmax}")
 # print(vmin, vmax)
 # Function to update the plot for each time step
 def update(frame):
-
     # Select the data for the current time step
     if subtract:
-        daSurf = differencer("Aerosol",month,var,frame,level,average)
+        daSurf = differencer("Aerosol", month, var, frame, level, average)
     else:
         if average:
-            daSurf = da.mean(dim= "lev").isel(time=frame)
+            daSurf = da.mean(dim="lev").isel(time=frame)
         else:
-            daSurf = da.isel(lev = level).isel(time=frame)
+            daSurf = da.isel(lev=level).isel(time=frame)
     
-    # Redraw the coastlines and borders for every frame
+    # Normalize the data between 0 and 1
+    min_val = float(daSurf.min(skipna=True))
+    max_val = float(daSurf.max(skipna=True))
+    daSurf_norm = (daSurf - min_val) / (max_val - min_val + 1e-10)  # Add epsilon to avoid division by zero
+    
+    # Clear the axis to prevent overplotting
+    ax.clear()
     ax.add_feature(cfeature.BORDERS.with_scale('50m'), linewidth=0.5, edgecolor='darkgrey')
     ax.coastlines(resolution='50m', linewidth=0.5, color='white')
     
-    # Plot the data for the current time step
-    im = daSurf.plot(ax=ax, transform=ccrs.PlateCarree(), add_colorbar=False, vmin=vmin, vmax=vmax, cmap="YlOrRd",)
-
-    date_str = np.datetime_as_string(da.time[frame].values, unit='D') 
-
-    # Add a title with the current time
+    # Plot the normalized data
+    im = daSurf_norm.plot(ax=ax, transform=ccrs.PlateCarree(), add_colorbar=False, cmap="viridis")
+    
+    date_str = np.datetime_as_string(da.time[frame].values, unit='D')
     if average:
-        ax.set_title(f"{var} at time {date_str}, averaged over height", fontsize=14)
+        ax.set_title(f"{var} (normalized) at time {date_str}, averaged over height", fontsize=14)
     else:
-        ax.set_title(f"{var} at time {date_str}, level = {np.round(daSurf.lev.values, 3)}", fontsize=14)
-        
+        ax.set_title(f"{var} (normalized) at time {date_str}, level = {np.round(daSurf.lev.values, 3)}", fontsize=14)
+
     return [im]
+
 
 # Create the animation
 ani = FuncAnimation(fig, update, frames=len(da.time), interval=500, blit=False)
