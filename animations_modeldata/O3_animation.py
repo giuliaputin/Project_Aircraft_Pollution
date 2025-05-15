@@ -9,6 +9,8 @@ from matplotlib.animation import FuncAnimation
 import numpy as np
 from difference_machine import differencer
 
+
+
 # Select either July (JUL) or January (JAN)
 month = 'JAN'
 
