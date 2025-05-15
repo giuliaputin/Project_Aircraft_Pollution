@@ -42,6 +42,12 @@ ax = plt.axes(projection=ccrs.PlateCarree())
 ax.add_feature(cfeature.BORDERS.with_scale('50m'), linewidth=0.5, edgecolor='darkgrey')
 ax.coastlines(resolution='50m', linewidth=0.5, color='white')
 
+for day in da.time.values:
+    print(day)
+
+
+
+
 # Function to update the plot for each time step
 def update(frame):
 

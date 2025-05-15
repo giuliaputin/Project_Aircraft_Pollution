@@ -14,11 +14,11 @@ import numpy as np
 month = 'JAN'
 
 # select aviation ON or OFF
-aviation = 'ON'
+aviation = 'OFF'
 
 # Select variable you want to animate
 # Choose between: ['PM25', 'AerMassNIT', 'AerMassNH4', 'AerMassPOA', 'AerMassBC']
-var = 'AerMassNIT'
+var = 'AerMassBC'
 
 # Select the level you want to animate [0, 72]
 level = 0
@@ -27,7 +27,8 @@ level = 0
 # Average with respect to height is taken
 average = True
 
-subtract = True
+# select subract to find aviation specific emissions. This overrides the aviation = "on"
+subtract = False
 
 # --------------------------------------------------------------------------------------------------------------------
 # Starting of the preprocessing, no need to modify anything after this
@@ -42,7 +43,23 @@ ax = plt.axes(projection=ccrs.PlateCarree())
 ax.add_feature(cfeature.BORDERS.with_scale('50m'), linewidth=0.5, edgecolor='darkgrey')
 ax.coastlines(resolution='50m', linewidth=0.5, color='white')
 
+vmin, vmax = np.inf, -np.inf
 
+
+for frame in range(len(da.time)):
+    if subtract:
+        daSurf = differencer("Aerosol", month, var, frame, level, average)
+    else:
+        if average:
+            daSurf = da.mean(dim="lev").isel(time=frame)
+        else:
+            daSurf = da.isel(lev=level).isel(time=frame)
+    vmin = min(vmin, float(daSurf.min(skipna=True)))
+    vmax = max(vmax, float(daSurf.max(skipna=True)))
+
+print(f"Global vmin: {vmin}, vmax: {vmax}")
+
+# print(vmin, vmax)
 # Function to update the plot for each time step
 def update(frame):
 
@@ -54,16 +71,13 @@ def update(frame):
             daSurf = da.mean(dim= "lev").isel(time=frame)
         else:
             daSurf = da.isel(lev = level).isel(time=frame)
-
-    # Clear the previous plot
-    ax.clear()
     
     # Redraw the coastlines and borders for every frame
     ax.add_feature(cfeature.BORDERS.with_scale('50m'), linewidth=0.5, edgecolor='darkgrey')
     ax.coastlines(resolution='50m', linewidth=0.5, color='white')
     
     # Plot the data for the current time step
-    im = daSurf.plot(ax=ax, transform=ccrs.PlateCarree(), add_colorbar=False)
+    im = daSurf.plot(ax=ax, transform=ccrs.PlateCarree(), add_colorbar=False, vmin=vmin, vmax=vmax, cmap="YlOrRd",)
 
     date_str = np.datetime_as_string(da.time[frame].values, unit='D') 
 
