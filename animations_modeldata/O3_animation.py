@@ -10,10 +10,10 @@ import numpy as np
 from difference_machine import differencer
 
 # Select either July (JUL) or January (JAN)
-month = 'JAN'
+month = 'JUL'
 
 # select aviation ON or OFF
-aviation = 'OFF'
+aviation = 'ON'
 
 # Select variable you want to animate
 # Choose: ['SpeciesConc_O3']

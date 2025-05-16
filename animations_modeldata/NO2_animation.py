@@ -38,9 +38,15 @@ da = ds[var]
 
 # Set up the figure and axis
 fig = plt.figure(figsize=[12, 6])
-ax = plt.axes(projection=ccrs.EqualEarth(central_longitude=10))
+ax = plt.axes(projection=ccrs.PlateCarree())
 ax.add_feature(cfeature.BORDERS.with_scale('50m'), linewidth=0.5, edgecolor='darkgrey')
 ax.coastlines(resolution='50m', linewidth=0.5, color='white')
+
+for day in da.time.values:
+    print(day)
+
+
+
 
 # Function to update the plot for each time step
 def update(frame):
@@ -62,7 +68,7 @@ def update(frame):
     ax.coastlines(resolution='50m', linewidth=0.5, color='white')
     
     # Plot the data for the current time step
-    im = daSurf.plot(ax=ax, transform=ccrs.PlateCarree(), add_colorbar=False)
+    im = daSurf.plot(ax=ax, transform=ccrs.PlateCarree(), add_colorbar=True)
 
     date_str = np.datetime_as_string(da.time[frame].values, unit='D') 
 
