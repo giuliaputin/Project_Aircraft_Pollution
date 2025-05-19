@@ -6,13 +6,11 @@ import xarray as xr
 import os
 import numpy as np
 
-
-
 miscer = ["Met_LAI", "Met_PHIS"]
-plotargs = [["Leaf Area Index", "BuGn", "leafareaindex"], ["Surface Geopotential Height", "inferno", "altitude"]]
+plotargs = [["Leaf Area Index", "BuGn", "leafareaindex"], ["Surface Geopotential Height", "terrain", "altitude"]]
 
 # Which one would you like to plot: 0 Leaf Index, 1 Altitude
-ploter = 0
+ploter = 1
 
 # For loop to iterate through each type and through each variable withing each type
 fig, ax = plt.subplots(1, 1, figsize= [9, 7], subplot_kw={"projection": ccrs.EqualEarth(central_longitude=10)})

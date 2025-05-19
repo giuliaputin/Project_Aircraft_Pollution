@@ -9,7 +9,7 @@ import numpy as np
 
 
 miscer = ["Met_LAI", "Met_PHIS"]
-plotargs = [["Leaf Area Index (July)", "BuGn", "leafareaindexjuly"], ["Surface Geopotential Height (July)", "inferno", "altitudejuly"]]
+plotargs = [["Leaf Area Index (July)", "BuGn", "leafareaindexjuly"], ["Surface Geopotential Height", "gist_earth", "altitudejuly"]]
 
 # Which one would you like to plot: 0 Leaf Index, 1 Altitude
 ploter = 1
