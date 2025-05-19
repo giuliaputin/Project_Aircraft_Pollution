@@ -10,7 +10,6 @@ def differencer(type, month, var):
     daSurfoff = daoff.isel(lev=0).mean(dim = "time")
     daSurfon = daon.isel(lev=0).mean(dim = "time")
     daDiff = daSurfon - daSurfoff
-
     return daDiff
 
 def adder(dataset, emittants):
