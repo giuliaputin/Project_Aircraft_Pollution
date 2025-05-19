@@ -18,7 +18,7 @@ aviation = 'ON'
 
 # Select variable you want to animate
 # Choose between: ['PM25', 'AerMassNIT', 'AerMassNH4', 'AerMassPOA', 'AerMassBC']
-var = 'AerMassNIT'
+var = 'PM25'
 
 # Select the level you want to animate [0, 72]
 level = 0
