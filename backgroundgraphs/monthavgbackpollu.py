@@ -29,7 +29,7 @@ for type in types:
             daoff = dsoff[var]
             daSurfoff = daoff.isel(lev=0).mean(dim = "time")
             daSurf[i] = daSurfoff
-
+            
             if i==0:
                 vmin = float(daSurf[i].values.min())
                 vmax = float(daSurf[i].values.max())
