@@ -12,7 +12,7 @@ miscer = ["Met_LAI", "Met_PHIS"]
 plotargs = [["Leaf Area Index (July)", "BuGn", "leafareaindexjuly"], ["Surface Geopotential Height", "gist_earth", "altitudejuly"]]
 
 # Which one would you like to plot: 0 Leaf Index, 1 Altitude
-ploter = 0
+ploter = 1
 
 # For loop to iterate through each type and through each variable withing each type
 fig, ax = plt.subplots(1, 1, figsize= [9, 7], subplot_kw={"projection": ccrs.EqualEarth(central_longitude=10)})
@@ -28,7 +28,11 @@ print(damean)
 
 
 # vmin = float(da.values.min())
-# vmax = float(da.values.max())
+vmax = float(damean.values.max())
+
+if ploter == 0:
+    print(vmax)
+    vmax = 7
 
 ax.add_feature(cfeature.BORDERS.with_scale('50m'), linewidth=0.5, edgecolor='darkgrey')
 ax.coastlines(resolution='50m', linewidth=0.5, color='black')
@@ -37,6 +41,7 @@ ax.coastlines(resolution='50m', linewidth=0.5, color='black')
 damean.plot(ax=ax,
             transform=ccrs.PlateCarree(),
             cmap=plotargs[ploter][1],
+            vmax = vmax,
             cbar_kwargs={
                 "label": plotargs[ploter][0],
                 # "aspect": 40,
@@ -49,7 +54,7 @@ damean.plot(ax=ax,
 # ax.set_title("Leaf Area Index", fontsize=14)
 
 
-plt.savefig(os.path.join(os.path.dirname(__file__), '..', 'backgroundgraphs', 'miscellaneous_figures', f'{plotargs[ploter][2]}.png'))
+plt.savefig(os.path.join(os.path.dirname(__file__), '..', 'backgroundgraphs', 'miscellaneous_figures', f'{plotargs[ploter][2]}.svg'))
 
 # Uncomment to display the plots on screen
 # plt.show()

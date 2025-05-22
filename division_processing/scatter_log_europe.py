@@ -18,7 +18,6 @@ shpfilename = natural_earth(resolution='10m', category='cultural', name='admin_0
 reader = Reader(shpfilename)
 records = reader.records()
 
-IQR = False
 europe_countries = [
     "Austria", "Belgium", "Bosnia and Herzegovina", "Bulgaria", "Croatia", "Czech Republic",
     "Denmark", "Estonia", "Finland", "France", "Germany", "Greece", "Hungary",
@@ -58,6 +57,9 @@ types = {
     }
 }
 
+percentile = 80
+ifpercen = "Top " + str(100-percentile) +  "%"
+
 units= [r'PM$_{2.5} \:$', r'O$_3 \:$', r'NO$_2 \:$']
 
 multipliers = [1, 44.6*48*1e6, 44.6*46.01*1e6]
@@ -71,36 +73,66 @@ for j, value in enumerate(types.items()):
         plt.tight_layout()
         pollutants_lst = []
         emittants_lst = []
+        measures_lst = []
         
         for month in months:
             pollutant = differencer(type_, month, var) * multipliers[j] # 74 by 122
             sum_emittant = adder(emissions, emittants) # 75 by 123
             
             sum_emittant = (sum_emittant.drop_isel({'lat':-1, 'lon': -1}))
+
+            measure = pollutant / sum_emittant
             
             # Filter data for europe 
             lon2d, lat2d = np.meshgrid(sum_emittant['lon'].values, sum_emittant['lat'].values)
-            mask = contains(europe_geom, lon2d, lat2d)
+            eu_mask = contains(europe_geom, lon2d, lat2d)
             
-            pollutants_lst.append(pollutant.where(mask))
+            pollutants_lst.append(pollutant.where(eu_mask))
             
-            emittants_lst.append(sum_emittant.where(mask)) 
+            emittants_lst.append(sum_emittant.where(eu_mask)) 
+
+            measures_lst.append(measure.where(eu_mask))
             
         for i, month in enumerate(months):
             np.set_printoptions(threshold=np.inf)
 
-            # mask the top emissions data
+            # Split into positive and negative values
             mask = (pollutants_lst[i].values > 0) & (~np.isnan(pollutants_lst[i].values))
             neg_mask = (pollutants_lst[i].values < 0) & (~np.isnan(pollutants_lst[i].values))
+            meas_mask = (measures_lst[i].values > 0) & (~np.isnan(pollutants_lst[i].values))
+            neg_meas_mask = (measures_lst[i].values < 0) & (~np.isnan(pollutants_lst[i].values))
+
+
             # Apply the mask to get valid data
             positive_pollutants = pollutants_lst[i].values[mask]
             positive_emittants = emittants_lst[i].values[mask]
             negative_pollutants = np.abs(pollutants_lst[i].values[neg_mask])
             negative_emittants = np.abs(emittants_lst[i].values[neg_mask])
+            positive_measures = measures_lst[i].values[meas_mask]
+            negative_measures = np.abs(measures_lst[i].values[neg_meas_mask])
+
+            # mask the top sensitivity data
+            thresh = np.nanpercentile(positive_measures, percentile)
+            neg_thresh = np.nanpercentile(negative_measures, percentile)
+            thresh_mask = (positive_measures >= thresh)
+            non_thresh_mask = (positive_measures < thresh)
+            neg_thresh_mask = (negative_measures >= neg_thresh)
+            non_neg_thresh_mask = (negative_measures < neg_thresh)
+
+            top_sens_pollutants = positive_pollutants[thresh_mask]
+            peasant_sens_pollutants = positive_pollutants[non_thresh_mask]
+            top_neg_sens_pollutants = negative_pollutants[neg_thresh_mask]
+            peasant_neg_sens_pollutants = negative_pollutants[non_neg_thresh_mask]
+            top_sens_emittants = positive_emittants[thresh_mask]
+            peasant_sens_emittants = positive_emittants[non_thresh_mask]
+            top_neg_sens_emittants = negative_emittants[neg_thresh_mask]
+            peasant_neg_sens_emittants = negative_emittants[non_neg_thresh_mask]
 
             # Plot
-            ax[i].scatter(positive_emittants, positive_pollutants, color='tab:blue', alpha=0.1, label= "Positive")
-            ax[i].scatter(negative_emittants, negative_pollutants, color='tab:orange', alpha=0.1, label= "Negative", marker="^")
+            ax[i].scatter(top_sens_emittants, top_sens_pollutants, color='tab:green', alpha=0.1, label= f"Positive ({ifpercen})", marker = "^")
+            ax[i].scatter(peasant_sens_emittants, peasant_sens_pollutants, color='tab:blue', alpha=0.1, label= "Positive")
+            ax[i].scatter(top_neg_sens_emittants, top_neg_sens_pollutants, color='tab:red', alpha=0.1, label= f"Negative ({ifpercen})", marker="^")
+            ax[i].scatter(peasant_neg_sens_emittants, peasant_neg_sens_pollutants, color='tab:orange', alpha=0.1, label= "Negative")
             # ax[i].set_title(f"{var}, monthly average {month}", fontsize=14)
             ax[i].set_xlabel(r'(kg/year)')
             ax[i].set_ylabel(units[j] + r'($\mu g /  m^3$)')
