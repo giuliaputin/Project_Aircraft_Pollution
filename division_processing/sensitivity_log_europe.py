@@ -109,7 +109,7 @@ types = {
 }
 
 
-percentile = 0
+percentile = 80
 
 units = [1e-3, 44.6 * 48 * 1e-3, 44.6 * 46.01 * 1e-3]
 
@@ -208,14 +208,14 @@ for i, values in enumerate(types.items()):
                     vmin=np.nanmin(negative_measures_topx.values),
                     vmax=np.nanmax(negative_measures_topx.values),
                 )
-                print(np.nanmin(negative_measures_topx.values), np.nanmax(negative_measures_topx.values))
+                
                 negative_measures_topx.plot(
                     ax=ax,
                     cmap="BuGn",
                     transform=ccrs.PlateCarree(),
                     norm=norm2,
                     cbar_kwargs={
-                        "label": "Negative values (log scale)",
+                        "label": "Negative Sensitivity",
                         # "aspect": 40,
                         "location": "bottom",
                         "pad": 0.01,
@@ -229,7 +229,7 @@ for i, values in enumerate(types.items()):
                 norm=norm1,
                 cmap="YlOrRd",
                 cbar_kwargs={
-                    "label": "Positive value (log scale)",
+                    "label": "Positive Sensitivity",
                     # "aspect": 40,
                     "location": "bottom",
                     "pad": 0.01,
@@ -257,6 +257,6 @@ for i, values in enumerate(types.items()):
             )
 
 end = time.time()
-plt.show()
+
 
 print(f"Process run in {end - start} s")
