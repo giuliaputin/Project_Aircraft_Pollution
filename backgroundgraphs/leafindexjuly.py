@@ -12,7 +12,7 @@ miscer = ["Met_LAI", "Met_PHIS"]
 plotargs = [["Leaf Area Index (July)", "BuGn", "leafareaindexjuly"], ["Surface Geopotential Height", "gist_earth", "altitudejuly"]]
 
 # Which one would you like to plot: 0 Leaf Index, 1 Altitude
-ploter = 1
+ploter = 0
 
 # For loop to iterate through each type and through each variable withing each type
 fig, ax = plt.subplots(1, 1, figsize= [9, 7], subplot_kw={"projection": ccrs.EqualEarth(central_longitude=10)})
@@ -41,7 +41,7 @@ damean.plot(ax=ax,
                 "label": plotargs[ploter][0],
                 # "aspect": 40,
                 "location": "bottom",
-                "pad": 0.05,
+                "pad": 0.01,
                 # "shrink": 0.4,
             })
 
