@@ -49,7 +49,7 @@ for type in types:
             ax[i].set_title(f"{var}, monthly average {month}, Surface, Bckg", fontsize=14)
         
        
-        plt.savefig(os.path.join(os.path.dirname(__file__), '..', 'backgroundpollutants', 'pollutants_figures',f'{type}_{var}_timeaveragedbackground.png'))
+        plt.savefig(os.path.join(os.path.dirname(__file__), '..', 'backgroundgraphs', 'pollutants_figures',f'{type}_{var}_timeaveragedbackground.png'))
         
 # Uncomment to display the plots on screen
 # plt.show()

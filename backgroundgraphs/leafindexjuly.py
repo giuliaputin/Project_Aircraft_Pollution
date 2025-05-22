@@ -6,8 +6,10 @@ import xarray as xr
 import os
 import numpy as np
 
+
+
 miscer = ["Met_LAI", "Met_PHIS"]
-plotargs = [["Leaf Area Index", "BuGn", "leafareaindex"], ["Surface Geopotential Height", "terrain", "altitude"]]
+plotargs = [["Leaf Area Index (July)", "BuGn", "leafareaindexjuly"], ["Surface Geopotential Height", "gist_earth", "altitudejuly"]]
 
 # Which one would you like to plot: 0 Leaf Index, 1 Altitude
 ploter = 1
@@ -16,7 +18,7 @@ ploter = 1
 fig, ax = plt.subplots(1, 1, figsize= [9, 7], subplot_kw={"projection": ccrs.EqualEarth(central_longitude=10)})
 plt.tight_layout()
 
-ds = xr.open_dataset( os.path.join(os.path.dirname(__file__), ".." ,  "raw_data", "misc", "GEOSChem.StateMet.20190101_0000z.nc4") )
+ds = xr.open_dataset( os.path.join(os.path.dirname(__file__), ".." ,  "raw_data", "misc", "GEOSChem.StateMet.20190701_0000z.nc4") )
 da = ds[miscer[ploter]]
 damean = da.mean(dim = "time")
 print(damean)
