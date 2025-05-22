@@ -208,7 +208,7 @@ for i, values in enumerate(types.items()):
                     vmin=np.nanmin(negative_measures_topx.values),
                     vmax=np.nanmax(negative_measures_topx.values),
                 )
-                print(np.nanmin(negative_measures_topx.values), np.nanmax(negative_measures_topx.values))
+                
                 negative_measures_topx.plot(
                     ax=ax,
                     cmap="BuGn",
