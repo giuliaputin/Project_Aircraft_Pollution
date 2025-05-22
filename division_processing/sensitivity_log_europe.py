@@ -109,7 +109,7 @@ types = {
 }
 
 
-percentile = 0
+percentile = 80
 
 units = [1e-3, 44.6 * 48 * 1e-3, 44.6 * 46.01 * 1e-3]
 
@@ -257,6 +257,6 @@ for i, values in enumerate(types.items()):
             )
 
 end = time.time()
-plt.show()
+
 
 print(f"Process run in {end - start} s")
