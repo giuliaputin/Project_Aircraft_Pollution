@@ -215,7 +215,7 @@ for i, values in enumerate(types.items()):
                     transform=ccrs.PlateCarree(),
                     norm=norm2,
                     cbar_kwargs={
-                        "label": "Negative values (log scale)",
+                        "label": "Negative Sensitivity",
                         # "aspect": 40,
                         "location": "bottom",
                         "pad": 0.01,
@@ -229,7 +229,7 @@ for i, values in enumerate(types.items()):
                 norm=norm1,
                 cmap="YlOrRd",
                 cbar_kwargs={
-                    "label": "Positive value (log scale)",
+                    "label": "Positive Sensitivity",
                     # "aspect": 40,
                     "location": "bottom",
                     "pad": 0.01,
