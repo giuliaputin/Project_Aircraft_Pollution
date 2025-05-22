@@ -186,12 +186,12 @@ for i, values in enumerate(types.items()):
             positive_measures = masked_measure.where(masked_measure.values > 0)
 
             positive_measures_cutoff = np.nanpercentile(positive_measures.values, percentile)
-            positive_measures_topx = measure.where(
+            positive_measures_topx = positive_measures.where(
                 positive_measures.values >= positive_measures_cutoff, np.nan
             )
 
             negative_measures_cutoff = np.nanpercentile(negative_measures.values, percentile)
-            negative_measures_topx = measure.where(
+            negative_measures_topx = negative_measures.where(
                 negative_measures.values >= negative_measures_cutoff, np.nan
             )
 
@@ -208,6 +208,7 @@ for i, values in enumerate(types.items()):
                     vmin=np.nanmin(negative_measures_topx.values),
                     vmax=np.nanmax(negative_measures_topx.values),
                 )
+                print(np.nanmin(negative_measures_topx.values), np.nanmax(negative_measures_topx.values))
                 negative_measures_topx.plot(
                     ax=ax,
                     cmap="BuGn",
