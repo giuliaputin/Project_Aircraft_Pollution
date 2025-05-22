@@ -143,7 +143,7 @@ for j, value in enumerate(types.items()):
                 legend_handle.set_alpha(1)
             plt.tight_layout()
         
-        plt.savefig(os.path.join(os.path.dirname(__file__), '..', 'division_processing', 'scatter_figures_log', 'analysis',f'{type_}_{var}_timeaveraged_Europe_scatter_log.png'))
+        plt.savefig(os.path.join(os.path.dirname(__file__), '..', 'division_processing', 'scatter_figures_log', 'analysis',f'{type_}_{var}_timeaveraged_Europe_scatter_log.svg'))
 
 end = time.time()
 # plt.show()
