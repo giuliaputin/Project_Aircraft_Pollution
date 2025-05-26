@@ -182,19 +182,21 @@ for i, values in enumerate(types.items()):
             gl.ylabel_style = {"size": 9}
 
             masked_measure = mask_ocean(measure)
-            negative_measures = abs(masked_measure.where(masked_measure.values < 0))
-            positive_measures = masked_measure.where(masked_measure.values > 0)
 
-            positive_measures_cutoff = np.nanpercentile(positive_measures.values, percentile)
-            positive_measures_topx = positive_measures.where(
-                positive_measures.values >= positive_measures_cutoff, np.nan
-            )
+            # Step 2: Take absolute value
+            abs_measure = abs(masked_measure)
 
-            negative_measures_cutoff = np.nanpercentile(negative_measures.values, percentile)
-            negative_measures_topx = negative_measures.where(
-                negative_measures.values >= negative_measures_cutoff, np.nan
-            )
+            # Step 3: Compute cutoff and mask values below percentile
+            abs_cutoff = np.nanpercentile(abs_measure.values, percentile)
+            topx_abs_measure = abs_measure.where(abs_measure.values >= abs_cutoff, np.nan)
 
+            # Step 4: Use the topx mask on the original (signed) data
+            topx_masked_measure = masked_measure.where(~np.isnan(topx_abs_measure), np.nan)
+
+            # Step 5: Split into positives and negatives
+            positive_measures_topx = topx_masked_measure.where(topx_masked_measure.values > 0)
+            negative_measures_topx = abs(topx_masked_measure.where(topx_masked_measure.values < 0))
+            
             # print(min(negative_measures.lat))
             # print(min(masked_measure_europe.lat))
 

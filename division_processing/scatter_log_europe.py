@@ -95,38 +95,46 @@ for j, value in enumerate(types.items()):
             
         for i, month in enumerate(months):
             np.set_printoptions(threshold=np.inf)
+            # Step 1: Get absolute measures and compute percentile threshold
+            abs_measures = np.abs(measures_lst[i].values)
+            valid_mask = ~np.isnan(pollutants_lst[i].values) & ~np.isnan(abs_measures)
 
-            # Split into positive and negative values
-            mask = (pollutants_lst[i].values > 0) & (~np.isnan(pollutants_lst[i].values))
-            neg_mask = (pollutants_lst[i].values < 0) & (~np.isnan(pollutants_lst[i].values))
-            meas_mask = (measures_lst[i].values > 0) & (~np.isnan(pollutants_lst[i].values))
-            neg_meas_mask = (measures_lst[i].values < 0) & (~np.isnan(pollutants_lst[i].values))
+            # Apply valid mask
+            abs_measures_valid = abs_measures[valid_mask]
+            threshold = np.nanpercentile(abs_measures_valid, percentile)
 
+            # Step 2: Mask top X% absolute sensitivities
+            topx_mask = (abs_measures >= threshold) & valid_mask
 
-            # Apply the mask to get valid data
-            positive_pollutants = pollutants_lst[i].values[mask]
-            positive_emittants = emittants_lst[i].values[mask]
-            negative_pollutants = np.abs(pollutants_lst[i].values[neg_mask])
-            negative_emittants = np.abs(emittants_lst[i].values[neg_mask])
-            positive_measures = measures_lst[i].values[meas_mask]
-            negative_measures = np.abs(measures_lst[i].values[neg_meas_mask])
+            # Step 3: Apply mask to original signed measures and pollutant/emittant data
+            topx_measures = measures_lst[i].values[topx_mask]
+            topx_pollutants = pollutants_lst[i].values[topx_mask]
+            topx_emittants = emittants_lst[i].values[topx_mask]
 
-            # mask the top sensitivity data
-            thresh = np.nanpercentile(positive_measures, percentile)
-            neg_thresh = np.nanpercentile(negative_measures, percentile)
-            thresh_mask = (positive_measures >= thresh)
-            non_thresh_mask = (positive_measures < thresh)
-            neg_thresh_mask = (negative_measures >= neg_thresh)
-            non_neg_thresh_mask = (negative_measures < neg_thresh)
+            # Step 4: Split top data into positive and negative groups
+            positive_mask = topx_measures > 0
+            negative_mask = topx_measures < 0
 
-            top_sens_pollutants = positive_pollutants[thresh_mask]
-            peasant_sens_pollutants = positive_pollutants[non_thresh_mask]
-            top_neg_sens_pollutants = negative_pollutants[neg_thresh_mask]
-            peasant_neg_sens_pollutants = negative_pollutants[non_neg_thresh_mask]
-            top_sens_emittants = positive_emittants[thresh_mask]
-            peasant_sens_emittants = positive_emittants[non_thresh_mask]
-            top_neg_sens_emittants = negative_emittants[neg_thresh_mask]
-            peasant_neg_sens_emittants = negative_emittants[non_neg_thresh_mask]
+            top_sens_pollutants = topx_pollutants[positive_mask]
+            top_neg_sens_pollutants = np.abs(topx_pollutants[negative_mask])
+
+            top_sens_emittants = topx_emittants[positive_mask]
+            top_neg_sens_emittants = np.abs(topx_emittants[negative_mask])
+
+            # Optional: If you also want the non-top (peasant) group
+            non_topx_mask = ~topx_mask & valid_mask
+            non_topx_measures = measures_lst[i].values[non_topx_mask]
+            non_topx_pollutants = pollutants_lst[i].values[non_topx_mask]
+            non_topx_emittants = emittants_lst[i].values[non_topx_mask]
+
+            peasant_pos_mask = non_topx_measures > 0
+            peasant_neg_mask = non_topx_measures < 0
+
+            peasant_sens_pollutants = non_topx_pollutants[peasant_pos_mask]
+            peasant_neg_sens_pollutants = np.abs(non_topx_pollutants[peasant_neg_mask])
+
+            peasant_sens_emittants = non_topx_emittants[peasant_pos_mask]
+            peasant_neg_sens_emittants = np.abs(non_topx_emittants[peasant_neg_mask])
 
             # Plot
             ax[i].scatter(top_sens_emittants, top_sens_pollutants, color='tab:green', alpha=0.1, label= f"Positive ({ifpercen})", marker = "^")
