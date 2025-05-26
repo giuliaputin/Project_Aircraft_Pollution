@@ -254,7 +254,7 @@ for i, values in enumerate(types.items()):
                     "division_processing",
                     "division_figures",
                     "analysis",
-                    f"{type_}_{var}_{month}_timeaveraged_logscale{ifpercen}.png",
+                    f"{type_}_{var}_{month}_timeaveraged_logscale{ifpercen}.svg",
                 )
             )
 
