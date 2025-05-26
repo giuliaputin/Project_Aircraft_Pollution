@@ -3,8 +3,7 @@ import matplotlib.pyplot as plt
 import cartopy.crs as ccrs
 import cartopy.feature as cfeature
 import numpy as np
-import os
-from utils import differencer_levavg
+from utils import differencer
 # Types and variables that will be plotted
 types = {'Aerosol': ['PM25', 'AerMassNIT', 'AerMassNH4', 'AerMassPOA', 'AerMassBC', 'AerMassSO4'],
                   'O3' : ['SpeciesConc_O3'],
@@ -24,7 +23,7 @@ for type in types:
         daSurf = [[],[]]
         for i, month in enumerate(months):
 
-            daSurf[i] = differencer_levavg(type, month, var)
+            daSurf[i] = differencer(type, month, var)
 
             if i==0:
                 vmin = float(daSurf[i].values.min())
@@ -42,10 +41,10 @@ for type in types:
             daSurf[i].plot(ax=ax[i], transform=ccrs.PlateCarree(), vmin=vmin, vmax=vmax)
 
             # Add a title with the current time
-            # ax[i].set_title(f"{var}, monthly average {month}, level = {np.round(daSurf[i].lev.values, 3)}", fontsize=14)
+            ax[i].set_title(f"{var}, monthly average {month}, level = {np.round(daSurf[i].lev.values, 3)}", fontsize=14)
         
        
-        plt.savefig(os.path.join(os.path.dirname(__file__), '..', 'division_processing', 'pollutants_figures',f'{type}_{var}_timeaveraged_lvlavg.png'))
+        # plt.savefig(os.path.join(os.path.dirname(__file__), '..', 'division_processing', 'pollutants_figures',f'{type}_{var}_timeaveraged.png'))
         
 # Uncomment to display the plots on screen
 plt.show()
