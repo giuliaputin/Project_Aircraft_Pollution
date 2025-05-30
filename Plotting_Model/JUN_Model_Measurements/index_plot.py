@@ -66,7 +66,7 @@ plt.rcParams.update({'font.size': 40})  # You can increase this value for even l
 
 # Plotting
 fig = plt.figure(figsize=(12, 8))
-ax = plt.axes(projection=ccrs.PlateCarree(central_longitude=10))
+ax = plt.axes(projection=ccrs.EqualEarth(central_longitude=10))
 ax.add_feature(cfeature.BORDERS.with_scale('50m'), linewidth=0.5, edgecolor='darkgrey')
 ax.coastlines(resolution='50m', linewidth=0.5, color='white')
 
