@@ -12,6 +12,12 @@ import cartopy.io.shapereader as shpreader
 from shapely.prepared import prep
 from matplotlib.patches import Rectangle
 
+#FONT
+font = {'family' : 'DejaVu Sans',
+        'size'   : 18}
+
+matplotlib.rc('font', **font)
+
 # Load the 'admin_0_countries' shapefile (countries of the world)
 shpfilename = shpreader.natural_earth(
     resolution="10m", category="cultural", name="admin_0_countries"
@@ -95,6 +101,7 @@ def mask_ocean(dataarray):
 # ----------------------------------------------------
 start = time.time()
 months = ["JAN", "JUL"]
+monthname = ["January", "July"]
 
 types = {
     "Aerosol": {
@@ -112,6 +119,7 @@ types = {
 percentile = 80
 
 units = [1e-3, 44.6 * 48 * 1e-3, 44.6 * 46.01 * 1e-3]
+name= [r'PM$_{2.5} \:$', r'O$_3 \:$', r'NO$_2 \:$']
 
 emissions = xr.open_dataset(
     os.path.join(
@@ -129,7 +137,7 @@ for i, values in enumerate(types.items()):
 
     for var, emittants in vars.items():
 
-        for month in months:
+        for m, month in enumerate(months):
             pollutant = differencer(type_, month, var) * units[i] * area["AREA"] * 128
             sum_emittants = adder(emissions, emittants)
 
@@ -138,7 +146,7 @@ for i, values in enumerate(types.items()):
             fig, ax = plt.subplots(
                 1,1,
                 figsize=[12, 8],
-                subplot_kw={"projection": ccrs.PlateCarree()},
+                subplot_kw={"projection": ccrs.EqualEarth()},
                 constrained_layout=True,
             )
 
@@ -178,8 +186,8 @@ for i, values in enumerate(types.items()):
             )
             gl.top_labels = False
             gl.right_labels = False
-            gl.xlabel_style = {"size": 9}
-            gl.ylabel_style = {"size": 9}
+            gl.xlabel_style = {"size": 16}
+            gl.ylabel_style = {"size": 16}
 
             masked_measure = mask_ocean(measure)
 
@@ -218,7 +226,7 @@ for i, values in enumerate(types.items()):
                     norm=norm2,
                     cbar_kwargs={
                         "label": "Negative Sensitivity",
-                        # "aspect": 40,
+                        "aspect": 80,
                         "location": "bottom",
                         "pad": 0.01,
                         # "shrink": 0.5,
@@ -232,16 +240,16 @@ for i, values in enumerate(types.items()):
                 cmap="YlOrRd",
                 cbar_kwargs={
                     "label": "Positive Sensitivity",
-                    # "aspect": 40,
+                    "aspect": 80,
                     "location": "bottom",
                     "pad": 0.01,
                     # "shrink": 0.5,
                 },
             )
 
-            # ax[i].set_title(f"{var}, monthly average {month}", fontsize=14)
+            # ax[i].set_title(f"{var}, {month}", fontsize=14)
             # plt.tight_layout()
-            ax.set_title("")
+            ax.set_title(f"{name[i]}, {monthname[m]}", fontsize=18)
             if percentile > 0:
                 ifpercen = "_top" + str(100 - percentile)
             else:
@@ -254,8 +262,9 @@ for i, values in enumerate(types.items()):
                     "division_processing",
                     "division_figures",
                     "analysis",
-                    f"{type_}_{var}_{month}_timeaveraged_logscale{ifpercen}.svg",
-                )
+                    f"{type_}_{var}_{month}_timeaveraged_logscale{ifpercen}.png",
+                ),
+                dpi = 300
             )
 
 end = time.time()

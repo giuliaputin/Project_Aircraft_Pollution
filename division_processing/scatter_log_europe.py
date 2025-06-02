@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import matplotlib
 import xarray as xr
 from shapely.geometry import MultiPolygon
 from shapely.vectorized import contains
@@ -11,6 +12,13 @@ from shapely.prepared import prep
 
 start = time.time()
 months = ['JAN', 'JUL']
+monthname = ["January", "July"]
+
+#FONT
+font = {'family' : 'DejaVu Sans',
+        'size'   : 12}
+
+matplotlib.rc('font', **font)
 
 
 # Load the 'admin_0_countries' shapefile (countries of the world)
@@ -142,16 +150,17 @@ for j, value in enumerate(types.items()):
             ax[i].scatter(top_neg_sens_emittants, top_neg_sens_pollutants, color='tab:red', alpha=0.1, label= f"Negative ({ifpercen})", marker="^")
             ax[i].scatter(peasant_neg_sens_emittants, peasant_neg_sens_pollutants, color='tab:orange', alpha=0.1, label= "Negative")
             # ax[i].set_title(f"{var}, monthly average {month}", fontsize=14)
-            ax[i].set_xlabel(r'(kg/year)')
-            ax[i].set_ylabel(units[j] + r'($\mu g /  m^3$)')
+            ax[i].set_xlabel(r'[kg/year]')
+            ax[i].set_ylabel(units[j] + r'[$\mu g /  m^3$]')
             ax[i].set_xscale('log')
             ax[i].set_yscale('log')
-            legend = ax[i].legend(frameon=False)
+            ax[i].set_title(f"{monthname[i]}")
+            legend = ax[i].legend(frameon=False, fontsize=10)
             for legend_handle in legend.legend_handles:
                 legend_handle.set_alpha(1)
             plt.tight_layout()
         
-        plt.savefig(os.path.join(os.path.dirname(__file__), '..', 'division_processing', 'scatter_figures_log', 'analysis',f'{type_}_{var}_timeaveraged_Europe_scatter_log.svg'))
+        plt.savefig(os.path.join(os.path.dirname(__file__), '..', 'division_processing', 'scatter_figures_log', 'analysis',f'{type_}_{var}_timeaveraged_Europe_scatter_log.png'), dpi = 300)
 
 end = time.time()
 # plt.show()
