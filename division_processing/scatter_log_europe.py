@@ -52,7 +52,7 @@ prep_europe = prep(europe_geom)
 types = {
     "Aerosol": {
         "PM25": {
-            "emittants": ["nvPM"],
+            "emittants": ["NO2"],
             "unit": 1,
             "name": r'PM$_{2.5} \:$'
         },
