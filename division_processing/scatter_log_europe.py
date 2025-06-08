@@ -50,41 +50,63 @@ europe_geom = MultiPolygon(polygons)
 prep_europe = prep(europe_geom)
 
 types = {
-    'Aerosol': {
-        'PM25': ['nvPM'],
-        'AerMassNIT': ['NO2'],
-        'AerMassNH4': ['NO2'],
-        'AerMassPOA': ['nvPM', 'HC'],
-        'AerMassBC': ['nvPM']
+    "Aerosol": {
+        "PM25": {
+            "emittants": ["nvPM"],
+            "unit": 1,
+            "name": r'PM$_{2.5} \:$'
+        },
+        "AerMassNIT": {
+            "emittants": ["NO2"],
+            "unit": 1,  # Example, adjust as needed
+            "name": r'Inorganic Nitrate Aerosols'
+        },
+        "AerMassSO4":{
+            "emittants": ["FUELBURN"],
+            "unit": 1,
+            "name": r"Sulfate Aerosol"
+        }
+        # 'AerMassNH4': ['NO2'],
+        # 'AerMassPOA': ['nvPM', 'HC'],
+        # 'AerMassBC': ['nvPM']
     },
-    'O3': {
-        'SpeciesConc_O3': ['NO2', 'HC', 'CO']
+    # "Aerosol2": {
+    #     "AerMassNIT": ["NO2"]
+    # },
+    "O3": {
+        "SpeciesConc_O3": {
+            "emittants": ["NO2", "HC", "CO"],
+            "unit": 44.6 * 48 * 1e6,
+            "name": r'O$_3 \:$'
+        }
     },
-    'NO2': {
-        'SpeciesConc_NO2': ['NO2']
-    }
+    "NO2": {
+        "SpeciesConc_NO2": {
+            "emittants": ["NO2"],
+            "unit": 44.6 * 46.01 * 1e6,
+            "name": r'NO$_2 \:$'
+        }
+    },
 }
 
 percentile = 80
 ifpercen = "Top " + str(100-percentile) +  "%"
 
-units= [r'PM$_{2.5} \:$', r'O$_3 \:$', r'NO$_2 \:$']
-
-multipliers = [1, 44.6*48*1e6, 44.6*46.01*1e6]
-
 emissions = xr.open_dataset(os.path.join(os.path.dirname(__file__), '..', 'raw_data', 'emissions', 'AvEmMasses.nc4'))
 
-for j, value in enumerate(types.items()):
-    type_, vars = value
-    for var, emittants in vars.items():
-        fig, ax = plt.subplots(1, 2, figsize=[12, 3])
+for type_, vars in types.items():
+    for var, properties in vars.items():
+        emittants = properties["emittants"]
+        unit = properties["unit"]
+        name = properties["name"]
+        fig, ax = plt.subplots(1, 2, figsize=[12, 4])
         plt.tight_layout()
         pollutants_lst = []
         emittants_lst = []
         measures_lst = []
         
         for month in months:
-            pollutant = differencer(type_, month, var) * multipliers[j] # 74 by 122
+            pollutant = differencer(type_, month, var) * unit # 74 by 122
             sum_emittant = adder(emissions, emittants) # 75 by 123
             
             sum_emittant = (sum_emittant.drop_isel({'lat':-1, 'lon': -1}))
@@ -150,8 +172,8 @@ for j, value in enumerate(types.items()):
             ax[i].scatter(top_neg_sens_emittants, top_neg_sens_pollutants, color='tab:red', alpha=0.1, label= f"Negative ({ifpercen})", marker="^")
             ax[i].scatter(peasant_neg_sens_emittants, peasant_neg_sens_pollutants, color='tab:orange', alpha=0.1, label= "Negative")
             # ax[i].set_title(f"{var}, monthly average {month}", fontsize=14)
-            ax[i].set_xlabel(r'[kg/year]')
-            ax[i].set_ylabel(units[j] + r'[$\mu g /  m^3$]')
+            ax[i].set_xlabel(f"Emittants ({emittants}) [kg/year]")
+            ax[i].set_ylabel(name + r' [$\mu g /  m^3$]')
             ax[i].set_xscale('log')
             ax[i].set_yscale('log')
             ax[i].set_title(f"{monthname[i]}")

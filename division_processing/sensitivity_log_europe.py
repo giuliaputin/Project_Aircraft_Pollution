@@ -19,6 +19,20 @@ font = {'family' : 'DejaVu Sans',
 
 matplotlib.rc('font', **font)
 
+def safe_lognorm(data, margin_factor=5):
+    vmin = np.nanmin(data)
+    vmax = np.nanmax(data)
+
+    if not np.isfinite(vmin) or not np.isfinite(vmax) or vmin <= 0:
+        raise ValueError("Invalid or non-positive data for LogNorm")
+
+    if vmin == vmax:
+        # Expand the range around the single value
+        vmin /= margin_factor
+        vmax *= margin_factor
+
+    return matplotlib.colors.LogNorm(vmin=vmin, vmax=vmax)
+
 # Load the 'admin_0_countries' shapefile (countries of the world)
 shpfilename = shpreader.natural_earth(
     resolution="10m", category="cultural", name="admin_0_countries"
@@ -236,17 +250,11 @@ for type_, vars in types.items():
             # print(min(negative_measures.lat))
             # print(min(masked_measure_europe.lat))
 
-            vmin = np.nanmin(positive_measures_topx.values)
-            vmax = np.nanmax(positive_measures_topx.values)
-            print("vmin, vmax pos:", vmin, vmax)
-            norm1 = matplotlib.colors.LogNorm(vmin=vmin, vmax=vmax)
+            norm1 = safe_lognorm(positive_measures_topx.values)
 
             # fig.set_size_inches(12, 6)
             if np.any(~np.isnan(negative_measures_topx.values)):
-                vmin=np.nanmin(negative_measures_topx.values)
-                vmax=np.nanmax(negative_measures_topx.values)
-                print("vmin, vmax pos:", vmin, vmax)
-                norm2 = matplotlib.colors.LogNorm(vmin=vmin, vmax=vmax)
+                norm2 = safe_lognorm(negative_measures_topx.values)
                 
                 negative_measures_topx.plot(
                     ax=ax,
