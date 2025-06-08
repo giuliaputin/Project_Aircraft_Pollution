@@ -12,9 +12,10 @@ import cartopy.io.shapereader as shpreader
 from shapely.prepared import prep
 from matplotlib.patches import Rectangle
 
+
 #FONT
 font = {'family' : 'DejaVu Sans',
-        'size'   : 18}
+        'size'   : 20}
 
 matplotlib.rc('font', **font)
 
@@ -105,21 +106,46 @@ monthname = ["January", "July"]
 
 types = {
     "Aerosol": {
-        "PM25": ["nvPM"],
-        # 'AerMassNIT': ['NO2'],
+        "PM25": {
+            "emittants": ["nvPM"],
+            "unit": 1e-3,
+            "name": r'PM$_{2.5} \:$'
+        },
+        "AerMassNIT": {
+            "emittants": ["NO2"],
+            "unit": 1e-3,  # Example, adjust as needed
+            "name": r'Inorganic Nitrate Aerosols'
+        },
+        "AerMassSO4":{
+            "emittants": ["FUELBURN"],
+            "unit": 1e-3,
+            "name": r"Sulfate Aerosol"
+        }
         # 'AerMassNH4': ['NO2'],
         # 'AerMassPOA': ['nvPM', 'HC'],
         # 'AerMassBC': ['nvPM']
     },
-    "O3": {"SpeciesConc_O3": ["NO2", "HC", "CO"]},
-    "NO2": {"SpeciesConc_NO2": ["NO2"]},
+    # "Aerosol2": {
+    #     "AerMassNIT": ["NO2"]
+    # },
+    "O3": {
+        "SpeciesConc_O3": {
+            "emittants": ["NO2", "HC", "CO"],
+            "unit": 44.6 * 48 * 1e-3,
+            "name": r'O$_3 \:$'
+        }
+    },
+    "NO2": {
+        "SpeciesConc_NO2": {
+            "emittants": ["NO2"],
+            "unit": 44.6 * 46.01 * 1e-3,
+            "name": r'NO$_2 \:$'
+        }
+    },
 }
 
 
 percentile = 80
-
-units = [1e-3, 44.6 * 48 * 1e-3, 44.6 * 46.01 * 1e-3]
-name= [r'PM$_{2.5} \:$', r'O$_3 \:$', r'NO$_2 \:$']
 
 emissions = xr.open_dataset(
     os.path.join(
@@ -132,13 +158,15 @@ area = xr.open_dataset(
     )
 )
 
-for i, values in enumerate(types.items()):
-    type_, vars = values
+for type_, vars in types.items():
 
-    for var, emittants in vars.items():
+    for var, properties in vars.items():
+        emittants = properties["emittants"]
+        unit = properties["unit"]
+        name = properties["name"]
 
         for m, month in enumerate(months):
-            pollutant = differencer(type_, month, var) * units[i] * area["AREA"] * 128
+            pollutant = differencer(type_, month, var) * unit * area["AREA"] * 128
             sum_emittants = adder(emissions, emittants)
 
             measure = pollutant / sum_emittants
@@ -210,14 +238,15 @@ for i, values in enumerate(types.items()):
 
             vmin = np.nanmin(positive_measures_topx.values)
             vmax = np.nanmax(positive_measures_topx.values)
+            print("vmin, vmax pos:", vmin, vmax)
             norm1 = matplotlib.colors.LogNorm(vmin=vmin, vmax=vmax)
 
             # fig.set_size_inches(12, 6)
             if np.any(~np.isnan(negative_measures_topx.values)):
-                norm2 = matplotlib.colors.LogNorm(
-                    vmin=np.nanmin(negative_measures_topx.values),
-                    vmax=np.nanmax(negative_measures_topx.values),
-                )
+                vmin=np.nanmin(negative_measures_topx.values)
+                vmax=np.nanmax(negative_measures_topx.values)
+                print("vmin, vmax pos:", vmin, vmax)
+                norm2 = matplotlib.colors.LogNorm(vmin=vmin, vmax=vmax)
                 
                 negative_measures_topx.plot(
                     ax=ax,
@@ -249,7 +278,7 @@ for i, values in enumerate(types.items()):
 
             # ax[i].set_title(f"{var}, {month}", fontsize=14)
             # plt.tight_layout()
-            ax.set_title(f"{name[i]}, {monthname[m]}", fontsize=18)
+            ax.set_title(f"{name}, {monthname[m]}", fontsize=20)
             if percentile > 0:
                 ifpercen = "_top" + str(100 - percentile)
             else:
