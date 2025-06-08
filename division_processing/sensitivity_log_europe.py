@@ -121,7 +121,7 @@ monthname = ["January", "July"]
 types = {
     "Aerosol": {
         "PM25": {
-            "emittants": ["nvPM"],
+            "emittants": ["NO2"],
             "unit": 1e-3,
             "name": r'PM$_{2.5} \:$'
         },
