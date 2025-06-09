@@ -172,7 +172,7 @@ for type_, vars in types.items():
             ax[i].scatter(top_neg_sens_emittants, top_neg_sens_pollutants, color='tab:red', alpha=0.1, label= f"Negative ({ifpercen})", marker="^")
             ax[i].scatter(peasant_neg_sens_emittants, peasant_neg_sens_pollutants, color='tab:orange', alpha=0.1, label= "Negative")
             # ax[i].set_title(f"{var}, monthly average {month}", fontsize=14)
-            ax[i].set_xlabel(r"Emittants [kg/year]")
+            ax[i].set_xlabel(r"Emissions [kg/year]")
             ax[i].set_ylabel(name + r' [$\mu g /  m^3$]')
             ax[i].set_xscale('log')
             ax[i].set_yscale('log')
