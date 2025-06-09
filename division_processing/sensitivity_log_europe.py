@@ -15,7 +15,7 @@ from matplotlib.patches import Rectangle
 
 #FONT
 font = {'family' : 'DejaVu Sans',
-        'size'   : 20}
+        'size'   : 22}
 
 matplotlib.rc('font', **font)
 
@@ -181,7 +181,9 @@ for type_, vars in types.items():
 
         for m, month in enumerate(months):
             pollutant = differencer(type_, month, var) * unit * area["AREA"] * 128
+            print(np.nanmin(area["AREA"].values))
             sum_emittants = adder(emissions, emittants)
+            # print(np.any(emittants==0))
 
             measure = pollutant / sum_emittants
 
@@ -286,7 +288,7 @@ for type_, vars in types.items():
 
             # ax[i].set_title(f"{var}, {month}", fontsize=14)
             # plt.tight_layout()
-            ax.set_title(f"{name}, {monthname[m]}", fontsize=20)
+            ax.set_title(f"{name}, {monthname[m]}", fontsize=22)
             if percentile > 0:
                 ifpercen = "_top" + str(100 - percentile)
             else:
