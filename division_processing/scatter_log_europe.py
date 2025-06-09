@@ -20,6 +20,10 @@ font = {'family' : 'DejaVu Sans',
 
 matplotlib.rc('font', **font)
 
+def safe_nanmin(arr):
+    return np.nanmin(arr) if arr.size > 0 and not np.all(np.isnan(arr)) else 1e9
+def safe_nanmax(arr):
+    return np.nanmax(arr) if arr.size > 0 and not np.all(np.isnan(arr)) else 0
 
 # Load the 'admin_0_countries' shapefile (countries of the world)
 shpfilename = natural_earth(resolution='10m', category='cultural', name='admin_0_countries')
@@ -122,7 +126,18 @@ for type_, vars in types.items():
             emittants_lst.append(sum_emittant.where(eu_mask)) 
 
             measures_lst.append(measure.where(eu_mask))
-            
+
+        top_sens_pollutants_list = []
+        top_neg_sens_pollutants_list = []
+        top_sens_emittants_list = []
+        top_neg_sens_emittants_list = []
+
+        peasant_sens_pollutants_list = []
+        peasant_neg_sens_pollutants_list = []
+        peasant_sens_emittants_list = []
+        peasant_neg_sens_emittants_list =[]
+        y_min = 1e9
+        y_max = 0
         for i, month in enumerate(months):
             np.set_printoptions(threshold=np.inf)
             # Step 1: Get absolute measures and compute percentile threshold
@@ -145,11 +160,11 @@ for type_, vars in types.items():
             positive_mask = topx_measures > 0
             negative_mask = topx_measures < 0
 
-            top_sens_pollutants = topx_pollutants[positive_mask]
-            top_neg_sens_pollutants = np.abs(topx_pollutants[negative_mask])
+            top_sens_pollutants_list.append(topx_pollutants[positive_mask])
+            top_neg_sens_pollutants_list.append(np.abs(topx_pollutants[negative_mask]))
 
-            top_sens_emittants = topx_emittants[positive_mask]
-            top_neg_sens_emittants = np.abs(topx_emittants[negative_mask])
+            top_sens_emittants_list.append(topx_emittants[positive_mask])
+            top_neg_sens_emittants_list.append(np.abs(topx_emittants[negative_mask]))
 
             # Optional: If you also want the non-top (peasant) group
             non_topx_mask = ~topx_mask & valid_mask
@@ -160,22 +175,27 @@ for type_, vars in types.items():
             peasant_pos_mask = non_topx_measures > 0
             peasant_neg_mask = non_topx_measures < 0
 
-            peasant_sens_pollutants = non_topx_pollutants[peasant_pos_mask]
-            peasant_neg_sens_pollutants = np.abs(non_topx_pollutants[peasant_neg_mask])
+            peasant_sens_pollutants_list.append(non_topx_pollutants[peasant_pos_mask])
+            peasant_neg_sens_pollutants_list.append(np.abs(non_topx_pollutants[peasant_neg_mask]))
 
-            peasant_sens_emittants = non_topx_emittants[peasant_pos_mask]
-            peasant_neg_sens_emittants = np.abs(non_topx_emittants[peasant_neg_mask])
-
+            peasant_sens_emittants_list.append(non_topx_emittants[peasant_pos_mask])
+            peasant_neg_sens_emittants_list.append(np.abs(non_topx_emittants[peasant_neg_mask]))
+        
+            y_min = min(safe_nanmin(top_sens_pollutants_list[i]), safe_nanmin(top_neg_sens_pollutants_list[i]), safe_nanmin(peasant_sens_pollutants_list[i]), safe_nanmin(peasant_neg_sens_pollutants_list[i]), y_min)
+            y_max = max(safe_nanmax(top_sens_pollutants_list[i]), safe_nanmax(top_neg_sens_pollutants_list[i]), safe_nanmax(peasant_sens_pollutants_list[i]), safe_nanmax(peasant_neg_sens_pollutants_list[i]), y_max)
+        
+        for i, month in enumerate(months):
             # Plot
-            ax[i].scatter(top_sens_emittants, top_sens_pollutants, color='tab:green', alpha=0.1, label= f"Positive ({ifpercen})", marker = "^")
-            ax[i].scatter(peasant_sens_emittants, peasant_sens_pollutants, color='tab:blue', alpha=0.1, label= "Positive")
-            ax[i].scatter(top_neg_sens_emittants, top_neg_sens_pollutants, color='tab:red', alpha=0.1, label= f"Negative ({ifpercen})", marker="^")
-            ax[i].scatter(peasant_neg_sens_emittants, peasant_neg_sens_pollutants, color='tab:orange', alpha=0.1, label= "Negative")
+            ax[i].scatter(top_sens_emittants_list[i], top_sens_pollutants_list[i], color='tab:green', alpha=0.1, label= f"Positive ({ifpercen})", marker = "^")
+            ax[i].scatter(peasant_sens_emittants_list[i], peasant_sens_pollutants_list[i], color='tab:blue', alpha=0.1, label= "Positive")
+            ax[i].scatter(top_neg_sens_emittants_list[i], top_neg_sens_pollutants_list[i], color='tab:red', alpha=0.1, label= f"Negative ({ifpercen})", marker="^")
+            ax[i].scatter(peasant_neg_sens_emittants_list[i], peasant_neg_sens_pollutants_list[i], color='tab:orange', alpha=0.1, label= "Negative")
             # ax[i].set_title(f"{var}, monthly average {month}", fontsize=14)
             ax[i].set_xlabel(r"Emissions [kg/year]")
             ax[i].set_ylabel(name + r' [$\mu g /  m^3$]')
             ax[i].set_xscale('log')
             ax[i].set_yscale('log')
+            ax[i].set_ylim(y_min*0.5, y_max*2)
             ax[i].set_title(f"{monthname[i]}")
             legend = ax[i].legend(frameon=False, fontsize=10)
             for legend_handle in legend.legend_handles:
