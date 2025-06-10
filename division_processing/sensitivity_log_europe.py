@@ -226,7 +226,7 @@ for type_, vars in types.items():
 
             # Optional: Add gridlines with labels
             gl = ax.gridlines(
-                draw_labels=True, linewidth=0.3, color="gray", alpha=0.5, linestyle="--"
+                draw_labels=False, linewidth=0.3, color="gray", alpha=0.5, linestyle="--"
             )
             gl.top_labels = False
             gl.right_labels = False
