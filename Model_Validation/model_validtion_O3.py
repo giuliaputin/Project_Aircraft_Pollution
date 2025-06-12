@@ -81,6 +81,14 @@ print(f'NMB: {NMB}')
 
 print(f'Bias corrected normalized error: {measurements['error'].mean()}')
 
+plt.boxplot(measurements['error'], vert=True, showfliers=False)
+plt.xlabel('Measurement stations (-)')
+plt.ylabel('Bias-Corrected Normalized Error (%)')
+plt.title('Bias-Corrected Normalized Error for O3')
+plt.grid(True)
+plt.show()
+
+
 
 
 

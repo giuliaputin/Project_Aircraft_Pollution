@@ -80,13 +80,20 @@ print(f'percentage bias: {per_bias}')
 print(f'NMB: {NMB}')
 print(f'Bias corrected normalized error: {measurements['error'].mean()}')
 
-
-
-
-plt.plot(measurements['error'])
-plt.xlabel('Index for measurement stations (-)')
+plt.boxplot(measurements['error'], vert=True, showfliers=False)
+plt.xlabel('Measurement stations (-)')
 plt.ylabel('Bias-Corrected Normalized Error (%)')
 plt.title('Bias-Corrected Normalized Error for PM2.5')
+plt.grid(True)
+plt.show()
+
+def plot_PM25():
+    plt.plot(measurements['error'])
+    plt.xlabel('Index for measurement stations (-)')
+    plt.ylabel('Bias-Corrected Normalized Error (%)')
+    plt.title('Bias-Corrected Normalized Error for PM2.5')
+
+plot_PM25()
 plt.show()
 
 
